@@ -1,0 +1,1140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Edagarli&#39;s Blog</title>
+  <subtitle>Only The Paranoid Survive</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://blog.edagarli.com/"/>
+  <updated>2016-03-18T03:50:02.000Z</updated>
+  <id>http://blog.edagarli.com/</id>
+  
+  <author>
+    <name>Edagarli</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>实践了下React-Native</title>
+    <link href="http://blog.edagarli.com/2016/React-Douban/"/>
+    <id>http://blog.edagarli.com/2016/React-Douban/</id>
+    <published>2016-03-17T14:48:00.000Z</published>
+    <updated>2016-03-18T03:50:02.000Z</updated>
+    
+    <content type="html">&lt;p&gt;最近在学React，用React-Native写了个简单的小东西。&lt;/p&gt;
+&lt;p&gt;基于 React-Native &amp;amp; 豆瓣Open API&lt;br&gt;(&lt;a href=&quot;https://github.com/edagarli/React-Douban&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/edagarli/React-Douban&lt;/a&gt;)&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/douban.gif&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近在学React，用React-Native写了个简单的小东西。&lt;/p&gt;
+&lt;p&gt;基于 React-Native &amp;amp; 豆瓣Open API&lt;br&gt;(&lt;a href=&quot;https://github.com/edagarli/React-Douban&quot; target=&quot;
+    
+    </summary>
+    
+      <category term="实践" scheme="http://blog.edagarli.com/categories/%E5%AE%9E%E8%B7%B5/"/>
+    
+    
+      <category term="React-Native" scheme="http://blog.edagarli.com/tags/React-Native/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>switch与if-else效率问题</title>
+    <link href="http://blog.edagarli.com/2016/switch%E4%B8%8Eif-else%E6%95%88%E7%8E%87%E9%97%AE%E9%A2%98/"/>
+    <id>http://blog.edagarli.com/2016/switch与if-else效率问题/</id>
+    <published>2016-03-09T03:21:00.000Z</published>
+    <updated>2016-03-18T03:50:02.000Z</updated>
+    
+    <content type="html">&lt;p&gt;最近看见项目里面很多if-else，突然想到switch与if-else效率问题。&lt;br&gt;网上查了下资料，备记下：&lt;/p&gt;
+&lt;p&gt;switch和if-else相比，由于使用了Binary Tree算法，绝大部分情况下switch会快一点，除非是if-else的第一个条件就为true.说实话  我也没有深入研究过这个问题的根源只是在实际开发中  没有人会去用很多很多else if的都是用 switch case 的  后者比较清晰  给人感觉就是一个脑子很清楚的人写出来的东西至于效率的本质  就让大企鹅去操心吧&lt;br&gt;编译器编译switch与编译if…else…不同。不管有多少case，都直接跳转，不需逐个比较查询。&lt;br&gt;昨天发现了一本叫做CSAPP的书，终于找到了关于switch问题的解答。&lt;/p&gt;
+&lt;p&gt;这是一段C代码：&lt;br&gt;/&lt;em&gt; $begin switch-c &lt;/em&gt;/&lt;br&gt;int switch_eg(int x)&lt;br&gt;{&lt;br&gt;    int result = x; &lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;switch (x) { 
+
+case 100: 
+result *= 13; 
+break; 
+
+case 102: 
+result += 10; 
+/* Fall through */ 
+
+case 103: 
+result += 11; 
+break; 
+
+case 104: 
+case 106: 
+result *= result; 
+break; 
+
+default: 
+result = 0;       
+} 
+
+return result; 
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;}&lt;br&gt;/&lt;em&gt; $end switch-c &lt;/em&gt;/ &lt;/p&gt;
+&lt;p&gt;用GCC汇编出来的代码如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;    .file    &amp;quot;switch.c&amp;quot; 
+    .version    &amp;quot;01.01&amp;quot; 
+gcc2_compiled.: 
+.text 
+    .align 4 
+.globl switch_eg 
+    .type     switch_eg,@function 
+switch_eg: 
+    pushl %ebp 
+    movl %esp,%ebp 
+    movl 8(%ebp),%edx 
+    leal -100(%edx),%eax 
+    cmpl ,%eax 
+    ja .L9 
+    jmp *.L10(,%eax,4) 
+    .p2align 4,,7 
+.section    .rodata 
+    .align 4 
+    .align 4 
+.L10: 
+    .long .L4 
+    .long .L9 
+    .long .L5 
+    .long .L6 
+    .long .L8 
+    .long .L9 
+    .long .L8 
+.text 
+    .p2align 4,,7 
+.L4: 
+    leal (%edx,%edx,2),%eax 
+    leal (%edx,%eax,4),%edx 
+    jmp .L3 
+    .p2align 4,,7 
+.L5: 
+    addl ,%edx 
+.L6: 
+    addl ,%edx 
+    jmp .L3 
+    .p2align 4,,7 
+.L8: 
+    imull %edx,%edx 
+    jmp .L3 
+    .p2align 4,,7 
+.L9: 
+    xorl %edx,%edx 
+.L3: 
+    movl %edx,%eax 
+    movl %ebp,%esp 
+    popl %ebp 
+    ret 
+.Lfe1: 
+    .size     switch_eg,.Lfe1-switch_eg 
+    .ident    &amp;quot;GCC: (GNU) 2.95.3 20010315 (release)&amp;quot; 
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;在上面的汇编代码中我们可以很清楚的看到switch部分被分配了一个连续的查找表，switch case中不连续的部分也被添加上了相应的条目，switch表的大小不是根据case语句的多少，而是case的最大值的最小值之间的间距。在选择相应 的分支时，会先有一个cmp子句，如果大于查找表的最大值，则跳转到default子句。而其他所有的case语句的耗时都回事O(1)。&lt;/p&gt;
+&lt;p&gt;相比于if-else结构，switch的效率绝对是要高很多的，但是switch使用查找表的方式决定了case的条件必须是一个连续的常量。而if-else则可以灵活的多。&lt;/p&gt;
+&lt;p&gt;可以看到if-else只是单纯地一个接一个比较，效率比较低&lt;br&gt;可以看出，switch的效率一般比if-else高&lt;br&gt;switch   效率高,     从汇编代码可以看出来&lt;br&gt;switch   只计算一次值   然后都是test   ,   jmp,&lt;br&gt;if…else   是每个条件都要计算一遍的.&lt;br&gt;switch的效率与分支数无关&lt;br&gt;当只有分支比较少的时候，if效率比switch高（因为switch有跳转表）&lt;br&gt;分支比较多，那当然是switch&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近看见项目里面很多if-else，突然想到switch与if-else效率问题。&lt;br&gt;网上查了下资料，备记下：&lt;/p&gt;
+&lt;p&gt;switch和if-else相比，由于使用了Binary Tree算法，绝大部分情况下switch会快一点，除非是if-else的第一个条件就为
+    
+    </summary>
+    
+      <category term="随笔" scheme="http://blog.edagarli.com/categories/%E9%9A%8F%E7%AC%94/"/>
+    
+    
+      <category term="java" scheme="http://blog.edagarli.com/tags/java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>如何解决消息发送一致性</title>
+    <link href="http://blog.edagarli.com/2016/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E6%B6%88%E6%81%AF%E5%8F%91%E9%80%81%E4%B8%80%E8%87%B4%E6%80%A7/"/>
+    <id>http://blog.edagarli.com/2016/如何解决消息发送一致性/</id>
+    <published>2016-03-07T14:42:00.000Z</published>
+    <updated>2016-03-18T03:50:02.000Z</updated>
+    
+    <content type="html">&lt;p&gt;消息发送一致性是什么？&lt;/p&gt;
+&lt;p&gt;是指产生消息的业务动作与消息发送的一致，就是说，如果业务操作成功了，那么对应的消息一定要发送出去，否则就丢失消息了。而另一方面，如果这个业务行为没有发生或者失败，那么就不应该把消息发出去。&lt;/p&gt;
+&lt;p&gt;消息发送一致性很难保证吗？&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;void test(){
+  //业务操作
+  //列如写数据库，调用服务等
+  //发送消息
+}    
+
+void test(){
+  // 发送消息
+  //业务操作
+  //列如写数据库，调用服务等
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;上面伪代码不管哪一步出现问题了，都很难保持一致性。虽然在实践中，第一种丢失消息的比例相对第二种是很低的。但是，要求保证一致性的场景，上面的两种方案都不能接受。&lt;/p&gt;
+&lt;p&gt;使用JMS可以实现消息一致性吗？&lt;/p&gt;
+&lt;p&gt;用过JMS的都知道，JMS的API种，有很多XA开头的接口。其实如果不实用XA系列的接口实现，那么我们就无法直接得到发送消息给消息中间件及业务操作这两个事情的事物保证，而JMS中定义的XA系列的接口就是为了实现分布式事务的支持（发送消息和业务操作很难做在一个本地事务中）。但是会有如下问题:&lt;/p&gt;
+&lt;p&gt;1.引入了分布式事务，这会带来一些开销并增加复杂性。&lt;br&gt;2.对于业务操作有限制，要求业务操作的资源必须支持XA协议，才能够与发送消息一起来做分布式事务。这会成为一个限制，因为并不是所有需要与发送消息一起做成分布式事务的业务操作都支持XA协议。&lt;/p&gt;
+&lt;p&gt;其他的办法？&lt;/p&gt;
+&lt;p&gt;JMS可以解决一致性问题，但是存在一些限制并且成本相对较高。那么有没有其他的办法呢？如图所示方案。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/pasted-8.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;可能这个过程当中会出现很多异常，下面具体分析下。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/pasted-9.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/pasted-10.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;那么如何了解业务操作的结果呢？&lt;/p&gt;
+&lt;p&gt;下面展示了这个过程。由消息中间件主动询问业务应用，获取待处理消息所对的业务操作的结果，然后业务应用需要对业务操作结果进行检查，并且把结果发送给消息中间件，然后根据这个结果，更新状态。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/pasted-11.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;本文采用 &lt;a href=&quot;http://creativecommons.org/licenses/by-sa/3.0/cn/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;知识共享署名-相同方式共享 3.0 中国大陆许可协议&lt;/a&gt;，转载、引用前需联系作者，并署名作者且注明文章出处 。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;消息发送一致性是什么？&lt;/p&gt;
+&lt;p&gt;是指产生消息的业务动作与消息发送的一致，就是说，如果业务操作成功了，那么对应的消息一定要发送出去，否则就丢失消息了。而另一方面，如果这个业务行为没有发生或者失败，那么就不应该把消息发出去。&lt;/p&gt;
+&lt;p&gt;消息发送一致性很难保证吗？&lt;/p
+    
+    </summary>
+    
+      <category term="聊聊架构" scheme="http://blog.edagarli.com/categories/%E8%81%8A%E8%81%8A%E6%9E%B6%E6%9E%84/"/>
+    
+    
+      <category term=" 消息中间件" scheme="http://blog.edagarli.com/tags/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>60多年前，一群小白程序员扒了一个俄罗斯的开源框架</title>
+    <link href="http://blog.edagarli.com/2016/%E4%B8%80%E7%BE%A4%E5%B0%8F%E7%99%BD%E7%A8%8B%E5%BA%8F%E5%91%98%E6%89%92%E4%BA%86%E4%B8%80%E4%B8%AA%E4%BF%84%E7%BD%97%E6%96%AF%E7%9A%84%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
+    <id>http://blog.edagarli.com/2016/一群小白程序员扒了一个俄罗斯的开源框架/</id>
+    <published>2016-03-06T04:06:00.000Z</published>
+    <updated>2016-03-18T03:50:02.000Z</updated>
+    
+    <content type="html">&lt;p&gt;60多年前，一群小白程序员扒了一个俄罗斯的开源框架，写了几行漏洞百出的代码，产品上线运营了，30年后新的CTO实在看不下去了，重构了部分代码，但框架依旧是旧的，又过了30年新代码和就框架严重不兼容，产品濒临崩溃，用户流失严重，这时我们该&lt;/p&gt;
+&lt;p&gt;1继续修bug打补丁&lt;/p&gt;
+&lt;p&gt;2换个框架重构代码&lt;/p&gt;
+&lt;p&gt;3干脆换掉这些程序猿。&lt;/p&gt;
+&lt;p&gt;关键是那个开源框架糟烂得很，还没哪个使用它的产品成功过，后来连俄国人自己都抛弃不用了Communix操作系统最早是两个德国人Marx和Engles开发的（称为Communix基础版，或Communix 1.0和2.0），遵守GPL，它的早期支持者曾经先后组织过两个国际讨论区。&lt;/p&gt;
+&lt;p&gt;当时少数先进的国家都使用最早由英国人开发后来在美国得到大力发展的Libertix，亚洲、非洲和澳洲人当时本土更古老的操作系统已经或濒于崩溃，多数成为受Libertix主机控制的远程终端。相比之下， Communix支持的机子很少，但移植Communix的努力一直就没停止过。最早是以法国为主的一些人在巴黎、里昂等地移植过，但失败了。&lt;/p&gt;
+&lt;p&gt;此后Communix分成两条路发展，一条是删除一些不兼容的代码，把Communix移植到Libertix上运行；另一批人在俄国著名程序员 Lenin的领导下，在俄国移植Communix获得成功（第一次发行时称为俄版Communix beta或Communix 3.0 beta），俄版Communix一度做到15个主节点、20多个子节点的大规模并行Cluster，并影响到亚洲、东欧、拉美等一些地方。&lt;/p&gt;
+&lt;p&gt;在Lenin之后，俄版Communix项目的两个CEO对Communix 3.0正式版出现了意见分歧。势力强大的Stalin重视系统安全和运行效率，认为需要在已有的基础上继续优化俄版Communix代码；实力较弱小的Trotsky认为Communix必须支持更多的硬件，提供更多的功能。这次分歧以Trotsky失败告终。&lt;/p&gt;
+&lt;p&gt;Trotsky和他的团队后来开发了自己的Communix（称为托版Communix或Communix 4.0），但除了在斯里兰卡短暂地装过一段时间以外，都是小用户，这些用户又加入了很多自己的东西，且互相不统一，Trotsky死后没人整理，因此托版Communix非常乱。&lt;/p&gt;
+&lt;p&gt;而由Stalin的团队打造的Communix 3.0正式版因为过于注重系统安全和效率，导致接口不够友好，娱乐功能少，不能及时更新一些新功能。Stalin的继任者由一个极端走向另一个极端，他们片面追求漂亮接口和娱乐功能，甚至干脆向欧美的Libertix购买这些功能，放弃了系统安全和效率，更不对代码作任何优化，导致系统经常当机和被黑客入侵，最后不得不改装Libertix。&lt;/p&gt;
+&lt;p&gt;在俄国成功移植Communix的消息也鼓舞着中国的Communix爱好者们，但早期的努力都不成功。一个姓毛的人说，俄版Communix光是汉化还不行，因为我们的硬件配置太低，短期内也不可能更新，所以必须为我们自己的硬件改写一部分底层代码。&lt;/p&gt;
+&lt;p&gt;这种办法最后成功了，毛版Communix一度曾成为低配置计算机移植Communix的经典范例。毛还反对俄版Communix晚期的一些修改，认为这是向Libertix投降。为了及时清理Communix队伍内部的Libertix代理人，他发动广大用户学Communix和写 Communix，打造一个“六亿神州皆Hacker”的毛版Communix。他的主张遭到开发团队的反对，最后无果而终，但影响持续至今。&lt;/p&gt;
+&lt;p&gt;如今，一个精通毛版Communix的程序员往往被看作是危险的黑客，而那些拿了很多认证的Communix程序员都在跟Libertix学接轨。也有人认为，所谓的“毛版Communix”其实是用户的误解，毛在中国发布的操作系统的正确名称是Maox OS，这个系统仅仅只是借鉴了Communix的目录结构等标准，与Communix并无代码上的继承关系，只能称之为“Communix Like”系统。&lt;/p&gt;
+&lt;p&gt;到70年代后期，毛版Communix由于缺乏对于新硬件和新技术的支持，同时本身的大量漏洞也暴露无遗，已经变得很不稳定，此时一个中国Communix开源小区的程序员Deng更改了一部分Communix的内核，采用了微内核技术，这个改进最初在一定程度上解决了原版Communix对内存调用存在的内存泄露和内存管理效率低下的问题，同时提高了磁盘操作效率，并且比较成功地解决了许多应用程序在Communix与世界主流使用的Libertix的兼容问题。&lt;/p&gt;
+&lt;p&gt;邓版Communix本来试图引进一些Libertix系统的部分特点，但由于考虑不周，设计上有不少漏洞，更由于Communix本身固有的弊病和程序员Deng及其后继者无心也无力从根本上对Communix的内核进行更新，导致邓版Communix运行30年后出现少数进程劫持了系统核心并占用了大量资源的情况，系统的稳定性和安全性看来已出现了严重的问题。&lt;/p&gt;
+&lt;p&gt;当今世界，除中国仍在使用Communix外，还有朝鲜、古巴、越南等少数国家也在使用Communix。&lt;/p&gt;
+&lt;p&gt;朝鲜的金版Communix系统是毛版Communix系统mini版，又称毛版Communix系统朝鲜语版。&lt;/p&gt;
+&lt;p&gt;由于朝鲜的硬件配置仍然较低，适应低硬件配置的毛版Communix系统朝鲜语版运行仍然比较流畅。&lt;/p&gt;
+&lt;p&gt;古巴的Castro版Communix系统类似于金版Communix系统，而越南人使用的胡版Communix近年来经改良后则更像中国的邓版Communix。&lt;/p&gt;
+&lt;p&gt;此外，尼泊尔有部分人宣称他们要在尼泊尔安装毛版Communix系统，但又有人说尼泊尔人的毛版Communix是“山寨版”的Communix。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;如果觉得有点用处，可以请我喝杯咖啡!&lt;br&gt;&lt;img src=&quot;/images/aex068188cqwy9xbxa3oc07.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;60多年前，一群小白程序员扒了一个俄罗斯的开源框架，写了几行漏洞百出的代码，产品上线运营了，30年后新的CTO实在看不下去了，重构了部分代码，但框架依旧是旧的，又过了30年新代码和就框架严重不兼容，产品濒临崩溃，用户流失严重，这时我们该&lt;/p&gt;
+&lt;p&gt;1继续修bug打补丁&lt;
+    
+    </summary>
+    
+      <category term="闲谈" scheme="http://blog.edagarli.com/categories/%E9%97%B2%E8%B0%88/"/>
+    
+    
+      <category term="查水表" scheme="http://blog.edagarli.com/tags/%E6%9F%A5%E6%B0%B4%E8%A1%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>大浏览量系统的解决思路</title>
+    <link href="http://blog.edagarli.com/2016/%E5%A4%A7%E6%B5%8F%E8%A7%88%E9%87%8F%E7%B3%BB%E7%BB%9F%E7%9A%84%E8%A7%A3%E5%86%B3%E6%80%9D%E8%B7%AF/"/>
+    <id>http://blog.edagarli.com/2016/大浏览量系统的解决思路/</id>
+    <published>2016-03-02T15:07:00.000Z</published>
+    <updated>2016-03-18T03:50:02.000Z</updated>
+    
+    <content type="html">&lt;p&gt;随着网站的发展壮大，系统也面临越来越多的挑战，有些是业务发展带来的挑战，例如大型促销活动，秒杀活动等突发流量冲击；还有一些是非正常的访问请求，例如网站经常受到攻击和恶意请求。像这种流量突然暴增的情况对系统的冲击很大，有时候流量突然暴增的情况对系统的冲击很大，有时候流量瞬间可达到20w/s的QPS,所以如何让系统有更好的性能和稳定性是我们面临的一大挑战。&lt;/p&gt;
+&lt;p&gt;在介绍前台系统的静态化改造之前，先说说可以做哪些优化工作。介绍下淘宝前台系统的优化历程。&lt;/p&gt;
+&lt;p&gt;2009年，系统拆分，静态文件合并，前端页面异步化和JSON化。&lt;br&gt;2010年，去DB依赖，引入缓存，提升单机QPS，关注用户体验。&lt;br&gt;2011年，优化进入深水区Velocity，BigPipe。&lt;br&gt;2012年，静态化改造。&lt;br&gt;2013年，统一Cache，CDN化，网络协议。&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;静态改造&lt;/b&gt;&lt;/p&gt;
+&lt;p&gt;1.什么是静态化系统&lt;/p&gt;
+&lt;p&gt;在要改造成静态化系统之前首先要搞明白什么是静态化系统？&lt;/p&gt;
+&lt;p&gt;几个特征：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1.一个页面对应URL通常固定。
+2.在页面中不能包含与浏览者相关的因素，这里所说的“不能包含”不包括JS动态生成的部分，也就是在页面中HTML代码不能明显地含有与浏览器相关的DOM。
+3.在页面中不包含时间因素。页面同样不能含有与时间（而是服务端输出的时间）相关的因素，页面中的DOM不随时间变化而变化。
+4.页面中不包含地域信息。
+5.不能包含Cookie等私有数据。
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;为什么要进行静态化架构设计&lt;/p&gt;
+&lt;p&gt;系统经过多次优化升级，包括系统架构的升级，系统本身的模块优化，代码优化和增加各种缓存等这些优化，我们的优化层次都是在java系统中做改进的。在这种情况下压测我们的java系统，性能依旧不能满足我们的期望，我们的目标是再上一个数量级。&lt;/p&gt;
+&lt;p&gt;如何改造动态系统&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;URL唯一化
+分离与浏览者相关的因素。
+分离时间因素。
+异地化地域因素。
+去掉Cookie。
+   动态内容结构化。（ESI和CSI）
+&lt;/code&gt;&lt;/pre&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;随着网站的发展壮大，系统也面临越来越多的挑战，有些是业务发展带来的挑战，例如大型促销活动，秒杀活动等突发流量冲击；还有一些是非正常的访问请求，例如网站经常受到攻击和恶意请求。像这种流量突然暴增的情况对系统的冲击很大，有时候流量突然暴增的情况对系统的冲击很大，有时候流量瞬间可
+    
+    </summary>
+    
+      <category term="案例" scheme="http://blog.edagarli.com/categories/%E6%A1%88%E4%BE%8B/"/>
+    
+    
+      <category term="案例" scheme="http://blog.edagarli.com/tags/%E6%A1%88%E4%BE%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JVM性能调优</title>
+    <link href="http://blog.edagarli.com/2016/JVM%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/"/>
+    <id>http://blog.edagarli.com/2016/JVM性能调优/</id>
+    <published>2016-03-01T03:24:00.000Z</published>
+    <updated>2016-03-18T03:50:02.000Z</updated>
+    
+    <content type="html">&lt;p&gt;最近线上问题很多，本来想写篇JVM性能调优，但发现@优雅先生 已经写了篇很不错的文章，所以不打算再写了，等下次有时间再分享一篇线上问题案例分析。文章如下,花了点时间，排了下版。&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;JVM性能调优监控工具jps、jstack、jmap、jhat、jstat、hprof使用详解&lt;/b&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;JDK本身提供了很多方便的JVM性能调优监控工具，除了集成式的VisualVM和jConsole外，还有jps、jstack、jmap、jhat、jstat、hprof等小巧的工具，本博客希望能起抛砖引玉之用，让大家能开始对JVM性能调优的常用工具有所了解。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;现实企业级Java开发中，有时候我们会碰到下面这些问题：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;OutOfMemoryError，内存不足
+
+内存泄露
+
+线程死锁
+
+锁争用（Lock Contention）
+
+Java进程消耗CPU过高
+
+......
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这些问题在日常开发中可能被很多人忽视（比如有的人遇到上面的问题只是重启服务器或者调大内存，而不会深究问题根源），但能够理解并解决这些问题是Java程序员进阶的必备要求。本文将对一些常用的JVM性能调优监控工具进行介绍，希望能起抛砖引玉之用。本文参考了网上很多资料，难以一一列举，在此对这些资料的作者表示感谢！关于JVM性能调优相关的资料，请参考文末。&lt;/p&gt;
+&lt;p&gt;A、 jps(Java Virtual Machine Process Status Tool)      &lt;/p&gt;
+&lt;p&gt;jps主要用来输出JVM中运行的进程状态信息。语法格式如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;jps [options] [hostid]
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;如果不指定hostid就默认为当前主机或服务器。&lt;/p&gt;
+&lt;p&gt;命令行参数选项说明如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;-q 不输出类名、Jar名和传入main方法的参数
+-m 输出传入main方法的参数
+-l 输出main类或Jar的全限名
+-v 输出传入JVM的参数
+
+root@ubuntu:/# jps -m -l
+2458 org.artifactory.standalone.main.Main     /usr/local/artifactory-2.2.5/etc/jetty.xml
+29920 com.sun.tools.hat.Main -port 9998 /tmp/dump.dat
+3149 org.apache.catalina.startup.Bootstrap start
+30972 sun.tools.jps.Jps -m -l
+8247 org.apache.catalina.startup.Bootstrap start
+25687 com.sun.tools.hat.Main -port 9999 dump.dat
+21711 mrf-center.jar
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;B、 jstack&lt;/p&gt;
+&lt;p&gt;jstack主要用来查看某个Java进程内的线程堆栈信息。语法格式如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;jstack [option] pid
+jstack [option] executable core
+jstack [option] [server-id@]remote-hostname-or-ip
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;命令行参数选项说明如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;-l long listings，会打印出额外的锁信息，在发生死锁时可以用jstack -l pid来观察锁持有情况
+-m mixed mode，不仅会输出Java堆栈信息，还会输出C/C++堆栈信息（比如Native方法）
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;jstack可以定位到线程堆栈，根据堆栈信息我们可以定位到具体代码，所以它在JVM性能调优中使用得非常多。下面我们来一个实例找出某个Java进程中最耗费CPU的Java线程并定位堆栈信息，用到的命令有ps、top、printf、jstack、grep。&lt;/p&gt;
+&lt;p&gt;第一步先找出Java进程ID，我部署在服务器上的Java应用名称为mrf-center：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;root@ubuntu:/# ps -ef | grep mrf-center | grep -v grep
+root     21711     1  1 14:47 pts/3    00:02:10 java -jar mrf-center.jar
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;得到进程ID为21711，第二步找出该进程内最耗费CPU的线程，可以使用ps -Lfp pid或者ps -mp pid -o THREAD, tid, time或者top -Hp pid，我这里用第三个，输出如下：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/pasted-3.png&quot; alt=&quot;pasted image&quot;&gt;&lt;/p&gt;
+&lt;p&gt;TIME列就是各个Java线程耗费的CPU时间，CPU时间最长的是线程ID为21742的线程，用&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;printf &amp;quot;%x\n&amp;quot; 21742
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;得到21742的十六进制值为54ee，下面会用到。&lt;br&gt;OK，下一步终于轮到jstack上场了，它用来输出进程21711的堆栈信息，然后根据线程ID的十六进制值grep，如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;root@ubuntu:/# jstack 21711 | grep 54ee
+&amp;quot;PollIntervalRetrySchedulerThread&amp;quot; prio=10 tid=0x00007f950043e000 nid=0x54ee in Object.wait() [0x00007f94c6eda000]
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;可以看到CPU消耗在PollIntervalRetrySchedulerThread这个类的Object.wait()，我找了下我的代码，定位到下面的代码：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// Idle wait
+getLog().info(&amp;quot;Thread [&amp;quot; + getName() + &amp;quot;] is idle waiting...&amp;quot;);
+schedulerThreadState = PollTaskSchedulerThreadState.IdleWaiting;
+long now = System.currentTimeMillis();
+long waitTime = now + getIdleWaitTime();
+long timeUntilContinue = waitTime - now;
+synchronized(sigLock) {
+try {
+if(!halted.get()) {
+sigLock.wait(timeUntilContinue);
+}
+} 
+catch (InterruptedException ignore) {
+}
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;它是轮询任务的空闲等待代码，上面的sigLock.wait(timeUntilContinue)就对应了前面的Object.wait()。&lt;/p&gt;
+&lt;p&gt;C、 jmap（Memory Map）和jhat（Java Heap Analysis Tool）&lt;/p&gt;
+&lt;p&gt;jmap用来查看堆内存使用状况，一般结合jhat使用。&lt;/p&gt;
+&lt;p&gt;jmap语法格式如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;jmap [option] pid
+jmap [option] executable core
+jmap [option] [server-id@]remote-hostname-or-ip
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;如果运行在64位JVM上，可能需要指定-J-d64命令选项参数。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;jmap -permstat pid
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;打印进程的类加载器和类加载器加载的持久代对象信息，输出：类加载器名称、对象是否存活（不可靠）、对象地址、父类加载器、已加载的类大小等信息，如下图：&lt;/p&gt;
+&lt;p&gt;  &lt;img src=&quot;/images/pasted-4.png&quot; alt=&quot;pasted image&quot;&gt;&lt;/p&gt;
+&lt;p&gt;使用jmap -heap pid查看进程堆内存使用情况，包括使用的GC算法、堆配置参数和各代中堆内存使用情况。比如下面的例子：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;root@ubuntu:/# jmap -heap 21711
+Attaching to process ID 21711, please wait...
+Debugger attached successfully.
+Server compiler detected.
+JVM version is 20.10-b01
+
+using thread-local object allocation.
+Parallel GC with 4 thread(s)
+
+Heap Configuration:
+MinHeapFreeRatio = 40
+MaxHeapFreeRatio = 70
+MaxHeapSize      = 2067791872 (1972.0MB)
+NewSize          = 1310720 (1.25MB)
+MaxNewSize       = 17592186044415 MB
+OldSize          = 5439488 (5.1875MB)
+NewRatio         = 2
+SurvivorRatio    = 8
+PermSize         = 21757952 (20.75MB)
+MaxPermSize      = 85983232 (82.0MB)
+
+Heap Usage:
+PS Young Generation
+Eden Space:
+capacity = 6422528 (6.125MB)
+used     = 5445552 (5.1932830810546875MB)
+free     = 976976 (0.9317169189453125MB)
+84.78829520089286% used
+From Space:
+capacity = 131072 (0.125MB)
+used     = 98304 (0.09375MB)
+free     = 32768 (0.03125MB)
+75.0% used
+To Space:
+capacity = 131072 (0.125MB)
+used     = 0 (0.0MB)
+free     = 131072 (0.125MB)
+0.0% used
+PS Old Generation
+capacity = 35258368 (33.625MB)
+used     = 4119544 (3.9287033081054688MB)
+free     = 31138824 (29.69629669189453MB)
+11.683876009235595% used
+PS Perm Generation
+capacity = 52428800 (50.0MB)
+used     = 26075168 (24.867218017578125MB)
+free     = 26353632 (25.132781982421875MB)
+49.73443603515625% used
+....
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;使用jmap -histo[:live] pid查看堆内存中的对象数目、大小统计直方图，如果带上live则只统计活对象，如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;  root@ubuntu:/# jmap -histo:live 21711 | more
+
+   num     #instances         #bytes  class name
+ 1:         38445        5597736  &amp;lt;constMethodKlass&amp;gt;
+ 2:         38445        5237288  &amp;lt;methodKlass&amp;gt;
+ 3:          3500        3749504  &amp;lt;constantPoolKlass&amp;gt;
+ 4:         60858        3242600  &amp;lt;symbolKlass&amp;gt;
+ 5:          3500        2715264  &amp;lt;instanceKlassKlass&amp;gt;
+ 6:          2796        2131424  &amp;lt;constantPoolCacheKlass&amp;gt;
+ 7:          5543        1317400  [I
+ 8:         13714        1010768  [C
+ 9:          4752        1003344  [B
+10:          1225         639656  &amp;lt;methodDataKlass&amp;gt;
+11:         14194         454208  java.lang.String
+12:          3809         396136  java.lang.Class
+13:          4979         311952  [S
+14:          5598         287064  [[I
+15:          3028         266464  java.lang.reflect.Method
+16:           280         163520  &amp;lt;objArrayKlassKlass&amp;gt;
+17:          4355         139360  java.util.HashMap$Entry
+18:          1869         138568  [Ljava.util.HashMap$Entry;
+19:          2443          97720  java.util.LinkedHashMap$Entry
+20:          2072          82880  java.lang.ref.SoftReference
+21:          1807          71528  [Ljava.lang.Object;
+22:          2206          70592  java.lang.ref.WeakReference
+23:           934          52304  java.util.LinkedHashMap
+24:           871          48776  java.beans.MethodDescriptor
+25:          1442          46144  java.util.concurrent.ConcurrentHashMap$HashEntry
+26:           804          38592  java.util.HashMap
+27:           948          37920  java.util.concurrent.ConcurrentHashMap$Segment
+28:          1621          35696  [Ljava.lang.Class;
+29:          1313          34880  [Ljava.lang.String;
+30:          1396          33504  java.util.LinkedList$Entry
+31:           462          33264  java.lang.reflect.Field
+32:          1024          32768  java.util.Hashtable$Entry
+33:           948          31440  [Ljava.util.concurrent.ConcurrentHashMap$HashEntry;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;class name是对象类型，说明如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;B  byte
+C  char
+D  double
+F  float
+I  int
+J  long
+Z  boolean
+[  数组，如[I表示int[]
+[L+类名 其他对象
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;还有一个很常用的情况是：用jmap把进程内存使用情况dump到文件中，再用jhat分析查看。jmap进行dump命令格式如下&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;jmap -dump:format=b,file=dumpFileName pid
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;我一样地对上面进程ID为21711进行Dump：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;root@ubuntu:/# jmap -dump:format=b,file=/tmp/dump.dat 21711     
+Dumping heap to /tmp/dump.dat ...
+Heap dump file created
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt; dump出来的文件可以用MAT、VisualVM等工具查看，这里用jhat查看：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; root@ubuntu:/# jhat -port 9998 /tmp/dump.dat
+Reading from /tmp/dump.dat...
+Dump file created Tue Jan 28 17:46:14 CST 2014
+Snapshot read, resolving...
+Resolving 132207 objects...
+Chasing references, expect 26 dots..........................
+Eliminating duplicate references..........................
+Snapshot resolved.
+Started HTTP server on port 9998
+Server is ready.
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;注意如果Dump文件太大，可能需要加上-J-Xmx512m这种参数指定最大堆内存，即jhat -J-Xmx512m -port 9998 /tmp/dump.dat。然后就可以在浏览器中输入主机地址:9998查看了：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/pasted-5.png&quot; alt=&quot;pasted image&quot;&gt;&lt;/p&gt;
+&lt;p&gt;上面红线框出来的部分大家可以自己去摸索下，最后一项支持OQL（对象查询语言）。&lt;/p&gt;
+&lt;p&gt;D、jstat（JVM统计监测工具）&lt;/p&gt;
+&lt;p&gt;语法格式如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;jstat [ generalOption | outputOptions vmid [interval[s|ms] [count]] ]
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;vmid是Java虚拟机ID，在Linux/Unix系统上一般就是进程ID。interval是采样时间间隔。count是采样数目。比如下面输出的是GC信息，采样时间间隔为250ms，采样数为4：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;root@ubuntu:/# jstat -gc 21711 250 4
+ S0C    S1C    S0U    S1U      EC       EU        OC         OU       PC     PU    YGC     YGCT    FGC    FGCT     GCT   
+192.0  192.0   64.0   0.0    6144.0   1854.9   32000.0     4111.6   55296.0 25472.7    702    0.431   3      0.218    0.649
+192.0  192.0   64.0   0.0    6144.0   1972.2   32000.0     4111.6   55296.0 25472.7    702    0.431   3      0.218    0.649
+192.0  192.0   64.0   0.0    6144.0   1972.2   32000.0     4111.6   55296.0 25472.7    702    0.431   3      0.218    0.649
+192.0  192.0   64.0   0.0    6144.0   2109.7   32000.0     4111.6   55296.0 25472.7    702    0.431   3      0.218    0.649
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;要明白上面各列的意义，先看JVM堆内存布局：&lt;/p&gt;
+&lt;p&gt;可以看出：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;堆内存 = 年轻代 + 年老代 + 永久代
+年轻代 = Eden区 + 两个Survivor区（From和To）
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;现在来解释各列含义：&lt;br&gt;          S0C、S1C、S0U、S1U：Survivor 0/1区容量（Capacity）和使用量（Used）&lt;br&gt;          EC、EU：Eden区容量和使用量&lt;br&gt;          OC、OU：年老代容量和使用量&lt;br&gt;          PC、PU：永久代容量和使用量&lt;br&gt;          YGC、YGT：年轻代GC次数和GC耗时&lt;br&gt;          FGC、FGCT：Full GC次数和Full GC耗时&lt;br&gt;          GCT：GC总耗时&lt;/p&gt;
+&lt;p&gt;E、hprof（Heap/CPU Profiling Tool）&lt;/p&gt;
+&lt;p&gt;hprof能够展现CPU使用率，统计堆内存使用情况。&lt;br&gt;语法格式如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;java -agentlib:hprof[=options] ToBeProfiledClass
+java -Xrunprof[:options] ToBeProfiledClass
+javac -J-agentlib:hprof[=options] ToBeProfiledClass
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;完整的命令选项如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;      Option Name and Value  Description                    Default
+      ---------------------  -----------                    -------
+      heap=dump|sites|all    heap profiling                 all
+      cpu=samples|times|old  CPU usage                      off
+      monitor=y|n            monitor contention             n
+      format=a|b             text(txt) or binary output     a
+      file=&amp;lt;file&amp;gt;            write data to file             java.hprof[.txt]
+      net=&amp;lt;host&amp;gt;:&amp;lt;port&amp;gt;      send data over a socket        off
+      depth=&amp;lt;size&amp;gt;           stack trace depth              4
+      interval=&amp;lt;ms&amp;gt;          sample interval in ms          10
+      cutoff=&amp;lt;value&amp;gt;         output cutoff point            0.0001
+      lineno=y|n             line number in traces?         y
+      thread=y|n             thread in traces?              n
+      doe=y|n                dump on exit?                  y
+      msa=y|n                Solaris micro state accounting n
+      force=y|n              force output to &amp;lt;file&amp;gt;         y
+      verbose=y|n            print messages about dumps     y
+来几个官方指南上的实例。
+
+CPU Usage Sampling Profiling(cpu=samples)的例子：
+java -agentlib:hprof=cpu=samples,interval=20,depth=3     Hello
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;上面每隔20毫秒采样CPU消耗信息，堆栈深度为3，生成的profile文件名称是java.hprof.txt，在当前目录。 &lt;/p&gt;
+&lt;p&gt;CPU Usage Times Profiling(cpu=times)的例子，它相对于CPU Usage Sampling Profile能够获得更加细粒度的CPU消耗信息，能够细到每个方法调用的开始和结束，它的实现使用了字节码注入技术（BCI）：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;javac -J-agentlib:hprof=cpu=times Hello.java
+Heap Allocation Profiling(heap=sites)的例子：
+
+javac -J-agentlib:hprof=heap=sites Hello.java
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Heap Dump(heap=dump)的例子，它比上面的Heap Allocation Profiling能生成更详细的Heap Dump信息：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;javac -J-agentlib:hprof=heap=dump Hello.java
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;虽然在JVM启动参数中加入-Xrunprof:heap=sites参数可以生成CPU/Heap Profile文件，但对JVM性能影响非常大，不建议在线上服务器环境使用。&lt;/p&gt;
+&lt;p&gt;其他JVM性能调优参考资料：&lt;/p&gt;
+&lt;p&gt;《Java虚拟机规范》&lt;/p&gt;
+&lt;p&gt;《Java Performance》&lt;/p&gt;
+&lt;p&gt;《Trouble Shooting Guide for JavaSE 6 with HotSpot VM》: &lt;a href=&quot;http://www.oracle.com/technetwork/java/javase/tsg-vm-149989.pdf&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.oracle.com/technetwork/java/javase/tsg-vm-149989.pdf&lt;/a&gt; &lt;/p&gt;
+&lt;p&gt;《Effective Java》&lt;/p&gt;
+&lt;p&gt;VisualVM: &lt;a href=&quot;http://docs.oracle.com/javase/7/docs/technotes/guides/visualvm/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://docs.oracle.com/javase/7/docs/technotes/guides/visualvm/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;jConsole: &lt;a href=&quot;http://docs.oracle.com/javase/1.5.0/docs/guide/management/jconsole.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://docs.oracle.com/javase/1.5.0/docs/guide/management/jconsole.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Monitoring and Managing JavaSE 6 Applications: &lt;a href=&quot;http://www.oracle.com/technetwork/articles/javase/monitoring-141801.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.oracle.com/technetwork/articles/javase/monitoring-141801.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;BTrace：&lt;a href=&quot;https://kenai.com/projects/btrace&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://kenai.com/projects/btrace&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;原文：&lt;a href=&quot;http://my.oschina.net/feichexia/blog/196575&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://my.oschina.net/feichexia/blog/196575&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近线上问题很多，本来想写篇JVM性能调优，但发现@优雅先生 已经写了篇很不错的文章，所以不打算再写了，等下次有时间再分享一篇线上问题案例分析。文章如下,花了点时间，排了下版。&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;JVM性能调优监控工具jps、jstack、jmap、jhat、jstat、
+    
+    </summary>
+    
+      <category term="JVM" scheme="http://blog.edagarli.com/categories/JVM/"/>
+    
+    
+      <category term="JVM" scheme="http://blog.edagarli.com/tags/JVM/"/>
+    
+  </entry>
+  
+  <entry>
+    <title> 发布或重启线上服务时load很高之解决方案</title>
+    <link href="http://blog.edagarli.com/2016/%E5%8F%91%E5%B8%83%E6%88%96%E9%87%8D%E5%90%AF%E7%BA%BF%E4%B8%8A%E6%9C%8D%E5%8A%A1%E6%97%B6%E6%8A%96%E5%8A%A8%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
+    <id>http://blog.edagarli.com/2016/发布或重启线上服务时抖动问题解决方案/</id>
+    <published>2016-03-01T02:45:00.000Z</published>
+    <updated>2016-03-18T03:50:02.000Z</updated>
+    
+    <content type="html">&lt;p&gt;最近发现项目重启时，load会飙到非常高，然后运行了一段时间，会恢复正常，所以集中整理了下资料以便查阅。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.cnblogs.com/LBSer/p/3703967.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.cnblogs.com/LBSer/p/3703967.html&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://confluence.atlassian.com/jirakb/jira-crashes-due-to-codecache-is-full-compiler-has-been-disabled-314447083.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://confluence.atlassian.com/jirakb/jira-crashes-due-to-codecache-is-full-compiler-has-been-disabled-314447083.html&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://qa.blog.163.com/blog/static/190147002201392221426372/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://qa.blog.163.com/blog/static/190147002201392221426372/&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近发现项目重启时，load会飙到非常高，然后运行了一段时间，会恢复正常，所以集中整理了下资料以便查阅。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.cnblogs.com/LBSer/p/3703967.html&quot; target=&quot;_blank&quot; rel=&quot;ex
+    
+    </summary>
+    
+      <category term="案例" scheme="http://blog.edagarli.com/categories/%E6%A1%88%E4%BE%8B/"/>
+    
+    
+      <category term="服务器" scheme="http://blog.edagarli.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>如何不死掉</title>
+    <link href="http://blog.edagarli.com/2016/%E5%A6%82%E4%BD%95%E4%B8%8D%E6%AD%BB%E6%8E%89/"/>
+    <id>http://blog.edagarli.com/2016/如何不死掉/</id>
+    <published>2016-02-28T11:18:00.000Z</published>
+    <updated>2016-03-18T03:50:02.000Z</updated>
+    
+    <content type="html">&lt;p&gt;今天失恋了，好难受。我发现这段时间经历的事情特别多，接连经历创业失败，撞车，失恋，彷佛生活差到了极点。&lt;/p&gt;
+&lt;p&gt;每每遇到这样的事情，我都会消沉一天，然后重新振作，没什么大不了的。此时此刻，想起了我之前分享的一篇文章。&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;如何不死掉——How Not to Die&lt;/b&gt;&lt;/p&gt;
+&lt;p&gt;创业公司能活下去，靠的是不抛弃不放弃的士气。&lt;/p&gt;
+&lt;p&gt;创业是个艰辛的过程，成功的创业者变得富有，失败的创业者一无所有（除了经验教训）。Paul Graham提到如果一个创业公司与Y Combinator失去联系，或者创业者不再出现在每周的聚会上，基本说明这个创业公司要挂掉了。（在国内，或许是下面的情景预示着公司即将挂掉：创业公司淡出人们的实现，创业者不再露面吧）。死掉的创业公司都是默默就挂掉了，悄无声息的就死了。&lt;/p&gt;
+&lt;p&gt;定期参加创业者或者投资人的聚会，能迫使你每次都做出新东西。如果距离上次聚会你的产品没有任何变化，你真的都不好意思去。所以，让自己和自己的产品活在圈子里、灯光下，强迫自己和自己的团队迭代前进。&lt;/p&gt;
+&lt;p&gt;大部分创业公司因为意志消沉而停滞不前。其实创业的过程就是起起落落，没有什么产品能够一帆风顺，即使是Google也有迷茫甚至是遇挫的时候。而创始人唯一能做的就是打气精神，继续迭代更新自己的产品，千万不能一蹶不振。&lt;/p&gt;
+&lt;p&gt;在创业期间不要轻易去读研，因为一旦你选择去读书，创业就成了你的兼职，你会找各种借口推迟产品发布，导致失败。&lt;/p&gt;
+&lt;p&gt;创业不死掉的秘诀：足够聪明，在一个有前途的领域做事，不放弃。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;生活也是这样，但要明白不放弃就对了。&lt;/p&gt;
+&lt;p&gt;心累，晚安&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;今天失恋了，好难受。我发现这段时间经历的事情特别多，接连经历创业失败，撞车，失恋，彷佛生活差到了极点。&lt;/p&gt;
+&lt;p&gt;每每遇到这样的事情，我都会消沉一天，然后重新振作，没什么大不了的。此时此刻，想起了我之前分享的一篇文章。&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;如何不死掉——How Not 
+    
+    </summary>
+    
+      <category term="闲谈" scheme="http://blog.edagarli.com/categories/%E9%97%B2%E8%B0%88/"/>
+    
+    
+      <category term="创业" scheme="http://blog.edagarli.com/tags/%E5%88%9B%E4%B8%9A/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>为啥HBase需要搭建SQL引擎层</title>
+    <link href="http://blog.edagarli.com/2016/%E4%B8%BA%E5%95%A5HBase%E9%9C%80%E8%A6%81%E6%90%AD%E5%BB%BASQL%E5%BC%95%E6%93%8E%E5%B1%82/"/>
+    <id>http://blog.edagarli.com/2016/为啥HBase需要搭建SQL引擎层/</id>
+    <published>2016-02-12T13:51:00.000Z</published>
+    <updated>2016-03-18T03:50:02.000Z</updated>
+    
+    <content type="html">&lt;p&gt;现有的SQL解决方案通常都不是水平可伸缩的，因此当数据量变大时会遇到障碍。但是这样的情况，随着NoSQL的出现已经得到很大程度的缓解，并且随着NoSQL技术的完善与成熟，这种情况将会从根本上解决。&lt;/p&gt;
+&lt;p&gt;我们知道NoSQL区别于关系型数据库的一点就是NoSQL不使用SQL作为查询语言，至于为何在NoSQL数据存储HBase上提供SQL接口，有如下原因：&lt;/p&gt;
+&lt;p&gt;1.使用诸如SQL这样易于理解的语言，使人们能够更加轻松地使用HBase。&lt;/p&gt;
+&lt;p&gt;2.使用诸如SQL这样更高层次的语言来编写，减少了编写的代码量。&lt;/p&gt;
+&lt;p&gt;3.执行查询时，在数据访问与运行时执行之间加上SQL这样一层抽象可以进行大量优化。例如，对于GROUP BY查询来说，利用HBase中协同处理器，聚合可以在服务器上进行，而不必在客户端，这么做会极大减少客户端与服务器之间传输的数据量。此外，也可以在客户端并行执行GROUP BY，这是根据行健的范围来截断扫描而实现的。通过并行执行，结果会更快的返回。所有这些优化无需用户参与，只需执行查询即可。&lt;/p&gt;
+&lt;b&gt;基于HBase的SQL引擎实现&lt;/b&gt;
+
+&lt;p&gt;现阶段业内有一些关于HBase SQL引擎层的尝试，已经有一些比较稳定的解决方案和现实。&lt;/p&gt;
+&lt;p&gt;1.Hive整合HBase&lt;/p&gt;
+&lt;p&gt;Hive与HBase的整合功能从Hive0.6.0版本已经开始出现，利用两者对外的API接口互相通信，通信主要依靠hive_hbase-handler.jar工具包（Hive Storage Handlers）。由于HBase有一次比较大的版本变动，所以并不是每个版本的Hive都能和现有的HBase版本进行整合，所以在使用过程中特别注意的就是两者版本的一致性。&lt;/p&gt;
+&lt;p&gt;2.Phoenix&lt;/p&gt;
+&lt;p&gt;Phoenix由Salesforce.com开源，是构建在Apache HBase之上的一个SQL中间层，可以让开发者在HBase上执行SQL查询。Phoenix 完全使用Java编写，代码位于Github上，并且提供了一个客户端可嵌入的JDBC驱动。对于10w到100w行的简单查询来说，Phoenix要胜于Hive。&lt;/p&gt;
+&lt;p&gt;3.Kundera&lt;/p&gt;
+&lt;p&gt;Kundera 是一个JPA2.0兼容的NoSQL数据存储的对象映射框架。Kundera基于现有类库构建，封装出简易的API，其主要特性有：&lt;/p&gt;
+&lt;p&gt;1）支持交叉数据存储持久性，这意味着用户可以在不同的数据存储使用单一方法存储和获取相关实体。&lt;br&gt;2)能够很好地管理事务，同时支持EntityTransaction和Java Transaction API（JPA）。&lt;br&gt;3) 兼容JPA2.0，严格使用JPA注释对象映射到数据存储表。&lt;br&gt;4) 目前支持的NoSQL服务器包括: HBase,MongoDB,Redis,Neo4j等。&lt;/p&gt;
+&lt;p&gt;还有其它一些解决方案，例如：Lealone,hbase-sql,Impala等，要么不成熟，要么停止更新了，要么具有局限性。读者对其感兴趣，可以自行去了解。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;现有的SQL解决方案通常都不是水平可伸缩的，因此当数据量变大时会遇到障碍。但是这样的情况，随着NoSQL的出现已经得到很大程度的缓解，并且随着NoSQL技术的完善与成熟，这种情况将会从根本上解决。&lt;/p&gt;
+&lt;p&gt;我们知道NoSQL区别于关系型数据库的一点就是NoSQL不使用
+    
+    </summary>
+    
+      <category term="读书笔记" scheme="http://blog.edagarli.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="HBase" scheme="http://blog.edagarli.com/tags/HBase/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>我的创业反思</title>
+    <link href="http://blog.edagarli.com/2016/%E5%88%9B%E4%B8%9A%E5%8F%8D%E6%80%9D/"/>
+    <id>http://blog.edagarli.com/2016/创业反思/</id>
+    <published>2016-02-09T13:35:00.000Z</published>
+    <updated>2016-03-18T03:50:02.000Z</updated>
+    
+    <content type="html">&lt;p&gt;往往夜深人静的时候，容易胡思乱想。但今天不知为何，躺在床上不停的回忆创业往事，感觉有点过头了。可能与今天的心情，或者与看到的事情有关。&lt;/p&gt;
+&lt;p&gt;我当时进入公司作为技术合伙人的时候，公司正进行新的产品研发。不过之前公司已经开发了一款产品，所以团队开发能力还是有的（虽然人员变换频繁，不过还是很理解的，毕竟是创业公司）。先不说新产品市场，前景如何如何，此时公司内部问题还是有很多的。&lt;/p&gt;
+&lt;p&gt;第一：选错人；我进入公司时候，原先主力iOS没干了（其实之前也是外包，做完就撤），剩下的是CEO招进来的，招了几个看上去还不错的iOS程序员。由于CEO也不是技术出身，所以说招进来的靠不靠谱也不是很清楚。按照以往我的习惯，我要了解一个人，我就网络搜索，爬虫等。还是挖到了一些有用的信息，iOS开发竟是培训机构出来的。之前谎称是有2年工作经验的。这块我找CEO聊了聊，但是人不好找，新产品开发时间紧，迫于无赖。暂时先留着，开发新产品。（其实，这里已经埋下了隐患）&lt;/p&gt;
+&lt;p&gt;第二：没有产品经理。其实这也不是大问题，CEO往往前期可以充当产品经理。无奈，CEO之前是搞投资的，对产品经验欠缺。刚开始，我们是3个合伙人。CEO，我，还有一个负责运营的。新产品需求我们开始一起商量定的。说实话，到现在我还觉得，产品完全是我们闭着脑袋想出来的，产品设计不是很合理，没有充分的考虑市场，用户，这才导致产品上线用户黏性很低。&lt;/p&gt;
+&lt;p&gt;第三：管理不行。大将无能，累死三军！这句话说的真好。往往下面出问题了，首先需要反思的是自己。所以说当你选错人后，如何管理，如何带人，这也是一种考验。一句话，没管理好。iOS开发进度一直落后，产品效果也不好。但我们就是不敢开除，因为不好找人啊！（我相信创业公司都如此）中间，其实建立了很多方式，绩效考核，绩效奖金等。现在，如果让我选择的话，我立刻开除。产品最终出来花的时间有点长，导致我们资金花了很大一部分。这就导致融资的急迫性。最终运营一段时间，因为资金链断了，团队解散了。&lt;/p&gt;
+&lt;p&gt;心里有很多关于自己创业的话说，可能是因为表达不行，可能是有些东西不知道从哪去讲。反正现在回忆起来，总觉得当时能做的太多了，但就是没做；总觉得当时不该犯的错误，就犯了；总觉得当时能考虑全很多事情，但就是没有；总觉得当时应该清醒一点，不要盲目闭门想着产品，但还是盲目了；总觉得产品做出来后，就很火了，但终究没有；总觉得……&lt;/p&gt;
+&lt;p&gt;自己想到哪，写到哪。总感觉肚子里好多东西要写，但终究写不出来。想对那些一直在创业路上的朋友们，说两个字: 加油！&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;如果觉得有点帮助，可以赏点酒钱！（lizhi@lydiabox.com）&lt;br&gt;&lt;img src=&quot;/images/aex068188cqwy9xbxa3oc07.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;往往夜深人静的时候，容易胡思乱想。但今天不知为何，躺在床上不停的回忆创业往事，感觉有点过头了。可能与今天的心情，或者与看到的事情有关。&lt;/p&gt;
+&lt;p&gt;我当时进入公司作为技术合伙人的时候，公司正进行新的产品研发。不过之前公司已经开发了一款产品，所以团队开发能力还是有的（虽然人
+    
+    </summary>
+    
+      <category term="闲谈" scheme="http://blog.edagarli.com/categories/%E9%97%B2%E8%B0%88/"/>
+    
+    
+      <category term="创业" scheme="http://blog.edagarli.com/tags/%E5%88%9B%E4%B8%9A/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>HBase表结构设计笔记</title>
+    <link href="http://blog.edagarli.com/2016/HBase%E8%A1%A8%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1%E7%AC%94%E8%AE%B0/"/>
+    <id>http://blog.edagarli.com/2016/HBase表结构设计笔记/</id>
+    <published>2016-02-06T09:22:00.000Z</published>
+    <updated>2016-03-18T08:16:34.000Z</updated>
+    
+    <content type="html">&lt;p&gt;在设计HBase表时，Rowkey设计是很重要的事情，应该基于预期的访问模式来为Rowkey建模。&lt;/p&gt;
+&lt;p&gt;Rowkey非常重要，在设计时需要慎重考虑。以存储用户观影记录数据为例，复合的Rowkey由用户ID作为前缀(方便把某用户的观影记录聚合在一起)，倒置的时间串作为Rowkey的后缀可以使观影记录数据从新到旧排列。如果Rowkey是整型的，用二进制的方式应该比用String来存储一个数据更节约空间。&lt;/p&gt;
+&lt;p&gt;Rowkey进行设计需要的注意要点。&lt;/p&gt;
+&lt;p&gt;1.Rowkey是以字典顺序从大到小排序。&lt;br&gt;2.Rowkey尽量散列Rowkey设计。&lt;br&gt;最重要的是要保证散列，这样就会保证所有的数据都不是在一个Region上，从而避免读写的时候负载会集中在个别Region上。从而避免读写的时候负载会集中在个别Region上。&lt;/p&gt;
+&lt;p&gt;假设我们需要存储一个视频网站用户的所有观影记录（暂时不需要考虑时间倒排），这时候的Rowkey可设计为userid_videoid的拼接字符串，但是这样设计的话，userid的分布就很可能不均匀，因此Rowkey是按字符串排序的（默认字典顺序排序）。&lt;/p&gt;
+&lt;p&gt;有3种办法来解决这个问题，具体如下：&lt;/p&gt;
+&lt;p&gt;一.反转userid，将userid字符串反转后存储。&lt;/p&gt;
+&lt;p&gt;二.散列userid,即对userid进行散列。&lt;/p&gt;
+&lt;p&gt;三.userid取模后进行MD5加密，取前6位作为前缀加入到userid前面。&lt;/p&gt;
+&lt;p&gt;假设某视频网站的用户正在观看视频，但此时，要开辟一个新栏目，所有的用户观影记录都按照时间倒排序展示在这个栏目中。这个时候，就需要为原来的userid_vedioid建立一张索引表，并且这个表的Rowkey要和时间相关。&lt;/p&gt;
+&lt;p&gt;Rowkey设计可以使用当前时间（观影时间）的Long值作为Rowkey的前缀。另外建议Rowkey最好都是String：一是方便线上使用Shell查数据，排查错误；二是更容易让数据均匀分布；三是不必考虑存储成本。&lt;/p&gt;
+&lt;p&gt;3.Rowkey的长度尽量短。&lt;br&gt;如果Rowkey太长，第一存储开销会增加，影响存储效率；第二内存中Rowkey字段过长，会导致内存的利用率降低，进而降低索引命中率。&lt;br&gt;一般的做法是：&lt;/p&gt;
+&lt;p&gt;时间使用Long来表示。&lt;br&gt;尽量使用编码压缩。&lt;/p&gt;
+&lt;p&gt;如果觉得还不错，赏点酒钱！&lt;br&gt;&lt;img src=&quot;/images/aex068188cqwy9xbxa3oc07.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;读书笔记来自 &amp;lt; HBase企业开发实战 &amp;gt; 一书&lt;/p&gt;
+&lt;p&gt;更多书籍读书笔记请参看&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/edagarli/ReadingNotes&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/edagarli/ReadingNotes&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在设计HBase表时，Rowkey设计是很重要的事情，应该基于预期的访问模式来为Rowkey建模。&lt;/p&gt;
+&lt;p&gt;Rowkey非常重要，在设计时需要慎重考虑。以存储用户观影记录数据为例，复合的Rowkey由用户ID作为前缀(方便把某用户的观影记录聚合在一起)，倒置的时间串作
+    
+    </summary>
+    
+      <category term="读书笔记" scheme="http://blog.edagarli.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="读书笔记" scheme="http://blog.edagarli.com/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="HBase" scheme="http://blog.edagarli.com/tags/HBase/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>情人节主题网站礼物</title>
+    <link href="http://blog.edagarli.com/2016/%E6%83%85%E4%BA%BA%E8%8A%82%E7%A4%BC%E7%89%A9/"/>
+    <id>http://blog.edagarli.com/2016/情人节礼物/</id>
+    <published>2016-02-05T13:20:00.000Z</published>
+    <updated>2016-03-18T03:50:02.000Z</updated>
+    
+    <content type="html">&lt;p&gt;参考hackerzhou写的网站礼物&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://hackerzhou.me/ex_love/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://hackerzhou.me/ex_love/&lt;/a&gt;   （貌似现在不能访问了，😄）&lt;/p&gt;
+&lt;p&gt;为妹子也写了个。&lt;/p&gt;
+&lt;p&gt;We are both programmers, so I write some code to celebrate our 1st valentine’s day.&lt;/p&gt;
+&lt;p&gt;代码：&lt;br&gt;&lt;a href=&quot;https://github.com/edagarli/OurLoveStory/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/edagarli/OurLoveStory/&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;参考hackerzhou写的网站礼物&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://hackerzhou.me/ex_love/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://hackerzhou.me/ex_love/&lt;/a&gt;   （貌似现
+    
+    </summary>
+    
+      <category term="闲谈" scheme="http://blog.edagarli.com/categories/%E9%97%B2%E8%B0%88/"/>
+    
+    
+      <category term="闲谈" scheme="http://blog.edagarli.com/tags/%E9%97%B2%E8%B0%88/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>关于淘点点面试中碰到的架构问题​</title>
+    <link href="http://blog.edagarli.com/2016/%E5%85%B3%E4%BA%8E%E6%B7%98%E7%82%B9%E7%82%B9%E9%9D%A2%E8%AF%95%E4%B8%AD%E7%A2%B0%E5%88%B0%E7%9A%84%E6%9E%B6%E6%9E%84%E9%97%AE%E9%A2%98%E2%80%8B/"/>
+    <id>http://blog.edagarli.com/2016/关于淘点点面试中碰到的架构问题​/</id>
+    <published>2016-01-28T02:54:00.000Z</published>
+    <updated>2016-03-18T03:50:02.000Z</updated>
+    
+    <content type="html">&lt;p&gt;之前面试淘点点的时候被问倒得一个问题至今牵挂，由于工作环境的限制，我没能接触到一些大数据量的并发工作，也没能有机遇参与复杂系统的设计，而我学习复杂或高并发系统的唯一途径就是阅读源码，惭愧的是，至今也只阅读了Tomcat的部分源码&lt;/p&gt;
+&lt;p&gt;从事开发工作两年来，从未写过只言片语，俗话说的好”好记性不如烂笔头“，最近心血来潮开始想慢慢写点博文，不仅是知识的积累还是为了若干年后回头看看当年努力的过程，希望把这个养成习惯并坚持下去，啰嗦了这么久 来点干货把。&lt;/p&gt;
+&lt;p&gt;之前面试淘点点的时候被问倒得一个问题至今牵挂，由于工作环境的限制，我没能接触到一些大数据量的并发工作，也没能有机遇参与复杂系统的设计，而我学习复杂或高并发系统的唯一途径就是阅读源码，惭愧的是，至今也只阅读了Tomcat的部分源码，于是我在oschina上贴出问题与互联网猿一同分析（大家可以先看看问题：关于淘点点面试中碰到的架构问题），非常感谢大家的意见，尤其是@林中漫步 @JerryLin 两位先生 最终确定两钟实现思路：&lt;/p&gt;
+&lt;p&gt;1、具有排序功能的队列&lt;/p&gt;
+&lt;p&gt;2、Redis+定时器&lt;/p&gt;
+&lt;p&gt;思路 1&lt;/p&gt;
+&lt;p&gt;原理：第一种思路也就是大家推荐的延迟队列实现的原理，其就是一个按时间排好序的队列，每次put的时候排序，然后take的时候就计算时间是否过期，如果过期则返回队列第一个元素，否则当前线程阻塞X秒，这个也是JDK 自带 DelayQueue 的思路。详细可看源码&lt;br&gt;&lt;img src=&quot;/images/pasted-0.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;代码实现：待实现后补充&lt;/p&gt;
+&lt;p&gt;思路 2&lt;/p&gt;
+&lt;p&gt;原理：第二种思路需要利用Redis的有序集合，说到使用 Redis 就不得不考虑Score的设计，因为它直接决定你代码的复杂度，你思路的清晰性，在这我并没有采用 林中漫步 先生的设计，而是通过精确到秒的时间做Score（去掉毫秒），然后使用线程每一秒扫一次，使用当前时间作为zrangeBysocre命令的Score去查询。详细请看代码。&lt;/p&gt;
+&lt;p&gt;业务场景：按京东一天500万的成交量，一天主要成交时间为8小时，计算得出每秒173个订单，当然实际上订单不能均匀分布在每秒，但我们主要为了论证思想的可行性。&lt;/p&gt;
+&lt;p&gt;代码实现：这里首先我简单的利用Spring Scheduled作为订单的生产者，每一秒制造170个订单，放入Redis，注意Score的生成，为当前时间的后60秒，removeMillis()生成去掉毫秒的时间戳作为Rredis的Zadd方法的 Score（不了解的可以百度下）。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/pasted-1.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;第二步：同样利用Spring Scheduled 一秒钟心跳一次，每次利用当前时间作为Key 从Redis 取数据。&lt;br&gt;&lt;img src=&quot;/images/pasted-2.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;经过测试，没有出现漏单的情况，这只是简单的实现，很多地方可以优化，在实际中用也可能会出现很多问题，需要不断完善，此案例只是提供思路，另外我觉得JDK的 DelayQueue 相对于Redis来说没有那么好，因为Queue毕竟每次取一个，如果同一时间的比较多可能不能符合当前这种时间严谨的需求，另外他是单机的，有时间我去研究下kafka、Rabbit的延迟队列再来补充。&lt;/p&gt;
+&lt;p&gt;终于写完了，因为公司的代码是加密的，所以不能上传源码了（其实也没得什么上的，哈哈），另外本人技术有限难免会有纰漏或者错误，欢迎拍砖，另外希望自己以后能够坚持写技术日志。&lt;/p&gt;
+&lt;p&gt;来源：&lt;a href=&quot;http://my.oschina.net/ambitor/blog/522227&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://my.oschina.net/ambitor/blog/522227&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;如果觉得还不错，赏点酒钱！&lt;br&gt;&lt;img src=&quot;/images/aex068188cqwy9xbxa3oc07.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;之前面试淘点点的时候被问倒得一个问题至今牵挂，由于工作环境的限制，我没能接触到一些大数据量的并发工作，也没能有机遇参与复杂系统的设计，而我学习复杂或高并发系统的唯一途径就是阅读源码，惭愧的是，至今也只阅读了Tomcat的部分源码&lt;/p&gt;
+&lt;p&gt;从事开发工作两年来，从未写过只
+    
+    </summary>
+    
+      <category term="案例" scheme="http://blog.edagarli.com/categories/%E6%A1%88%E4%BE%8B/"/>
+    
+    
+      <category term="Redis" scheme="http://blog.edagarli.com/tags/Redis/"/>
+    
+      <category term="案例" scheme="http://blog.edagarli.com/tags/%E6%A1%88%E4%BE%8B/"/>
+    
+      <category term="架构" scheme="http://blog.edagarli.com/tags/%E6%9E%B6%E6%9E%84/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>实现一个轻量级框架</title>
+    <link href="http://blog.edagarli.com/2016/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E8%BD%BB%E9%87%8F%E7%BA%A7%E6%A1%86%E6%9E%B6/"/>
+    <id>http://blog.edagarli.com/2016/实现一个轻量级框架/</id>
+    <published>2016-01-26T11:40:00.000Z</published>
+    <updated>2016-03-18T03:50:02.000Z</updated>
+    
+    <content type="html">&lt;p&gt;最近在折腾框架。&lt;/p&gt;
+&lt;p&gt;自己从0到1搭建一个java web框架实现&lt;/p&gt;
+&lt;p&gt;轻量级的框架&lt;/p&gt;
+&lt;p&gt;Spring 框架, fuck, 太重了, 开发一个很简单的web也要写一大堆代码.&lt;/p&gt;
+&lt;p&gt;只想折腾一个轻量级的框架, 有核心即可… 类似Nginx模块化设计.&lt;/p&gt;
+&lt;p&gt;核心+插件&lt;/p&gt;
+&lt;p&gt;可以定制化扩展&lt;/p&gt;
+&lt;p&gt;正在参考Play,Nutz,Smart,jfinal等框架,吸收优点,思想与框架慢慢完善中&lt;/p&gt;
+&lt;p&gt;项目地址：&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/edagarli/own_framework&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/edagarli/own_framework&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;如果觉得还不错，赏点酒钱！&lt;br&gt;&lt;img src=&quot;/images/aex068188cqwy9xbxa3oc07.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近在折腾框架。&lt;/p&gt;
+&lt;p&gt;自己从0到1搭建一个java web框架实现&lt;/p&gt;
+&lt;p&gt;轻量级的框架&lt;/p&gt;
+&lt;p&gt;Spring 框架, fuck, 太重了, 开发一个很简单的web也要写一大堆代码.&lt;/p&gt;
+&lt;p&gt;只想折腾一个轻量级的框架, 有核心即可… 类似Ngin
+    
+    </summary>
+    
+      <category term="聊聊架构" scheme="http://blog.edagarli.com/categories/%E8%81%8A%E8%81%8A%E6%9E%B6%E6%9E%84/"/>
+    
+    
+      <category term="框架" scheme="http://blog.edagarli.com/tags/%E6%A1%86%E6%9E%B6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>代理模式几种实现性能比较</title>
+    <link href="http://blog.edagarli.com/2016/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E4%B9%8B%E4%BC%98%E5%8C%96/"/>
+    <id>http://blog.edagarli.com/2016/代理模式之优化/</id>
+    <published>2016-01-25T02:27:00.000Z</published>
+    <updated>2016-03-18T03:50:02.000Z</updated>
+    
+    <content type="html">&lt;p&gt;代理模式的意图很多，比如：安全原因，远程调用等。这里主要讨论使用代理模式实现延迟加载，从而提升系统的性能和反应速度。&lt;/p&gt;
+&lt;p&gt;延迟加载的核心思想是：如果当前并没有使用这个组件，则不需要真正地初始化它，使用一个代理对象替代它的原有的位置，只要在真正需要使用的时候，才对它进行加载。&lt;/p&gt;
+&lt;h2 id=&quot;代理模式的实现和使用&quot;&gt;&lt;a href=&quot;#代理模式的实现和使用&quot; class=&quot;headerlink&quot; title=&quot;代理模式的实现和使用&quot;&gt;&lt;/a&gt;代理模式的实现和使用&lt;/h2&gt;&lt;p&gt;代理分为几种&lt;/p&gt;
+&lt;p&gt;静态代理&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;为每一个代理写一个方法，其实是挺烦的。接口有变动，真实主题与代理类都要修改。
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;动态代理&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;解决了上面问题，同时可以在运行时指定代理类的执行逻辑，从而大大提升系统的灵活性。
+动态代理又分JDK自带的动态代理，CGLIB，Javassist或者ASM库。
+ASM是低级的字节码生成工具，使用ASM已经近乎于在使用Java bytecode编程，对开发人员要求更高，当然也是性能最好的一种动态代理生成工具。但ASM的使用是在过于繁锁，而且性能也没有数量级的提升，与CGLIB等高级字节码生成工具相比，ASM程序的维护性也较差，如果不是在对性能有苛刻要求的场合，建议还是使用CGLIB或Javassist
+
+
+实际测试中，JDK的动态类创建过程很快，这是因为在这个内置实现中defineClass（）方法被定义为native实现，故性能高于其它几种实现。但在代理类的函数调用性能上，JDK的动态代理就不如CGLIB和Javassist的基于动态代理的代理。
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;如果觉得还不错，赏点酒钱！&lt;br&gt;&lt;img src=&quot;/images/aex068188cqwy9xbxa3oc07.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;代理模式的意图很多，比如：安全原因，远程调用等。这里主要讨论使用代理模式实现延迟加载，从而提升系统的性能和反应速度。&lt;/p&gt;
+&lt;p&gt;延迟加载的核心思想是：如果当前并没有使用这个组件，则不需要真正地初始化它，使用一个代理对象替代它的原有的位置，只要在真正需要使用的时候，才对它
+    
+    </summary>
+    
+      <category term="读书笔记" scheme="http://blog.edagarli.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="代理模式" scheme="http://blog.edagarli.com/tags/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>单例模式使用和实现之优化笔记</title>
+    <link href="http://blog.edagarli.com/2016/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E4%BD%BF%E7%94%A8%E5%92%8C%E5%AE%9E%E7%8E%B0%E4%B9%8B%E4%BC%98%E5%8C%96%E7%AC%94%E8%AE%B0/"/>
+    <id>http://blog.edagarli.com/2016/单例模式使用和实现之优化笔记/</id>
+    <published>2016-01-23T10:23:00.000Z</published>
+    <updated>2016-03-18T03:50:02.000Z</updated>
+    
+    <content type="html">&lt;p&gt;这算是最为普遍的模式之一。在Java语言中，这样的行为能带来两大好处:  (1)对于频繁使用的对象，可以省略创建对象所花费的时间，这对于那些重量级对象而言，是非常可观的一笔系统开销。  (2)由于new操作的次数减少，因而对系统内存的使用频率也会降低，这将减轻GC压力，缩短GC停顿时间。&lt;/p&gt;
+&lt;p&gt;单例模式的核心在于通过一个接口返回唯一的对象实例。一个简单的单例实现如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;public class Singleton{
+   private Singleton(){
+     System.out.println(&amp;quot;Singleton is create&amp;quot;);
+   }
+
+   private static Singleton instance = new Singleton();
+
+   public static Singleton getInstance(){
+      return instance;
+   }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;很简单，十分可靠。它唯一的不足仅是无法对instance实例做延迟加载。列如单例的创建过程很慢。&lt;/p&gt;
+&lt;p&gt;为了解决这个问题，引入延迟加载机制。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;public class LazySingleton {
+    private LazySingleton(){
+        System.out.println(&amp;quot;LazySingleton is create&amp;quot;);
+    }
+
+    private static LazySingleton instance = null;
+    public static synchronized LazySingleton getInstance(){
+       if(instance == null){
+          instance = new LazySingleton();
+       }
+       return instance;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;使用上面的实现，虽然实现了延迟加载的功能，但和第一种方法相比，它引入了同步关键字，因此在多线程环境下，它的时耗要远远大于第一种单例模式。&lt;/p&gt;
+&lt;p&gt;为了解决这个问题，还需要对其进行改进:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;public class StaticSingleton {
+   private StaticSingleton(){
+     System.out.println(&amp;quot;StaticSingleton is create&amp;quot;);
+   }
+
+   private static class SingletonHolder {
+     private static StaticSingleton instance = new StaticSingleton();
+   }
+   public static StaticSingleton getInstance(){
+      return SingletonHolder.instance;
+   }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;当StaticSingleton 被加载时，其内部类并不会被初始化，故可以确保当StaticSingleton类被载入JVM时，不会初始化单例类，而当getInstance()方法被调用时，才会加载SingletonHolder，从而初始化instance。同时，由于实例的建立是在类加载时完成，故天生对多线程友好，getInstance（）方法也不需要使用同步关键字。因此，这种实现方式同时兼备以上两种实现的优点。&lt;/p&gt;
+&lt;p&gt;如果觉得还不错，赏点酒钱！&lt;br&gt;&lt;img src=&quot;/images/aex068188cqwy9xbxa3oc07.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这算是最为普遍的模式之一。在Java语言中，这样的行为能带来两大好处:  (1)对于频繁使用的对象，可以省略创建对象所花费的时间，这对于那些重量级对象而言，是非常可观的一笔系统开销。  (2)由于new操作的次数减少，因而对系统内存的使用频率也会降低，这将减轻GC压力，缩短
+    
+    </summary>
+    
+      <category term="读书笔记" scheme="http://blog.edagarli.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="单例模式" scheme="http://blog.edagarli.com/tags/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>设计优化之笔记</title>
+    <link href="http://blog.edagarli.com/2016/%E8%AE%BE%E8%AE%A1%E4%BC%98%E5%8C%96%E4%B9%8B%E7%AC%94%E8%AE%B0/"/>
+    <id>http://blog.edagarli.com/2016/设计优化之笔记/</id>
+    <published>2016-01-23T09:06:00.000Z</published>
+    <updated>2016-03-18T03:50:02.000Z</updated>
+    
+    <content type="html">&lt;p&gt;软件的结构对系统整体性能有着重要的影响。优秀的设计结构可以规避很多潜在的性能问题，对系统性能的影响可能远远大于代码的优化。因此，熟悉一些常用的软件设计模式和方法，对设计高性能软件有着重要的帮助。一些常用的与性能相关的设计模式，组件和设计方法如下:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;单列模式的使用和实现
+   代理模式的实现和深入
+   享元模式的应用
+   装饰者模式对性能组件的封装
+   观察者模式的使用
+   使用Value Object 模式减少网络数据传输
+   使用业务代理模式添加远程调用缓存
+   缓冲和缓存的定义和使用
+   对象池的使用场景及其基本实现
+   构建负载均衡系统以及Terracotta框架的简单使用
+   时间换空间和空间换时间的基本思路
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt; 之后打算对单独每一点分别写深入分析的一篇文章。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;软件的结构对系统整体性能有着重要的影响。优秀的设计结构可以规避很多潜在的性能问题，对系统性能的影响可能远远大于代码的优化。因此，熟悉一些常用的软件设计模式和方法，对设计高性能软件有着重要的帮助。一些常用的与性能相关的设计模式，组件和设计方法如下:&lt;/p&gt;
+&lt;pre&gt;&lt;cod
+    
+    </summary>
+    
+      <category term="读书笔记" scheme="http://blog.edagarli.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="优化" scheme="http://blog.edagarli.com/tags/%E4%BC%98%E5%8C%96/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>实现依赖注入功能</title>
+    <link href="http://blog.edagarli.com/2016/%E5%AE%9E%E7%8E%B0%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E5%8A%9F%E8%83%BD/"/>
+    <id>http://blog.edagarli.com/2016/实现依赖注入功能/</id>
+    <published>2016-01-22T12:52:00.000Z</published>
+    <updated>2016-03-18T03:50:02.000Z</updated>
+    
+    <content type="html">&lt;p&gt;对类的实例化，不是开发者自己通过new的方式来实例化，而是通过框架自身来实例化，这过程称为IoC。控制不是由开发者来决定的，而是反转给框架了。一般地，我们也将控制反转称为DI（Dependency Injection，依赖注入）。那如何实现呢？&lt;/p&gt;
+&lt;p&gt;最简单的方式是，先通过BeanHelper获取所有Bean Map（是一个Map&lt;class&lt;?&gt;,Object&amp;gt; 结构，纪录了类与对象的映射关系，&lt;br&gt;分别取出Bean类与Bean实例 ，进而通过反射获取类中所有的成员变量。继续遍历这些成员变量，在循环中判断当前成员变量是否带有Inject注解，若带有该注解，则从Bean Map中根据Bean类取出Bean实例。最后通过ReflectionUtil＃setField方法来修改当前成员变量的值。&lt;/class&lt;?&gt;&lt;/p&gt;
+&lt;p&gt;核心实现：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Map&amp;lt;Class&amp;lt;?&amp;gt;, Object&amp;gt; beanMap = BeanHelper.getBeanMap();
+if (CollectionUtil.isNotEmpty(beanMap)) {
+    for (Map.Entry&amp;lt;Class&amp;lt;?&amp;gt;, Object&amp;gt; beanEntry : beanMap.entrySet()) {
+        Class&amp;lt;?&amp;gt; beanClass = beanEntry.getKey();
+        Object beanInstance = beanEntry.getValue();
+        Field[] beanFields = beanClass.getDeclaredFields();
+        if (ArrayUtil.isNotEmpty(beanFields)) {
+            for (Field beanField : beanFields) {
+                if (beanField.isAnnotationPresent(Inject.class)) {
+                    Class&amp;lt;?&amp;gt; beanFieldClass = beanField.getType();
+                    Object beanFieldInstance = beanMap.get(beanFieldClass);
+                    if (beanFieldInstance != null) {
+                        ReflectionUtil.setField(beanInstance, beanField, beanFieldInstance);
+                    }
+                }
+            }
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
+&lt;p&gt;更多架构底层实现代码请移步&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/edagarli/own_framework&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/edagarli/own_framework&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;如果觉得还不错，赏点酒钱！&lt;br&gt;&lt;img src=&quot;/images/aex068188cqwy9xbxa3oc07.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;对类的实例化，不是开发者自己通过new的方式来实例化，而是通过框架自身来实例化，这过程称为IoC。控制不是由开发者来决定的，而是反转给框架了。一般地，我们也将控制反转称为DI（Dependency Injection，依赖注入）。那如何实现呢？&lt;/p&gt;
+&lt;p&gt;最简单的方式是
+    
+    </summary>
+    
+      <category term="读书笔记" scheme="http://blog.edagarli.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="框架" scheme="http://blog.edagarli.com/tags/%E6%A1%86%E6%9E%B6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>创业公司高性能服务端优化之路</title>
+    <link href="http://blog.edagarli.com/2016/%E5%88%9B%E4%B8%9A%E5%85%AC%E5%8F%B8%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E7%AB%AF%E4%BC%98%E5%8C%96%E4%B9%8B%E8%B7%AF/"/>
+    <id>http://blog.edagarli.com/2016/创业公司高性能服务端优化之路/</id>
+    <published>2016-01-22T07:47:00.000Z</published>
+    <updated>2016-03-18T03:50:02.000Z</updated>
+    
+    <content type="html">&lt;p&gt;由于业务规模增长极大，在1年左右的时间从零增长到每天近百万单，给后端带来极大的访问压力。压力主要分为两类：读压力、写压力。读压力来源于配送员在APP中抢单，高频刷新查询周围的订单，每天访问量几亿次，高峰期QPS高达数千次/秒。写压力来源于商家发单、接单、取货、完成等操作。业务读的压力远大于写压力，读请求量约是写请求量的30倍以上。&lt;/p&gt;
+&lt;p&gt;极速增长的业务，对技术的要求越来越高，我们必须在架构上做好充分的准备，才能迎接业务的挑战。接下来，我们一起看看的后台架构是如何演化的。&lt;/p&gt;
+&lt;p&gt;最初的技术选型&lt;/p&gt;
+&lt;p&gt;作为创业公司，最重要的一点是敏捷，快速实现产品，对外提供服务，于是我们选择了公有云服务，保证快速实施和可扩展性，节省了自建机房等时间。在技术选型上，为快速的响应业务需求，业务系统使用python做为开发语言，数据库使用Mysql。&lt;/p&gt;
+&lt;p&gt;读写分离&lt;br&gt;随着业务的发展，访问量的极速增长，上述的方案很快不能满足性能需求。每次请求的响应时间越来越长，比如配送员在app中刷新周围订单，响应时间从最初的500毫秒增加到了2秒以上。业务高峰期，系统甚至出现过宕机，一些商家和配送员甚至因此而怀疑我们的服务质量。在这生死存亡的关键时刻，通过监控，我们发现高期峰Mysql CPU使用率已接近80%，磁盘IO使用率接近90%，Slow query从每天1百条上升到1万条，而且一天比一天严重。数据库俨然已成为瓶颈，我们必须得快速做架构升级。&lt;/p&gt;
+&lt;p&gt;当Web应用服务出现性能瓶颈的时候，由于服务本身无状态（stateless），我们可以通过加机器的水平扩展方式来解决。 而数据库显然无法通过简单的添加机器来实现扩展，因此我们采取了Mysql主从同步和应用服务端读写分离的方案。&lt;/p&gt;
+&lt;p&gt;Mysql支持主从同步，实时将主库的数据增量复制到从库，而且一个主库可以连接多个从库同步。利用此特性，我们在应用服务端对每次请求做读写判断，若是写请求，则把这次请求内的所有DB操作发向主库；若是读请求，则把这次请求内的所有DB操作发向从库.&lt;/p&gt;
+&lt;p&gt;实现读写分离后，数据库的压力减少了许多，CPU使用率和IO使用率都降到了5%内，Slow Query也趋近于0。主从同步、读写分离给我们主要带来如下两个好处：&lt;/p&gt;
+&lt;p&gt;减轻了主库（写）压力：业务主要来源于读操作，做读写分离后，读压力转移到了从库，主库的压力减小了数十倍。&lt;br&gt;从库（读）可水平扩展（加从库机器）：因系统压力主要是读请求，而从库又可水平扩展，当从库压力太时，可直接添加从库机器，缓解读请求压力.&lt;/p&gt;
+&lt;p&gt;当然，没有一个方案是万能的。读写分离，暂时解决了Mysql压力问题，同时也带来了新的挑战。业务高峰期，商家发完订单，在我的订单列表中却看不到当发的订单（典型的read after write）；系统内部偶尔也会出现一些查询不到数据的异常。通过监控，我们发现，业务高峰期Mysql可能会出现主从延迟，极端情况，主从延迟高达10秒。&lt;/p&gt;
+&lt;p&gt;那如何监控主从同步状态？在从库机器上，执行show slave status，查看Seconds_Behind_Master值，代表主从同步从库落后主库的时间，单位为秒，若同从同步无延迟，这个值为0。Mysql主从延迟一个重要的原因之一是主从复制是单线程串行执行。&lt;/p&gt;
+&lt;p&gt;那如何为避免或解决主从延迟？我们做了如下一些优化：&lt;/p&gt;
+&lt;p&gt;优化Mysql参数，比如增大innodb_buffer_pool_size，让更多操作在Mysql内存中完成，减少磁盘操作。&lt;br&gt;使用高性能CPU主机&lt;br&gt;数据库使用物理主机，避免使用虚拟云主机，提升IO性能&lt;br&gt;使用SSD磁盘，提升IO性能。SSD的随机IO性能约是SATA硬盘的10倍。&lt;br&gt;业务代码优化，将实时性要求高的某些操作，使用主库做读操作&lt;br&gt;垂直分库&lt;br&gt;读写分离很好的解决读压力问题，每次读压力增加，可以通过加从库的方式水平扩展。但是写操作的压力随着业务爆发式的增长没有很有效的缓解办法，比如商家发单起来越慢，严重影响了商家的使用体验。我们监控发现，数据库写操作越来越慢，一次普通的insert操作，甚至可能会执行1秒以上。&lt;/p&gt;
+&lt;p&gt;同时，业务越来越复杂，多个应用系统使用同一个数据库，其中一个很小的非核心功能出现Slow query，常常影响主库上的其它核心业务功能。我们有一个应用系统在MySql中记录日志，日志量非常大，近1亿行记录，而这张表的ID是UUID，某一天高峰期，整个系统突然变慢，进而引发了宕机。&lt;/p&gt;
+&lt;p&gt;监控发现，这张表insert极慢，拖慢了整个MySql Master，进而拖跨了整个系统。（当然在mysql中记日志不是一种好的设计，因此我们开发了大数据日志系统。另一方面，UUID做主键是个糟糕的选择，在下文的水平分库中，针对ID的生成，有更深入的讲述）。&lt;/p&gt;
+&lt;p&gt;这时，主库成为了性能瓶颈，我们意识到，必需得再一次做架构升级，将主库做拆分，一方面以提升性能，另一方面减少系统间的相互影响，以提升系统稳定性。这一次，我们将系统按业务进行了垂直拆分。如下图所示，将最初庞大的数据库按业务拆分成不同的业务数据库，每个系统仅访问对应业务的数据库，避免或减少跨库访问。&lt;/p&gt;
+&lt;p&gt;未来是美好的，道路是曲折的。垂直分库过程，也遇到不少挑战，最大的挑战是：不能跨库join，同时需要对现有代码重构。单库时，可以简单的使用join关联表查询；拆库后，拆分后的数据库在不同的实例上，就不能跨库使用join了。比如在CRM系统中，需要通过商家名查询某个商家的所有订单，在垂直分库前，可以join商家和订单表做查询，如下所示：&lt;/p&gt;
+&lt;p&gt;select * from tb_order where supplier_id in (select id from supplier where name=‘上海海底捞’)；&lt;/p&gt;
+&lt;p&gt;分库后，则要重构代码，先通过商家名查询商家id，再通过商家Id查询订单表，如下所示：&lt;/p&gt;
+&lt;p&gt;supplier_ids = select id from supplier where name=‘上海海底捞’&lt;br&gt;select * from tb_order where supplier_id in (supplier_ids )&lt;/p&gt;
+&lt;p&gt;垂直分库过程中的经验教训，使我们制定了SQL最佳实践，其中一条便是程序中禁用或少用join，而应该在程序中组装数据，让SQL更简单。一方面为以后进一步垂直拆分业务做准备，另一方面也避免了Mysql中join的性能较低的问题。&lt;/p&gt;
+&lt;p&gt;经过一个星期紧锣密鼓的底层架构调整，以及业务代码重构，终于完成了数据库的垂直拆分。拆分之后，每个应用程序只访问对应的数据库，一方面将单点数据库拆分成了多个，分摊了主库写压力；另一方面，拆分后的数据库各自独立，实现了业务隔离，不再互相影响。&lt;br&gt;水平分库（sharding）&lt;/p&gt;
+&lt;p&gt;读写分离，通过从库水平扩展，解决了读压力；垂直分库通过按业务拆分主库，缓存了写压力，但系统依然存在以下隐患：&lt;/p&gt;
+&lt;p&gt;单表数据量越来越大。如订单表，单表记录数很快将过亿，超出MySql的极限，影响读写性能。&lt;br&gt;核心业务库的写压力越来越大，已不能再进一次垂直拆分，Mysql 主库不具备水平扩展的能力&lt;/p&gt;
+&lt;p&gt;以前，系统压力逼迫我们架构升级，这一次，我们需提前做好架构升级，实现数据库的水平扩展(sharding)。我们的业务类似于Uber，而Uber在公司成立的5年后（2014）年才实施了水平分库,但我们的业务发展要求我们在成立18月就要开始实施水平分库。&lt;/p&gt;
+&lt;p&gt;水平分库面临的第一个问题是，按什么逻辑进行拆分。一种方案是按城市拆分，一个城市的所有数据在一个数据库中；另一种方案是按订单ID平均拆分数据。按城市拆分的优点是数据聚合度比较高，做聚合查询比较简单，实现也相对简单，缺点是数据分布不均匀，某些城市的数据量极大，产生热点，而这些热点以后可能还要被迫再次拆分。&lt;/p&gt;
+&lt;p&gt;按订单ID拆分则正相反，优点是数据分布均匀，不会出现一个数据库数据极大或极小的情况，缺点是数据太分散，不利于做聚合查询。比如，按订单ID拆分后，一个商家的订单可能分布在不同的数据库中，查询一个商家的所有订单，可能需要查询多个数据库。针对这种情况，一种解决方案是将需要聚合查询的数据做冗余表，冗余的表不做拆分，同时在业务开发过程中，减少聚合查询。&lt;/p&gt;
+&lt;p&gt;反复权衡利弊，并参考了Uber等公司的分库方案后，我们最后决定按订单ID做水平分库。从架构上，我们将系统分为三层：&lt;/p&gt;
+&lt;p&gt;应用层：即各类业务应用系统&lt;br&gt;数据访问层：统一的数据访问接口，对上层应用层屏蔽读写分库、分库、缓存等技术细节。&lt;br&gt;数据层：对DB数据进行分片，并可动态的添加shard分片。&lt;/p&gt;
+&lt;p&gt;水平分库的技术关键点在于数据访问层的设计，数据访问层主要包含三部分：&lt;/p&gt;
+&lt;p&gt;ID生成器：生成每张表的主键&lt;br&gt;数据源路由：将每次DB操作路由到不同的shard数据源上&lt;br&gt;缓存： 采用Redis实现数据的缓存，提升性能&lt;/p&gt;
+&lt;p&gt;ID生成器是整个水平分库的核心，它决定了如何拆分数据，以及查询存储-检索数据。ID需要跨库全局唯一，否则会引发业务层的冲突。此外，ID必须是数字且升序，这主要是考虑到升序的ID能保证Mysql的性能。同时，ID生成器必须非常稳定，因为任何故障都会影响所有的数据库操作。&lt;/p&gt;
+&lt;p&gt;我们的ID的生成策略借鉴了Instagram的ID生成算法。&lt;/p&gt;
+&lt;p&gt;整个ID的二进制长度为64位&lt;br&gt;前36位使用时间戳，以保证ID是升序增加&lt;br&gt;中间13位是分库标识，用来标识当前这个ID对应的记录在哪个数据库中&lt;br&gt;后15位为自增序列，以保证在同一秒内并发时，ID不会重复。每个shard库都有一个自增序列表，生成自增序列时，从自增序列表中获取当前自增序列值，并加1，做为当前ID的后15位&lt;/p&gt;
+&lt;p&gt;总结&lt;/p&gt;
+&lt;p&gt;创业是与时间赛跑的过程，前期为了快速满足业务需求，我们采用简单高效的方案，如使用云服务、应用服务直接访问单点DB；后期随着系统压力增大，性能和稳定性逐渐纳入考虑范围，而DB最容易出现性能瓶颈，我们采用读写分离、垂直分库、水平分库等方案。面对高性能和高稳定性，架构升级需要尽可能超前完成，否则，系统随时可能出现系统响应变慢甚至宕机的情况。&lt;/p&gt;
+&lt;p&gt;如果觉得还不错，赏点酒钱！&lt;br&gt;&lt;img src=&quot;/images/aex068188cqwy9xbxa3oc07.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;由于业务规模增长极大，在1年左右的时间从零增长到每天近百万单，给后端带来极大的访问压力。压力主要分为两类：读压力、写压力。读压力来源于配送员在APP中抢单，高频刷新查询周围的订单，每天访问量几亿次，高峰期QPS高达数千次/秒。写压力来源于商家发单、接单、取货、完成等操作。业
+    
+    </summary>
+    
+      <category term="案例" scheme="http://blog.edagarli.com/categories/%E6%A1%88%E4%BE%8B/"/>
+    
+    
+      <category term="优化" scheme="http://blog.edagarli.com/tags/%E4%BC%98%E5%8C%96/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>读书笔记之Java性能调优概述</title>
+    <link href="http://blog.edagarli.com/2016/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E4%B9%8BJava%E7%A8%8B%E5%BA%8F%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
+    <id>http://blog.edagarli.com/2016/读书笔记之Java程序性能优化/</id>
+    <published>2016-01-21T08:16:00.000Z</published>
+    <updated>2016-03-18T03:50:02.000Z</updated>
+    
+    <content type="html">&lt;p&gt;为了提升系统性能，开发人员可以从系统的各个角度和层次对系统进行优化。除了最常见的代码优化外，在软件架构上，JVM虚拟机层，数据库以及操作系统层面都可以通过各种手段进行调优，从而在整体上提升系统的性能。&lt;/p&gt;
+&lt;h3 id=&quot;设计调优&quot;&gt;&lt;a href=&quot;#设计调优&quot; class=&quot;headerlink&quot; title=&quot;设计调优&quot;&gt;&lt;/a&gt;设计调优&lt;/h3&gt;&lt;p&gt;   一个良好的系统设计可以规避很多潜在的性能问题。因此，尽可能多花些时间在系统设计上，是创建高性能程序的关键。&lt;/p&gt;
+&lt;h3 id=&quot;代码调优&quot;&gt;&lt;a href=&quot;#代码调优&quot; class=&quot;headerlink&quot; title=&quot;代码调优&quot;&gt;&lt;/a&gt;代码调优&lt;/h3&gt;&lt;p&gt;   好的实现与一个坏的实现对系统的影响也是非常大的。&lt;/p&gt;
+&lt;h3 id=&quot;JVM调优&quot;&gt;&lt;a href=&quot;#JVM调优&quot; class=&quot;headerlink&quot; title=&quot;JVM调优&quot;&gt;&lt;/a&gt;JVM调优&lt;/h3&gt;&lt;p&gt;  对JVM虚拟机进行优化也能在一定程度上提升Java程序的性能。&lt;/p&gt;
+&lt;h3 id=&quot;数据库调优&quot;&gt;&lt;a href=&quot;#数据库调优&quot; class=&quot;headerlink&quot; title=&quot;数据库调优&quot;&gt;&lt;/a&gt;数据库调优&lt;/h3&gt;&lt;p&gt;  在应用层对SQL语句进行优化&lt;/p&gt;
+&lt;p&gt;  对数据库进行优化&lt;/p&gt;
+&lt;p&gt;  对数据库软件进行优化&lt;/p&gt;
+&lt;h3 id=&quot;操作系统&quot;&gt;&lt;a href=&quot;#操作系统&quot; class=&quot;headerlink&quot; title=&quot;操作系统&quot;&gt;&lt;/a&gt;操作系统&lt;/h3&gt;&lt;p&gt;   不同操作系统，调优手段有所区别。    &lt;/p&gt;
+&lt;h3 id=&quot;系统优化主意事项&quot;&gt;&lt;a href=&quot;#系统优化主意事项&quot; class=&quot;headerlink&quot; title=&quot;系统优化主意事项&quot;&gt;&lt;/a&gt;系统优化主意事项&lt;/h3&gt;&lt;p&gt;   软件的功能优化虽然能提升软件的性能，但是优化过程往往伴随着一些风险和弊端。性能调优必须有明确的目标，不要为了调优而调优，如果当前程序并没有明显的性能问题，盲目地进行调整，其风险可能远远大于收益。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;为了提升系统性能，开发人员可以从系统的各个角度和层次对系统进行优化。除了最常见的代码优化外，在软件架构上，JVM虚拟机层，数据库以及操作系统层面都可以通过各种手段进行调优，从而在整体上提升系统的性能。&lt;/p&gt;
+&lt;h3 id=&quot;设计调优&quot;&gt;&lt;a href=&quot;#设计调优&quot; cl
+    
+    </summary>
+    
+      <category term="读书笔记" scheme="http://blog.edagarli.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="Java调优" scheme="http://blog.edagarli.com/tags/Java%E8%B0%83%E4%BC%98/"/>
+    
+  </entry>
+  
+</feed>

@@ -1,0 +1,27 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 为啥HBase需要搭建SQL引擎层 · Edagarli's Blog</title><meta name="description" content="为啥HBase需要搭建SQL引擎层 - Edagarli"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="short icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" type="text/css"></head><body><header><a href="/" class="logo-link"><img src="/favicon.png"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/edagarli" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/edagarli" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><section class="container"><div class="post"><article class="post-block"><h1 class="post-title">为啥HBase需要搭建SQL引擎层</h1><div class="post-time">2016年2月12日</div><div class="post-content"><p>现有的SQL解决方案通常都不是水平可伸缩的，因此当数据量变大时会遇到障碍。但是这样的情况，随着NoSQL的出现已经得到很大程度的缓解，并且随着NoSQL技术的完善与成熟，这种情况将会从根本上解决。</p>
+<p>我们知道NoSQL区别于关系型数据库的一点就是NoSQL不使用SQL作为查询语言，至于为何在NoSQL数据存储HBase上提供SQL接口，有如下原因：</p>
+<p>1.使用诸如SQL这样易于理解的语言，使人们能够更加轻松地使用HBase。</p>
+<p>2.使用诸如SQL这样更高层次的语言来编写，减少了编写的代码量。</p>
+<p>3.执行查询时，在数据访问与运行时执行之间加上SQL这样一层抽象可以进行大量优化。例如，对于GROUP BY查询来说，利用HBase中协同处理器，聚合可以在服务器上进行，而不必在客户端，这么做会极大减少客户端与服务器之间传输的数据量。此外，也可以在客户端并行执行GROUP BY，这是根据行健的范围来截断扫描而实现的。通过并行执行，结果会更快的返回。所有这些优化无需用户参与，只需执行查询即可。</p>
+<b>基于HBase的SQL引擎实现</b>
+
+<p>现阶段业内有一些关于HBase SQL引擎层的尝试，已经有一些比较稳定的解决方案和现实。</p>
+<p>1.Hive整合HBase</p>
+<p>Hive与HBase的整合功能从Hive0.6.0版本已经开始出现，利用两者对外的API接口互相通信，通信主要依靠hive_hbase-handler.jar工具包（Hive Storage Handlers）。由于HBase有一次比较大的版本变动，所以并不是每个版本的Hive都能和现有的HBase版本进行整合，所以在使用过程中特别注意的就是两者版本的一致性。</p>
+<p>2.Phoenix</p>
+<p>Phoenix由Salesforce.com开源，是构建在Apache HBase之上的一个SQL中间层，可以让开发者在HBase上执行SQL查询。Phoenix 完全使用Java编写，代码位于Github上，并且提供了一个客户端可嵌入的JDBC驱动。对于10w到100w行的简单查询来说，Phoenix要胜于Hive。</p>
+<p>3.Kundera</p>
+<p>Kundera 是一个JPA2.0兼容的NoSQL数据存储的对象映射框架。Kundera基于现有类库构建，封装出简易的API，其主要特性有：</p>
+<p>1）支持交叉数据存储持久性，这意味着用户可以在不同的数据存储使用单一方法存储和获取相关实体。<br>2)能够很好地管理事务，同时支持EntityTransaction和Java Transaction API（JPA）。<br>3) 兼容JPA2.0，严格使用JPA注释对象映射到数据存储表。<br>4) 目前支持的NoSQL服务器包括: HBase,MongoDB,Redis,Neo4j等。</p>
+<p>还有其它一些解决方案，例如：Lealone,hbase-sql,Impala等，要么不成熟，要么停止更新了，要么具有局限性。读者对其感兴趣，可以自行去了解。</p>
+</div></article></div></section><footer><div class="paginator"><a href="/2016/如何不死掉/" class="prev">PRVE</a><a href="/2016/创业反思/" class="next">NEXT</a></div><div data-thread-key="2016/为啥HBase需要搭建SQL引擎层/" data-title="为啥HBase需要搭建SQL引擎层" data-url="http://blog.edagarli.com/2016/为啥HBase需要搭建SQL引擎层/" data-author-key="1" class="ds-thread"></div><script>var duoshuoQuery = {short_name:"edagarli"};
+(function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+
+</script><div class="copyright"><p>© 2015 - 2016 <a href="http://blog.edagarli.com">Edagarli</a>, unless otherwise noted.</p></div></footer><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-65933410-1",'auto');ga('send','pageview');</script><script>var _hmt = _hmt || [];(function() {var hm = document.createElement("script");hm.src = "//hm.baidu.com/hm.js?47be17dedd3258963b6518c2ffbd5e1d";var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(hm, s);})();</script><script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script></body></html>

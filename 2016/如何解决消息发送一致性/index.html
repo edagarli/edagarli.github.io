@@ -1,0 +1,40 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 如何解决消息发送一致性 · Edagarli's Blog</title><meta name="description" content="如何解决消息发送一致性 - Edagarli"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="short icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" type="text/css"></head><body><header><a href="/" class="logo-link"><img src="/favicon.png"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/edagarli" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/edagarli" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><section class="container"><div class="post"><article class="post-block"><h1 class="post-title">如何解决消息发送一致性</h1><div class="post-time">2016年3月7日</div><div class="post-content"><p>消息发送一致性是什么？</p>
+<p>是指产生消息的业务动作与消息发送的一致，就是说，如果业务操作成功了，那么对应的消息一定要发送出去，否则就丢失消息了。而另一方面，如果这个业务行为没有发生或者失败，那么就不应该把消息发出去。</p>
+<p>消息发送一致性很难保证吗？</p>
+<pre><code>void test(){
+  //业务操作
+  //列如写数据库，调用服务等
+  //发送消息
+}    
+
+void test(){
+  // 发送消息
+  //业务操作
+  //列如写数据库，调用服务等
+}
+</code></pre><p>上面伪代码不管哪一步出现问题了，都很难保持一致性。虽然在实践中，第一种丢失消息的比例相对第二种是很低的。但是，要求保证一致性的场景，上面的两种方案都不能接受。</p>
+<p>使用JMS可以实现消息一致性吗？</p>
+<p>用过JMS的都知道，JMS的API种，有很多XA开头的接口。其实如果不实用XA系列的接口实现，那么我们就无法直接得到发送消息给消息中间件及业务操作这两个事情的事物保证，而JMS中定义的XA系列的接口就是为了实现分布式事务的支持（发送消息和业务操作很难做在一个本地事务中）。但是会有如下问题:</p>
+<p>1.引入了分布式事务，这会带来一些开销并增加复杂性。<br>2.对于业务操作有限制，要求业务操作的资源必须支持XA协议，才能够与发送消息一起来做分布式事务。这会成为一个限制，因为并不是所有需要与发送消息一起做成分布式事务的业务操作都支持XA协议。</p>
+<p>其他的办法？</p>
+<p>JMS可以解决一致性问题，但是存在一些限制并且成本相对较高。那么有没有其他的办法呢？如图所示方案。</p>
+<p><img src="/images/pasted-8.png" alt=""></p>
+<p>可能这个过程当中会出现很多异常，下面具体分析下。</p>
+<p><img src="/images/pasted-9.png" alt=""></p>
+<p><img src="/images/pasted-10.png" alt=""></p>
+<p>那么如何了解业务操作的结果呢？</p>
+<p>下面展示了这个过程。由消息中间件主动询问业务应用，获取待处理消息所对的业务操作的结果，然后业务应用需要对业务操作结果进行检查，并且把结果发送给消息中间件，然后根据这个结果，更新状态。</p>
+<p><img src="/images/pasted-11.png" alt=""></p>
+<hr>
+<p>本文采用 <a href="http://creativecommons.org/licenses/by-sa/3.0/cn/" target="_blank" rel="external">知识共享署名-相同方式共享 3.0 中国大陆许可协议</a>，转载、引用前需联系作者，并署名作者且注明文章出处 。</p>
+</div></article></div></section><footer><div class="paginator"><a href="/2016/switch与if-else效率问题/" class="prev">PRVE</a><a href="/2016/一群小白程序员扒了一个俄罗斯的开源框架/" class="next">NEXT</a></div><div data-thread-key="2016/如何解决消息发送一致性/" data-title="如何解决消息发送一致性" data-url="http://blog.edagarli.com/2016/如何解决消息发送一致性/" data-author-key="1" class="ds-thread"></div><script>var duoshuoQuery = {short_name:"edagarli"};
+(function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+
+</script><div class="copyright"><p>© 2015 - 2016 <a href="http://blog.edagarli.com">Edagarli</a>, unless otherwise noted.</p></div></footer><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-65933410-1",'auto');ga('send','pageview');</script><script>var _hmt = _hmt || [];(function() {var hm = document.createElement("script");hm.src = "//hm.baidu.com/hm.js?47be17dedd3258963b6518c2ffbd5e1d";var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(hm, s);})();</script><script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script></body></html>

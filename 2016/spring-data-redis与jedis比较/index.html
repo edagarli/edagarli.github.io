@@ -1,0 +1,39 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> spring data redis与jedis比较 · Edagarli's Blog</title><meta name="description" content="spring data redis与jedis比较 - Edagarli"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="short icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" type="text/css"></head><body><header><a href="/" class="logo-link"><img src="/favicon.png"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/edagarli" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/edagarli" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><section class="container"><div class="post"><article class="post-block"><h1 class="post-title">spring data redis与jedis比较</h1><div class="post-time">2016年1月9日</div><div class="post-content"><p>redis客户端实现方式有两种，一种是直接调用jedis来实现，一种是使用spring data redis,做了一些封装来调用。</p>
+<p>#spring data redis:</p>
+<ul>
+<li>对具体redis客户端做了封装，客户端可在jedis,jredis,rjc等Java客户端中做出选择和切换</li>
+<li>用template对调用做了封装，省去了建立连接，释放连接等繁琐代码。</li>
+<li><p>对对象的序列化也可自由选择工具。</p>
+</li>
+<li><p>提供对spring cache的支持，可用注解实现Cache —— 但是无法设定缓存失效时间。 （这块我没怎么验证过）</p>
+</li>
+</ul>
+<p>#通过对spring data redis的源码分析，具体提供了一些功能:</p>
+<ul>
+<li>连接池自动管理，提供了一个高度封装的“RedisTemplate”类</li>
+<li>针对jedis客户端中大量api进行了归类封装,将同一类型操作封装为operation接口</li>
+<li>提供了对key的“bound”(绑定)便捷化操作API，可以通过bound封装指定的key，然后进行一系列的操作而无须“显式”的再次指定Key</li>
+<li>将事务操作封装，有容器控制。</li>
+<li>针对数据的“序列化/反序列化”，提供了多种可选择策略。</li>
+<li>基于设计模式，和JMS开发思路，将pub/sub的API设计进行了封装，使开发更加便捷。  </li>
+<li>spring-data-redis中，并没有对sharding提供良好的封装，如果你的架构是基于sharding，那么你需要自己去实现，这也是sdr和jedis相比，唯一缺少的特性。</li>
+</ul>
+<p>#jedis:</p>
+<ul>
+<li>connection管理缺乏自动化，connection-pool的设计缺少必要的容器支持。</li>
+<li>数据操作需要关注“序列化”/“反序列化”，因为jedis的客户端API接受的数据类型为string和byte，对结构化数据(json,xml,pojo等)操作需要额外的支持。</li>
+<li>事务操作纯粹为硬编码</li>
+<li>pub/sub功能，缺乏必要的设计模式支持，对于开发者而言需要关注的太多。</li>
+<li>jedis最大优势就是sharded，比如Masater/Slaver。这也是我为啥项目发展到一定地步，我需要把spring-data-redis换成jedis</li>
+</ul>
+</div></article></div></section><footer><div class="paginator"><a href="/2016/spring-data-redis源码分析/" class="prev">PRVE</a><a href="/2016/hexo结合github pages搭建了个博客/" class="next">NEXT</a></div><div data-thread-key="2016/spring-data-redis与jedis比较/" data-title="spring data redis与jedis比较" data-url="http://blog.edagarli.com/2016/spring-data-redis与jedis比较/" data-author-key="1" class="ds-thread"></div><script>var duoshuoQuery = {short_name:"edagarli"};
+(function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+
+</script><div class="copyright"><p>© 2015 - 2016 <a href="http://blog.edagarli.com">Edagarli</a>, unless otherwise noted.</p></div></footer><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-65933410-1",'auto');ga('send','pageview');</script><script>var _hmt = _hmt || [];(function() {var hm = document.createElement("script");hm.src = "//hm.baidu.com/hm.js?47be17dedd3258963b6518c2ffbd5e1d";var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(hm, s);})();</script><script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script></body></html>

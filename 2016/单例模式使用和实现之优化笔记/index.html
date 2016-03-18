@@ -1,0 +1,55 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 单例模式使用和实现之优化笔记 · Edagarli's Blog</title><meta name="description" content="单例模式使用和实现之优化笔记 - Edagarli"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="short icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" type="text/css"></head><body><header><a href="/" class="logo-link"><img src="/favicon.png"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/edagarli" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/edagarli" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><section class="container"><div class="post"><article class="post-block"><h1 class="post-title">单例模式使用和实现之优化笔记</h1><div class="post-time">2016年1月23日</div><div class="post-content"><p>这算是最为普遍的模式之一。在Java语言中，这样的行为能带来两大好处:  (1)对于频繁使用的对象，可以省略创建对象所花费的时间，这对于那些重量级对象而言，是非常可观的一笔系统开销。  (2)由于new操作的次数减少，因而对系统内存的使用频率也会降低，这将减轻GC压力，缩短GC停顿时间。</p>
+<p>单例模式的核心在于通过一个接口返回唯一的对象实例。一个简单的单例实现如下：</p>
+<pre><code>public class Singleton{
+   private Singleton(){
+     System.out.println(&quot;Singleton is create&quot;);
+   }
+
+   private static Singleton instance = new Singleton();
+
+   public static Singleton getInstance(){
+      return instance;
+   }
+}
+</code></pre><p>很简单，十分可靠。它唯一的不足仅是无法对instance实例做延迟加载。列如单例的创建过程很慢。</p>
+<p>为了解决这个问题，引入延迟加载机制。</p>
+<pre><code>public class LazySingleton {
+    private LazySingleton(){
+        System.out.println(&quot;LazySingleton is create&quot;);
+    }
+
+    private static LazySingleton instance = null;
+    public static synchronized LazySingleton getInstance(){
+       if(instance == null){
+          instance = new LazySingleton();
+       }
+       return instance;
+    }
+}
+</code></pre><p>使用上面的实现，虽然实现了延迟加载的功能，但和第一种方法相比，它引入了同步关键字，因此在多线程环境下，它的时耗要远远大于第一种单例模式。</p>
+<p>为了解决这个问题，还需要对其进行改进:</p>
+<pre><code>public class StaticSingleton {
+   private StaticSingleton(){
+     System.out.println(&quot;StaticSingleton is create&quot;);
+   }
+
+   private static class SingletonHolder {
+     private static StaticSingleton instance = new StaticSingleton();
+   }
+   public static StaticSingleton getInstance(){
+      return SingletonHolder.instance;
+   }
+}
+</code></pre><p>当StaticSingleton 被加载时，其内部类并不会被初始化，故可以确保当StaticSingleton类被载入JVM时，不会初始化单例类，而当getInstance()方法被调用时，才会加载SingletonHolder，从而初始化instance。同时，由于实例的建立是在类加载时完成，故天生对多线程友好，getInstance（）方法也不需要使用同步关键字。因此，这种实现方式同时兼备以上两种实现的优点。</p>
+<p>如果觉得还不错，赏点酒钱！<br><img src="/images/aex068188cqwy9xbxa3oc07.png" alt=""></p>
+</div></article></div></section><footer><div class="paginator"><a href="/2016/代理模式之优化/" class="prev">PRVE</a><a href="/2016/设计优化之笔记/" class="next">NEXT</a></div><div data-thread-key="2016/单例模式使用和实现之优化笔记/" data-title="单例模式使用和实现之优化笔记" data-url="http://blog.edagarli.com/2016/单例模式使用和实现之优化笔记/" data-author-key="1" class="ds-thread"></div><script>var duoshuoQuery = {short_name:"edagarli"};
+(function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+
+</script><div class="copyright"><p>© 2015 - 2016 <a href="http://blog.edagarli.com">Edagarli</a>, unless otherwise noted.</p></div></footer><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-65933410-1",'auto');ga('send','pageview');</script><script>var _hmt = _hmt || [];(function() {var hm = document.createElement("script");hm.src = "//hm.baidu.com/hm.js?47be17dedd3258963b6518c2ffbd5e1d";var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(hm, s);})();</script><script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script></body></html>
