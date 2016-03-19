@@ -1,4 +1,5 @@
 <!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> JVM性能调优 · Edagarli's Blog</title><meta name="description" content="JVM性能调优 - Edagarli"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="short icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" type="text/css"></head><body><header><a href="/" class="logo-link"><img src="/favicon.png"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/edagarli" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/edagarli" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><section class="container"><div class="post"><article class="post-block"><h1 class="post-title">JVM性能调优</h1><div class="post-time">2016年3月1日</div><div class="post-content"><p>最近线上问题很多，本来想写篇JVM性能调优，但发现@优雅先生 已经写了篇很不错的文章，所以不打算再写了，等下次有时间再分享一篇线上问题案例分析。文章如下,花了点时间，排了下版。</p>
+<a id="more"></a>
 <p><b>JVM性能调优监控工具jps、jstack、jmap、jhat、jstat、hprof使用详解</b></p>
 <blockquote>
 <p>JDK本身提供了很多方便的JVM性能调优监控工具，除了集成式的VisualVM和jConsole外，还有jps、jstack、jmap、jhat、jstat、hprof等小巧的工具，本博客希望能起抛砖引玉之用，让大家能开始对JVM性能调优的常用工具有所了解。</p>
@@ -65,7 +66,7 @@ try {
 if(!halted.get()) {
 sigLock.wait(timeUntilContinue);
 }
-} 
+}
 catch (InterruptedException ignore) {
 }
 }
@@ -239,7 +240,7 @@ javac -J-agentlib:hprof[=options] ToBeProfiledClass
 
 CPU Usage Sampling Profiling(cpu=samples)的例子：
 java -agentlib:hprof=cpu=samples,interval=20,depth=3     Hello
-</code></pre><p>上面每隔20毫秒采样CPU消耗信息，堆栈深度为3，生成的profile文件名称是java.hprof.txt，在当前目录。 </p>
+</code></pre><p>上面每隔20毫秒采样CPU消耗信息，堆栈深度为3，生成的profile文件名称是java.hprof.txt，在当前目录。</p>
 <p>CPU Usage Times Profiling(cpu=times)的例子，它相对于CPU Usage Sampling Profile能够获得更加细粒度的CPU消耗信息，能够细到每个方法调用的开始和结束，它的实现使用了字节码注入技术（BCI）：</p>
 <pre><code>javac -J-agentlib:hprof=cpu=times Hello.java
 Heap Allocation Profiling(heap=sites)的例子：
@@ -251,7 +252,7 @@ javac -J-agentlib:hprof=heap=sites Hello.java
 <p>其他JVM性能调优参考资料：</p>
 <p>《Java虚拟机规范》</p>
 <p>《Java Performance》</p>
-<p>《Trouble Shooting Guide for JavaSE 6 with HotSpot VM》: <a href="http://www.oracle.com/technetwork/java/javase/tsg-vm-149989.pdf" target="_blank" rel="external">http://www.oracle.com/technetwork/java/javase/tsg-vm-149989.pdf</a> </p>
+<p>《Trouble Shooting Guide for JavaSE 6 with HotSpot VM》: <a href="http://www.oracle.com/technetwork/java/javase/tsg-vm-149989.pdf" target="_blank" rel="external">http://www.oracle.com/technetwork/java/javase/tsg-vm-149989.pdf</a></p>
 <p>《Effective Java》</p>
 <p>VisualVM: <a href="http://docs.oracle.com/javase/7/docs/technotes/guides/visualvm/" target="_blank" rel="external">http://docs.oracle.com/javase/7/docs/technotes/guides/visualvm/</a></p>
 <p>jConsole: <a href="http://docs.oracle.com/javase/1.5.0/docs/guide/management/jconsole.html" target="_blank" rel="external">http://docs.oracle.com/javase/1.5.0/docs/guide/management/jconsole.html</a></p>
@@ -268,4 +269,4 @@ javac -J-agentlib:hprof=heap=sites Hello.java
      || document.getElementsByTagName('body')[0]).appendChild(ds);
 })();
 
-</script><div class="copyright"><p>© 2015 - 2016 <a href="http://blog.edagarli.com">Edagarli</a>, unless otherwise noted.</p></div></footer><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-65933410-1",'auto');ga('send','pageview');</script><script>var _hmt = _hmt || [];(function() {var hm = document.createElement("script");hm.src = "//hm.baidu.com/hm.js?47be17dedd3258963b6518c2ffbd5e1d";var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(hm, s);})();</script><script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script></body></html>
+</script><div class="copyright"><p>© 2015 - 2016 <a href="http://blog.edagarli.com">Edagarli</a>, unless otherwise noted.</p></div></footer><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-65933410-1",'auto');ga('send','pageview');</script><script>var _hmt = _hmt || [];(function() {var hm = document.createElement("script");hm.src ="//hm.baidu.com/hm.js?47be17dedd3258963b6518c2ffbd5e1d";var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(hm, s);})();</script><script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script></body></html>

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.edagarli.com/"/>
-  <updated>2016-03-18T03:50:02.000Z</updated>
+  <updated>2016-03-19T11:34:56.000Z</updated>
   <id>http://blog.edagarli.com/</id>
   
   <author>
@@ -16,21 +16,27 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>实践了下React-Native</title>
-    <link href="http://blog.edagarli.com/2016/React-Douban/"/>
-    <id>http://blog.edagarli.com/2016/React-Douban/</id>
+    <title>React-Native写了个DoubanApp</title>
+    <link href="http://blog.edagarli.com/2016/React-Native%E5%86%99%E4%BA%86%E4%B8%AADoubanApp/"/>
+    <id>http://blog.edagarli.com/2016/React-Native写了个DoubanApp/</id>
     <published>2016-03-17T14:48:00.000Z</published>
-    <updated>2016-03-18T03:50:02.000Z</updated>
+    <updated>2016-03-19T11:34:56.000Z</updated>
     
-    <content type="html">&lt;p&gt;最近在学React，用React-Native写了个简单的小东西。&lt;/p&gt;
+    <content type="html">&lt;blockquote&gt;
+&lt;p&gt;最近在学React，用React-Native写了个简单的小东西。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;基于 React-Native &amp;amp; 豆瓣Open API&lt;br&gt;(&lt;a href=&quot;https://github.com/edagarli/React-Douban&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/edagarli/React-Douban&lt;/a&gt;)&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/images/douban.gif&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 </content>
     
     <summary type="html">
     
-      &lt;p&gt;最近在学React，用React-Native写了个简单的小东西。&lt;/p&gt;
-&lt;p&gt;基于 React-Native &amp;amp; 豆瓣Open API&lt;br&gt;(&lt;a href=&quot;https://github.com/edagarli/React-Douban&quot; target=&quot;
+      &lt;blockquote&gt;
+&lt;p&gt;最近在学React，用React-Native写了个简单的小东西。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;基于 React-Native &amp;amp; 豆瓣Open API&lt;br&gt;(&lt;a href=&quot;https://github.com/edagarli/React-Douban&quot;&gt;https://github.com/edagarli/React-Douban&lt;/a&gt;)&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/douban.gif&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
     
     </summary>
     
@@ -46,91 +52,92 @@
     <link href="http://blog.edagarli.com/2016/switch%E4%B8%8Eif-else%E6%95%88%E7%8E%87%E9%97%AE%E9%A2%98/"/>
     <id>http://blog.edagarli.com/2016/switch与if-else效率问题/</id>
     <published>2016-03-09T03:21:00.000Z</published>
-    <updated>2016-03-18T03:50:02.000Z</updated>
+    <updated>2016-03-19T07:41:10.000Z</updated>
     
     <content type="html">&lt;p&gt;最近看见项目里面很多if-else，突然想到switch与if-else效率问题。&lt;br&gt;网上查了下资料，备记下：&lt;/p&gt;
 &lt;p&gt;switch和if-else相比，由于使用了Binary Tree算法，绝大部分情况下switch会快一点，除非是if-else的第一个条件就为true.说实话  我也没有深入研究过这个问题的根源只是在实际开发中  没有人会去用很多很多else if的都是用 switch case 的  后者比较清晰  给人感觉就是一个脑子很清楚的人写出来的东西至于效率的本质  就让大企鹅去操心吧&lt;br&gt;编译器编译switch与编译if…else…不同。不管有多少case，都直接跳转，不需逐个比较查询。&lt;br&gt;昨天发现了一本叫做CSAPP的书，终于找到了关于switch问题的解答。&lt;/p&gt;
-&lt;p&gt;这是一段C代码：&lt;br&gt;/&lt;em&gt; $begin switch-c &lt;/em&gt;/&lt;br&gt;int switch_eg(int x)&lt;br&gt;{&lt;br&gt;    int result = x; &lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;switch (x) { 
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;p&gt;这是一段C代码：&lt;br&gt;/&lt;em&gt; $begin switch-c &lt;/em&gt;/&lt;br&gt;int switch_eg(int x)&lt;br&gt;{&lt;br&gt;    int result = x;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;switch (x) {
 
-case 100: 
-result *= 13; 
-break; 
+case 100:
+result *= 13;
+break;
 
-case 102: 
-result += 10; 
-/* Fall through */ 
+case 102:
+result += 10;
+/* Fall through */
 
-case 103: 
-result += 11; 
-break; 
+case 103:
+result += 11;
+break;
 
-case 104: 
-case 106: 
-result *= result; 
-break; 
+case 104:
+case 106:
+result *= result;
+break;
 
-default: 
+default:
 result = 0;       
-} 
+}
 
-return result; 
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;}&lt;br&gt;/&lt;em&gt; $end switch-c &lt;/em&gt;/ &lt;/p&gt;
+return result;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;}&lt;br&gt;/&lt;em&gt; $end switch-c &lt;/em&gt;/&lt;/p&gt;
 &lt;p&gt;用GCC汇编出来的代码如下：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;    .file    &amp;quot;switch.c&amp;quot; 
-    .version    &amp;quot;01.01&amp;quot; 
-gcc2_compiled.: 
-.text 
-    .align 4 
-.globl switch_eg 
-    .type     switch_eg,@function 
-switch_eg: 
-    pushl %ebp 
-    movl %esp,%ebp 
-    movl 8(%ebp),%edx 
-    leal -100(%edx),%eax 
-    cmpl ,%eax 
-    ja .L9 
-    jmp *.L10(,%eax,4) 
-    .p2align 4,,7 
-.section    .rodata 
-    .align 4 
-    .align 4 
-.L10: 
-    .long .L4 
-    .long .L9 
-    .long .L5 
-    .long .L6 
-    .long .L8 
-    .long .L9 
-    .long .L8 
-.text 
-    .p2align 4,,7 
-.L4: 
-    leal (%edx,%edx,2),%eax 
-    leal (%edx,%eax,4),%edx 
-    jmp .L3 
-    .p2align 4,,7 
-.L5: 
-    addl ,%edx 
-.L6: 
-    addl ,%edx 
-    jmp .L3 
-    .p2align 4,,7 
-.L8: 
-    imull %edx,%edx 
-    jmp .L3 
-    .p2align 4,,7 
-.L9: 
-    xorl %edx,%edx 
-.L3: 
-    movl %edx,%eax 
-    movl %ebp,%esp 
-    popl %ebp 
-    ret 
-.Lfe1: 
-    .size     switch_eg,.Lfe1-switch_eg 
-    .ident    &amp;quot;GCC: (GNU) 2.95.3 20010315 (release)&amp;quot; 
+&lt;pre&gt;&lt;code&gt;    .file    &amp;quot;switch.c&amp;quot;
+    .version    &amp;quot;01.01&amp;quot;
+gcc2_compiled.:
+.text
+    .align 4
+.globl switch_eg
+    .type     switch_eg,@function
+switch_eg:
+    pushl %ebp
+    movl %esp,%ebp
+    movl 8(%ebp),%edx
+    leal -100(%edx),%eax
+    cmpl ,%eax
+    ja .L9
+    jmp *.L10(,%eax,4)
+    .p2align 4,,7
+.section    .rodata
+    .align 4
+    .align 4
+.L10:
+    .long .L4
+    .long .L9
+    .long .L5
+    .long .L6
+    .long .L8
+    .long .L9
+    .long .L8
+.text
+    .p2align 4,,7
+.L4:
+    leal (%edx,%edx,2),%eax
+    leal (%edx,%eax,4),%edx
+    jmp .L3
+    .p2align 4,,7
+.L5:
+    addl ,%edx
+.L6:
+    addl ,%edx
+    jmp .L3
+    .p2align 4,,7
+.L8:
+    imull %edx,%edx
+    jmp .L3
+    .p2align 4,,7
+.L9:
+    xorl %edx,%edx
+.L3:
+    movl %edx,%eax
+    movl %ebp,%esp
+    popl %ebp
+    ret
+.Lfe1:
+    .size     switch_eg,.Lfe1-switch_eg
+    .ident    &amp;quot;GCC: (GNU) 2.95.3 20010315 (release)&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;在上面的汇编代码中我们可以很清楚的看到switch部分被分配了一个连续的查找表，switch case中不连续的部分也被添加上了相应的条目，switch表的大小不是根据case语句的多少，而是case的最大值的最小值之间的间距。在选择相应 的分支时，会先有一个cmp子句，如果大于查找表的最大值，则跳转到default子句。而其他所有的case语句的耗时都回事O(1)。&lt;/p&gt;
 &lt;p&gt;相比于if-else结构，switch的效率绝对是要高很多的，但是switch使用查找表的方式决定了case的条件必须是一个连续的常量。而if-else则可以灵活的多。&lt;/p&gt;
 &lt;p&gt;可以看到if-else只是单纯地一个接一个比较，效率比较低&lt;br&gt;可以看出，switch的效率一般比if-else高&lt;br&gt;switch   效率高,     从汇编代码可以看出来&lt;br&gt;switch   只计算一次值   然后都是test   ,   jmp,&lt;br&gt;if…else   是每个条件都要计算一遍的.&lt;br&gt;switch的效率与分支数无关&lt;br&gt;当只有分支比较少的时候，if效率比switch高（因为switch有跳转表）&lt;br&gt;分支比较多，那当然是switch&lt;/p&gt;
@@ -139,7 +146,7 @@ switch_eg:
     <summary type="html">
     
       &lt;p&gt;最近看见项目里面很多if-else，突然想到switch与if-else效率问题。&lt;br&gt;网上查了下资料，备记下：&lt;/p&gt;
-&lt;p&gt;switch和if-else相比，由于使用了Binary Tree算法，绝大部分情况下switch会快一点，除非是if-else的第一个条件就为
+&lt;p&gt;switch和if-else相比，由于使用了Binary Tree算法，绝大部分情况下switch会快一点，除非是if-else的第一个条件就为true.说实话  我也没有深入研究过这个问题的根源只是在实际开发中  没有人会去用很多很多else if的都是用 switch case 的  后者比较清晰  给人感觉就是一个脑子很清楚的人写出来的东西至于效率的本质  就让大企鹅去操心吧&lt;br&gt;编译器编译switch与编译if…else…不同。不管有多少case，都直接跳转，不需逐个比较查询。&lt;br&gt;昨天发现了一本叫做CSAPP的书，终于找到了关于switch问题的解答。&lt;/p&gt;
     
     </summary>
     
@@ -155,16 +162,17 @@ switch_eg:
     <link href="http://blog.edagarli.com/2016/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E6%B6%88%E6%81%AF%E5%8F%91%E9%80%81%E4%B8%80%E8%87%B4%E6%80%A7/"/>
     <id>http://blog.edagarli.com/2016/如何解决消息发送一致性/</id>
     <published>2016-03-07T14:42:00.000Z</published>
-    <updated>2016-03-18T03:50:02.000Z</updated>
+    <updated>2016-03-19T07:42:22.000Z</updated>
     
     <content type="html">&lt;p&gt;消息发送一致性是什么？&lt;/p&gt;
 &lt;p&gt;是指产生消息的业务动作与消息发送的一致，就是说，如果业务操作成功了，那么对应的消息一定要发送出去，否则就丢失消息了。而另一方面，如果这个业务行为没有发生或者失败，那么就不应该把消息发出去。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;p&gt;消息发送一致性很难保证吗？&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;void test(){
   //业务操作
   //列如写数据库，调用服务等
   //发送消息
-}    
+}
 
 void test(){
   // 发送消息
@@ -192,7 +200,6 @@ void test(){
     
       &lt;p&gt;消息发送一致性是什么？&lt;/p&gt;
 &lt;p&gt;是指产生消息的业务动作与消息发送的一致，就是说，如果业务操作成功了，那么对应的消息一定要发送出去，否则就丢失消息了。而另一方面，如果这个业务行为没有发生或者失败，那么就不应该把消息发出去。&lt;/p&gt;
-&lt;p&gt;消息发送一致性很难保证吗？&lt;/p
     
     </summary>
     
@@ -208,9 +215,10 @@ void test(){
     <link href="http://blog.edagarli.com/2016/%E4%B8%80%E7%BE%A4%E5%B0%8F%E7%99%BD%E7%A8%8B%E5%BA%8F%E5%91%98%E6%89%92%E4%BA%86%E4%B8%80%E4%B8%AA%E4%BF%84%E7%BD%97%E6%96%AF%E7%9A%84%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
     <id>http://blog.edagarli.com/2016/一群小白程序员扒了一个俄罗斯的开源框架/</id>
     <published>2016-03-06T04:06:00.000Z</published>
-    <updated>2016-03-18T03:50:02.000Z</updated>
+    <updated>2016-03-19T07:41:21.000Z</updated>
     
     <content type="html">&lt;p&gt;60多年前，一群小白程序员扒了一个俄罗斯的开源框架，写了几行漏洞百出的代码，产品上线运营了，30年后新的CTO实在看不下去了，重构了部分代码，但框架依旧是旧的，又过了30年新代码和就框架严重不兼容，产品濒临崩溃，用户流失严重，这时我们该&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;p&gt;1继续修bug打补丁&lt;/p&gt;
 &lt;p&gt;2换个框架重构代码&lt;/p&gt;
 &lt;p&gt;3干脆换掉这些程序猿。&lt;/p&gt;
@@ -237,7 +245,6 @@ void test(){
     <summary type="html">
     
       &lt;p&gt;60多年前，一群小白程序员扒了一个俄罗斯的开源框架，写了几行漏洞百出的代码，产品上线运营了，30年后新的CTO实在看不下去了，重构了部分代码，但框架依旧是旧的，又过了30年新代码和就框架严重不兼容，产品濒临崩溃，用户流失严重，这时我们该&lt;/p&gt;
-&lt;p&gt;1继续修bug打补丁&lt;
     
     </summary>
     
@@ -253,9 +260,10 @@ void test(){
     <link href="http://blog.edagarli.com/2016/%E5%A4%A7%E6%B5%8F%E8%A7%88%E9%87%8F%E7%B3%BB%E7%BB%9F%E7%9A%84%E8%A7%A3%E5%86%B3%E6%80%9D%E8%B7%AF/"/>
     <id>http://blog.edagarli.com/2016/大浏览量系统的解决思路/</id>
     <published>2016-03-02T15:07:00.000Z</published>
-    <updated>2016-03-18T03:50:02.000Z</updated>
+    <updated>2016-03-19T07:42:03.000Z</updated>
     
     <content type="html">&lt;p&gt;随着网站的发展壮大，系统也面临越来越多的挑战，有些是业务发展带来的挑战，例如大型促销活动，秒杀活动等突发流量冲击；还有一些是非正常的访问请求，例如网站经常受到攻击和恶意请求。像这种流量突然暴增的情况对系统的冲击很大，有时候流量突然暴增的情况对系统的冲击很大，有时候流量瞬间可达到20w/s的QPS,所以如何让系统有更好的性能和稳定性是我们面临的一大挑战。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;p&gt;在介绍前台系统的静态化改造之前，先说说可以做哪些优化工作。介绍下淘宝前台系统的优化历程。&lt;/p&gt;
 &lt;p&gt;2009年，系统拆分，静态文件合并，前端页面异步化和JSON化。&lt;br&gt;2010年，去DB依赖，引入缓存，提升单机QPS，关注用户体验。&lt;br&gt;2011年，优化进入深水区Velocity，BigPipe。&lt;br&gt;2012年，静态化改造。&lt;br&gt;2013年，统一Cache，CDN化，网络协议。&lt;/p&gt;
 &lt;p&gt;&lt;b&gt;静态改造&lt;/b&gt;&lt;/p&gt;
@@ -280,7 +288,7 @@ void test(){
     
     <summary type="html">
     
-      &lt;p&gt;随着网站的发展壮大，系统也面临越来越多的挑战，有些是业务发展带来的挑战，例如大型促销活动，秒杀活动等突发流量冲击；还有一些是非正常的访问请求，例如网站经常受到攻击和恶意请求。像这种流量突然暴增的情况对系统的冲击很大，有时候流量突然暴增的情况对系统的冲击很大，有时候流量瞬间可
+      &lt;p&gt;随着网站的发展壮大，系统也面临越来越多的挑战，有些是业务发展带来的挑战，例如大型促销活动，秒杀活动等突发流量冲击；还有一些是非正常的访问请求，例如网站经常受到攻击和恶意请求。像这种流量突然暴增的情况对系统的冲击很大，有时候流量突然暴增的情况对系统的冲击很大，有时候流量瞬间可达到20w/s的QPS,所以如何让系统有更好的性能和稳定性是我们面临的一大挑战。&lt;/p&gt;
     
     </summary>
     
@@ -296,9 +304,10 @@ void test(){
     <link href="http://blog.edagarli.com/2016/JVM%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/"/>
     <id>http://blog.edagarli.com/2016/JVM性能调优/</id>
     <published>2016-03-01T03:24:00.000Z</published>
-    <updated>2016-03-18T03:50:02.000Z</updated>
+    <updated>2016-03-19T07:40:11.000Z</updated>
     
     <content type="html">&lt;p&gt;最近线上问题很多，本来想写篇JVM性能调优，但发现@优雅先生 已经写了篇很不错的文章，所以不打算再写了，等下次有时间再分享一篇线上问题案例分析。文章如下,花了点时间，排了下版。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;p&gt;&lt;b&gt;JVM性能调优监控工具jps、jstack、jmap、jhat、jstat、hprof使用详解&lt;/b&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;JDK本身提供了很多方便的JVM性能调优监控工具，除了集成式的VisualVM和jConsole外，还有jps、jstack、jmap、jhat、jstat、hprof等小巧的工具，本博客希望能起抛砖引玉之用，让大家能开始对JVM性能调优的常用工具有所了解。&lt;/p&gt;
@@ -365,7 +374,7 @@ try {
 if(!halted.get()) {
 sigLock.wait(timeUntilContinue);
 }
-} 
+}
 catch (InterruptedException ignore) {
 }
 }
@@ -539,7 +548,7 @@ javac -J-agentlib:hprof[=options] ToBeProfiledClass
 
 CPU Usage Sampling Profiling(cpu=samples)的例子：
 java -agentlib:hprof=cpu=samples,interval=20,depth=3     Hello
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;上面每隔20毫秒采样CPU消耗信息，堆栈深度为3，生成的profile文件名称是java.hprof.txt，在当前目录。 &lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;上面每隔20毫秒采样CPU消耗信息，堆栈深度为3，生成的profile文件名称是java.hprof.txt，在当前目录。&lt;/p&gt;
 &lt;p&gt;CPU Usage Times Profiling(cpu=times)的例子，它相对于CPU Usage Sampling Profile能够获得更加细粒度的CPU消耗信息，能够细到每个方法调用的开始和结束，它的实现使用了字节码注入技术（BCI）：&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;javac -J-agentlib:hprof=cpu=times Hello.java
 Heap Allocation Profiling(heap=sites)的例子：
@@ -551,7 +560,7 @@ javac -J-agentlib:hprof=heap=sites Hello.java
 &lt;p&gt;其他JVM性能调优参考资料：&lt;/p&gt;
 &lt;p&gt;《Java虚拟机规范》&lt;/p&gt;
 &lt;p&gt;《Java Performance》&lt;/p&gt;
-&lt;p&gt;《Trouble Shooting Guide for JavaSE 6 with HotSpot VM》: &lt;a href=&quot;http://www.oracle.com/technetwork/java/javase/tsg-vm-149989.pdf&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.oracle.com/technetwork/java/javase/tsg-vm-149989.pdf&lt;/a&gt; &lt;/p&gt;
+&lt;p&gt;《Trouble Shooting Guide for JavaSE 6 with HotSpot VM》: &lt;a href=&quot;http://www.oracle.com/technetwork/java/javase/tsg-vm-149989.pdf&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.oracle.com/technetwork/java/javase/tsg-vm-149989.pdf&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;《Effective Java》&lt;/p&gt;
 &lt;p&gt;VisualVM: &lt;a href=&quot;http://docs.oracle.com/javase/7/docs/technotes/guides/visualvm/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://docs.oracle.com/javase/7/docs/technotes/guides/visualvm/&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;jConsole: &lt;a href=&quot;http://docs.oracle.com/javase/1.5.0/docs/guide/management/jconsole.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://docs.oracle.com/javase/1.5.0/docs/guide/management/jconsole.html&lt;/a&gt;&lt;/p&gt;
@@ -563,7 +572,6 @@ javac -J-agentlib:hprof=heap=sites Hello.java
     <summary type="html">
     
       &lt;p&gt;最近线上问题很多，本来想写篇JVM性能调优，但发现@优雅先生 已经写了篇很不错的文章，所以不打算再写了，等下次有时间再分享一篇线上问题案例分析。文章如下,花了点时间，排了下版。&lt;/p&gt;
-&lt;p&gt;&lt;b&gt;JVM性能调优监控工具jps、jstack、jmap、jhat、jstat、
     
     </summary>
     
@@ -579,16 +587,16 @@ javac -J-agentlib:hprof=heap=sites Hello.java
     <link href="http://blog.edagarli.com/2016/%E5%8F%91%E5%B8%83%E6%88%96%E9%87%8D%E5%90%AF%E7%BA%BF%E4%B8%8A%E6%9C%8D%E5%8A%A1%E6%97%B6%E6%8A%96%E5%8A%A8%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
     <id>http://blog.edagarli.com/2016/发布或重启线上服务时抖动问题解决方案/</id>
     <published>2016-03-01T02:45:00.000Z</published>
-    <updated>2016-03-18T03:50:02.000Z</updated>
+    <updated>2016-03-19T07:41:59.000Z</updated>
     
     <content type="html">&lt;p&gt;最近发现项目重启时，load会飙到非常高，然后运行了一段时间，会恢复正常，所以集中整理了下资料以便查阅。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;p&gt;&lt;a href=&quot;http://www.cnblogs.com/LBSer/p/3703967.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.cnblogs.com/LBSer/p/3703967.html&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://confluence.atlassian.com/jirakb/jira-crashes-due-to-codecache-is-full-compiler-has-been-disabled-314447083.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://confluence.atlassian.com/jirakb/jira-crashes-due-to-codecache-is-full-compiler-has-been-disabled-314447083.html&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://qa.blog.163.com/blog/static/190147002201392221426372/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://qa.blog.163.com/blog/static/190147002201392221426372/&lt;/a&gt;&lt;/p&gt;
 </content>
     
     <summary type="html">
     
       &lt;p&gt;最近发现项目重启时，load会飙到非常高，然后运行了一段时间，会恢复正常，所以集中整理了下资料以便查阅。&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://www.cnblogs.com/LBSer/p/3703967.html&quot; target=&quot;_blank&quot; rel=&quot;ex
     
     </summary>
     
@@ -604,10 +612,11 @@ javac -J-agentlib:hprof=heap=sites Hello.java
     <link href="http://blog.edagarli.com/2016/%E5%A6%82%E4%BD%95%E4%B8%8D%E6%AD%BB%E6%8E%89/"/>
     <id>http://blog.edagarli.com/2016/如何不死掉/</id>
     <published>2016-02-28T11:18:00.000Z</published>
-    <updated>2016-03-18T03:50:02.000Z</updated>
+    <updated>2016-03-19T07:42:17.000Z</updated>
     
     <content type="html">&lt;p&gt;今天失恋了，好难受。我发现这段时间经历的事情特别多，接连经历创业失败，撞车，失恋，彷佛生活差到了极点。&lt;/p&gt;
 &lt;p&gt;每每遇到这样的事情，我都会消沉一天，然后重新振作，没什么大不了的。此时此刻，想起了我之前分享的一篇文章。&lt;/p&gt;
+ &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;p&gt;&lt;b&gt;如何不死掉——How Not to Die&lt;/b&gt;&lt;/p&gt;
 &lt;p&gt;创业公司能活下去，靠的是不抛弃不放弃的士气。&lt;/p&gt;
 &lt;p&gt;创业是个艰辛的过程，成功的创业者变得富有，失败的创业者一无所有（除了经验教训）。Paul Graham提到如果一个创业公司与Y Combinator失去联系，或者创业者不再出现在每周的聚会上，基本说明这个创业公司要挂掉了。（在国内，或许是下面的情景预示着公司即将挂掉：创业公司淡出人们的实现，创业者不再露面吧）。死掉的创业公司都是默默就挂掉了，悄无声息的就死了。&lt;/p&gt;
@@ -624,7 +633,6 @@ javac -J-agentlib:hprof=heap=sites Hello.java
     
       &lt;p&gt;今天失恋了，好难受。我发现这段时间经历的事情特别多，接连经历创业失败，撞车，失恋，彷佛生活差到了极点。&lt;/p&gt;
 &lt;p&gt;每每遇到这样的事情，我都会消沉一天，然后重新振作，没什么大不了的。此时此刻，想起了我之前分享的一篇文章。&lt;/p&gt;
-&lt;p&gt;&lt;b&gt;如何不死掉——How Not 
     
     </summary>
     
@@ -640,9 +648,10 @@ javac -J-agentlib:hprof=heap=sites Hello.java
     <link href="http://blog.edagarli.com/2016/%E4%B8%BA%E5%95%A5HBase%E9%9C%80%E8%A6%81%E6%90%AD%E5%BB%BASQL%E5%BC%95%E6%93%8E%E5%B1%82/"/>
     <id>http://blog.edagarli.com/2016/为啥HBase需要搭建SQL引擎层/</id>
     <published>2016-02-12T13:51:00.000Z</published>
-    <updated>2016-03-18T03:50:02.000Z</updated>
+    <updated>2016-03-19T07:41:25.000Z</updated>
     
     <content type="html">&lt;p&gt;现有的SQL解决方案通常都不是水平可伸缩的，因此当数据量变大时会遇到障碍。但是这样的情况，随着NoSQL的出现已经得到很大程度的缓解，并且随着NoSQL技术的完善与成熟，这种情况将会从根本上解决。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;p&gt;我们知道NoSQL区别于关系型数据库的一点就是NoSQL不使用SQL作为查询语言，至于为何在NoSQL数据存储HBase上提供SQL接口，有如下原因：&lt;/p&gt;
 &lt;p&gt;1.使用诸如SQL这样易于理解的语言，使人们能够更加轻松地使用HBase。&lt;/p&gt;
 &lt;p&gt;2.使用诸如SQL这样更高层次的语言来编写，减少了编写的代码量。&lt;/p&gt;
@@ -663,7 +672,6 @@ javac -J-agentlib:hprof=heap=sites Hello.java
     <summary type="html">
     
       &lt;p&gt;现有的SQL解决方案通常都不是水平可伸缩的，因此当数据量变大时会遇到障碍。但是这样的情况，随着NoSQL的出现已经得到很大程度的缓解，并且随着NoSQL技术的完善与成熟，这种情况将会从根本上解决。&lt;/p&gt;
-&lt;p&gt;我们知道NoSQL区别于关系型数据库的一点就是NoSQL不使用
     
     </summary>
     
@@ -679,23 +687,23 @@ javac -J-agentlib:hprof=heap=sites Hello.java
     <link href="http://blog.edagarli.com/2016/%E5%88%9B%E4%B8%9A%E5%8F%8D%E6%80%9D/"/>
     <id>http://blog.edagarli.com/2016/创业反思/</id>
     <published>2016-02-09T13:35:00.000Z</published>
-    <updated>2016-03-18T03:50:02.000Z</updated>
+    <updated>2016-03-19T12:38:37.000Z</updated>
     
     <content type="html">&lt;p&gt;往往夜深人静的时候，容易胡思乱想。但今天不知为何，躺在床上不停的回忆创业往事，感觉有点过头了。可能与今天的心情，或者与看到的事情有关。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;p&gt;我当时进入公司作为技术合伙人的时候，公司正进行新的产品研发。不过之前公司已经开发了一款产品，所以团队开发能力还是有的（虽然人员变换频繁，不过还是很理解的，毕竟是创业公司）。先不说新产品市场，前景如何如何，此时公司内部问题还是有很多的。&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;p&gt;第一：选错人；我进入公司时候，原先主力iOS没干了（其实之前也是外包，做完就撤），剩下的是CEO招进来的，招了几个看上去还不错的iOS程序员。由于CEO也不是技术出身，所以说招进来的靠不靠谱也不是很清楚。按照以往我的习惯，我要了解一个人，我就网络搜索，爬虫等。还是挖到了一些有用的信息，iOS开发竟是培训机构出来的。之前谎称是有2年工作经验的。这块我找CEO聊了聊，但是人不好找，新产品开发时间紧，迫于无赖。暂时先留着，开发新产品。（其实，这里已经埋下了隐患）&lt;/p&gt;
 &lt;p&gt;第二：没有产品经理。其实这也不是大问题，CEO往往前期可以充当产品经理。无奈，CEO之前是搞投资的，对产品经验欠缺。刚开始，我们是3个合伙人。CEO，我，还有一个负责运营的。新产品需求我们开始一起商量定的。说实话，到现在我还觉得，产品完全是我们闭着脑袋想出来的，产品设计不是很合理，没有充分的考虑市场，用户，这才导致产品上线用户黏性很低。&lt;/p&gt;
 &lt;p&gt;第三：管理不行。大将无能，累死三军！这句话说的真好。往往下面出问题了，首先需要反思的是自己。所以说当你选错人后，如何管理，如何带人，这也是一种考验。一句话，没管理好。iOS开发进度一直落后，产品效果也不好。但我们就是不敢开除，因为不好找人啊！（我相信创业公司都如此）中间，其实建立了很多方式，绩效考核，绩效奖金等。现在，如果让我选择的话，我立刻开除。产品最终出来花的时间有点长，导致我们资金花了很大一部分。这就导致融资的急迫性。最终运营一段时间，因为资金链断了，团队解散了。&lt;/p&gt;
-&lt;p&gt;心里有很多关于自己创业的话说，可能是因为表达不行，可能是有些东西不知道从哪去讲。反正现在回忆起来，总觉得当时能做的太多了，但就是没做；总觉得当时不该犯的错误，就犯了；总觉得当时能考虑全很多事情，但就是没有；总觉得当时应该清醒一点，不要盲目闭门想着产品，但还是盲目了；总觉得产品做出来后，就很火了，但终究没有；总觉得……&lt;/p&gt;
-&lt;p&gt;自己想到哪，写到哪。总感觉肚子里好多东西要写，但终究写不出来。想对那些一直在创业路上的朋友们，说两个字: 加油！&lt;/p&gt;
-&lt;hr&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;心里有很多关于自己创业的话说，可能是因为表达不行，可能是有些东西不知道从哪去讲。反正现在回忆起来，总觉得当时能做的太多了，但就是没做；总觉得当时不该犯的错误，就犯了；总觉得当时能考虑全很多事情，但就是没有；总觉得当时应该清醒一点，不要盲目闭门想着产品，但还是盲目了；总觉得产品做出来后，就很火了，但终究没有；总觉得……&lt;br&gt;自己想到哪，写到哪。总感觉肚子里好多东西要写，但终究写不出来。想对那些一直在创业路上的朋友们，说两个字: 加油！&lt;/p&gt;
 &lt;p&gt;如果觉得有点帮助，可以赏点酒钱！（lizhi@lydiabox.com）&lt;br&gt;&lt;img src=&quot;/images/aex068188cqwy9xbxa3oc07.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 </content>
     
     <summary type="html">
     
       &lt;p&gt;往往夜深人静的时候，容易胡思乱想。但今天不知为何，躺在床上不停的回忆创业往事，感觉有点过头了。可能与今天的心情，或者与看到的事情有关。&lt;/p&gt;
-&lt;p&gt;我当时进入公司作为技术合伙人的时候，公司正进行新的产品研发。不过之前公司已经开发了一款产品，所以团队开发能力还是有的（虽然人
     
     </summary>
     
@@ -711,10 +719,11 @@ javac -J-agentlib:hprof=heap=sites Hello.java
     <link href="http://blog.edagarli.com/2016/HBase%E8%A1%A8%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1%E7%AC%94%E8%AE%B0/"/>
     <id>http://blog.edagarli.com/2016/HBase表结构设计笔记/</id>
     <published>2016-02-06T09:22:00.000Z</published>
-    <updated>2016-03-18T08:16:34.000Z</updated>
+    <updated>2016-03-19T07:39:49.000Z</updated>
     
     <content type="html">&lt;p&gt;在设计HBase表时，Rowkey设计是很重要的事情，应该基于预期的访问模式来为Rowkey建模。&lt;/p&gt;
 &lt;p&gt;Rowkey非常重要，在设计时需要慎重考虑。以存储用户观影记录数据为例，复合的Rowkey由用户ID作为前缀(方便把某用户的观影记录聚合在一起)，倒置的时间串作为Rowkey的后缀可以使观影记录数据从新到旧排列。如果Rowkey是整型的，用二进制的方式应该比用String来存储一个数据更节约空间。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;p&gt;Rowkey进行设计需要的注意要点。&lt;/p&gt;
 &lt;p&gt;1.Rowkey是以字典顺序从大到小排序。&lt;br&gt;2.Rowkey尽量散列Rowkey设计。&lt;br&gt;最重要的是要保证散列，这样就会保证所有的数据都不是在一个Region上，从而避免读写的时候负载会集中在个别Region上。从而避免读写的时候负载会集中在个别Region上。&lt;/p&gt;
 &lt;p&gt;假设我们需要存储一个视频网站用户的所有观影记录（暂时不需要考虑时间倒排），这时候的Rowkey可设计为userid_videoid的拼接字符串，但是这样设计的话，userid的分布就很可能不均匀，因此Rowkey是按字符串排序的（默认字典顺序排序）。&lt;/p&gt;
@@ -736,7 +745,7 @@ javac -J-agentlib:hprof=heap=sites Hello.java
     <summary type="html">
     
       &lt;p&gt;在设计HBase表时，Rowkey设计是很重要的事情，应该基于预期的访问模式来为Rowkey建模。&lt;/p&gt;
-&lt;p&gt;Rowkey非常重要，在设计时需要慎重考虑。以存储用户观影记录数据为例，复合的Rowkey由用户ID作为前缀(方便把某用户的观影记录聚合在一起)，倒置的时间串作
+&lt;p&gt;Rowkey非常重要，在设计时需要慎重考虑。以存储用户观影记录数据为例，复合的Rowkey由用户ID作为前缀(方便把某用户的观影记录聚合在一起)，倒置的时间串作为Rowkey的后缀可以使观影记录数据从新到旧排列。如果Rowkey是整型的，用二进制的方式应该比用String来存储一个数据更节约空间。&lt;/p&gt;
     
     </summary>
     
@@ -754,19 +763,23 @@ javac -J-agentlib:hprof=heap=sites Hello.java
     <link href="http://blog.edagarli.com/2016/%E6%83%85%E4%BA%BA%E8%8A%82%E7%A4%BC%E7%89%A9/"/>
     <id>http://blog.edagarli.com/2016/情人节礼物/</id>
     <published>2016-02-05T13:20:00.000Z</published>
-    <updated>2016-03-18T03:50:02.000Z</updated>
+    <updated>2016-03-19T07:42:38.000Z</updated>
     
     <content type="html">&lt;p&gt;参考hackerzhou写的网站礼物&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;http://hackerzhou.me/ex_love/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://hackerzhou.me/ex_love/&lt;/a&gt;   （貌似现在不能访问了，😄）&lt;/p&gt;
 &lt;p&gt;为妹子也写了个。&lt;/p&gt;
 &lt;p&gt;We are both programmers, so I write some code to celebrate our 1st valentine’s day.&lt;/p&gt;
 &lt;p&gt;代码：&lt;br&gt;&lt;a href=&quot;https://github.com/edagarli/OurLoveStory/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/edagarli/OurLoveStory/&lt;/a&gt;&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 </content>
     
     <summary type="html">
     
       &lt;p&gt;参考hackerzhou写的网站礼物&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://hackerzhou.me/ex_love/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://hackerzhou.me/ex_love/&lt;/a&gt;   （貌似现
+&lt;p&gt;&lt;a href=&quot;http://hackerzhou.me/ex_love/&quot;&gt;http://hackerzhou.me/ex_love/&lt;/a&gt;   （貌似现在不能访问了，😄）&lt;/p&gt;
+&lt;p&gt;为妹子也写了个。&lt;/p&gt;
+&lt;p&gt;We are both programmers, so I write some code to celebrate our 1st valentine’s day.&lt;/p&gt;
+&lt;p&gt;代码：&lt;br&gt;&lt;a href=&quot;https://github.com/edagarli/OurLoveStory/&quot;&gt;https://github.com/edagarli/OurLoveStory/&lt;/a&gt;&lt;/p&gt;
     
     </summary>
     
@@ -782,9 +795,10 @@ javac -J-agentlib:hprof=heap=sites Hello.java
     <link href="http://blog.edagarli.com/2016/%E5%85%B3%E4%BA%8E%E6%B7%98%E7%82%B9%E7%82%B9%E9%9D%A2%E8%AF%95%E4%B8%AD%E7%A2%B0%E5%88%B0%E7%9A%84%E6%9E%B6%E6%9E%84%E9%97%AE%E9%A2%98%E2%80%8B/"/>
     <id>http://blog.edagarli.com/2016/关于淘点点面试中碰到的架构问题​/</id>
     <published>2016-01-28T02:54:00.000Z</published>
-    <updated>2016-03-18T03:50:02.000Z</updated>
+    <updated>2016-03-19T07:41:39.000Z</updated>
     
     <content type="html">&lt;p&gt;之前面试淘点点的时候被问倒得一个问题至今牵挂，由于工作环境的限制，我没能接触到一些大数据量的并发工作，也没能有机遇参与复杂系统的设计，而我学习复杂或高并发系统的唯一途径就是阅读源码，惭愧的是，至今也只阅读了Tomcat的部分源码&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;p&gt;从事开发工作两年来，从未写过只言片语，俗话说的好”好记性不如烂笔头“，最近心血来潮开始想慢慢写点博文，不仅是知识的积累还是为了若干年后回头看看当年努力的过程，希望把这个养成习惯并坚持下去，啰嗦了这么久 来点干货把。&lt;/p&gt;
 &lt;p&gt;之前面试淘点点的时候被问倒得一个问题至今牵挂，由于工作环境的限制，我没能接触到一些大数据量的并发工作，也没能有机遇参与复杂系统的设计，而我学习复杂或高并发系统的唯一途径就是阅读源码，惭愧的是，至今也只阅读了Tomcat的部分源码，于是我在oschina上贴出问题与互联网猿一同分析（大家可以先看看问题：关于淘点点面试中碰到的架构问题），非常感谢大家的意见，尤其是@林中漫步 @JerryLin 两位先生 最终确定两钟实现思路：&lt;/p&gt;
 &lt;p&gt;1、具有排序功能的队列&lt;/p&gt;
@@ -807,7 +821,6 @@ javac -J-agentlib:hprof=heap=sites Hello.java
     <summary type="html">
     
       &lt;p&gt;之前面试淘点点的时候被问倒得一个问题至今牵挂，由于工作环境的限制，我没能接触到一些大数据量的并发工作，也没能有机遇参与复杂系统的设计，而我学习复杂或高并发系统的唯一途径就是阅读源码，惭愧的是，至今也只阅读了Tomcat的部分源码&lt;/p&gt;
-&lt;p&gt;从事开发工作两年来，从未写过只
     
     </summary>
     
@@ -827,10 +840,11 @@ javac -J-agentlib:hprof=heap=sites Hello.java
     <link href="http://blog.edagarli.com/2016/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E8%BD%BB%E9%87%8F%E7%BA%A7%E6%A1%86%E6%9E%B6/"/>
     <id>http://blog.edagarli.com/2016/实现一个轻量级框架/</id>
     <published>2016-01-26T11:40:00.000Z</published>
-    <updated>2016-03-18T03:50:02.000Z</updated>
+    <updated>2016-03-19T07:42:29.000Z</updated>
     
     <content type="html">&lt;p&gt;最近在折腾框架。&lt;/p&gt;
 &lt;p&gt;自己从0到1搭建一个java web框架实现&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;p&gt;轻量级的框架&lt;/p&gt;
 &lt;p&gt;Spring 框架, fuck, 太重了, 开发一个很简单的web也要写一大堆代码.&lt;/p&gt;
 &lt;p&gt;只想折腾一个轻量级的框架, 有核心即可… 类似Nginx模块化设计.&lt;/p&gt;
@@ -846,9 +860,6 @@ javac -J-agentlib:hprof=heap=sites Hello.java
     
       &lt;p&gt;最近在折腾框架。&lt;/p&gt;
 &lt;p&gt;自己从0到1搭建一个java web框架实现&lt;/p&gt;
-&lt;p&gt;轻量级的框架&lt;/p&gt;
-&lt;p&gt;Spring 框架, fuck, 太重了, 开发一个很简单的web也要写一大堆代码.&lt;/p&gt;
-&lt;p&gt;只想折腾一个轻量级的框架, 有核心即可… 类似Ngin
     
     </summary>
     
@@ -864,10 +875,11 @@ javac -J-agentlib:hprof=heap=sites Hello.java
     <link href="http://blog.edagarli.com/2016/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E4%B9%8B%E4%BC%98%E5%8C%96/"/>
     <id>http://blog.edagarli.com/2016/代理模式之优化/</id>
     <published>2016-01-25T02:27:00.000Z</published>
-    <updated>2016-03-18T03:50:02.000Z</updated>
+    <updated>2016-03-19T07:41:31.000Z</updated>
     
     <content type="html">&lt;p&gt;代理模式的意图很多，比如：安全原因，远程调用等。这里主要讨论使用代理模式实现延迟加载，从而提升系统的性能和反应速度。&lt;/p&gt;
 &lt;p&gt;延迟加载的核心思想是：如果当前并没有使用这个组件，则不需要真正地初始化它，使用一个代理对象替代它的原有的位置，只要在真正需要使用的时候，才对它进行加载。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;h2 id=&quot;代理模式的实现和使用&quot;&gt;&lt;a href=&quot;#代理模式的实现和使用&quot; class=&quot;headerlink&quot; title=&quot;代理模式的实现和使用&quot;&gt;&lt;/a&gt;代理模式的实现和使用&lt;/h2&gt;&lt;p&gt;代理分为几种&lt;/p&gt;
 &lt;p&gt;静态代理&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;为每一个代理写一个方法，其实是挺烦的。接口有变动，真实主题与代理类都要修改。
@@ -884,7 +896,7 @@ ASM是低级的字节码生成工具，使用ASM已经近乎于在使用Java byt
     <summary type="html">
     
       &lt;p&gt;代理模式的意图很多，比如：安全原因，远程调用等。这里主要讨论使用代理模式实现延迟加载，从而提升系统的性能和反应速度。&lt;/p&gt;
-&lt;p&gt;延迟加载的核心思想是：如果当前并没有使用这个组件，则不需要真正地初始化它，使用一个代理对象替代它的原有的位置，只要在真正需要使用的时候，才对它
+&lt;p&gt;延迟加载的核心思想是：如果当前并没有使用这个组件，则不需要真正地初始化它，使用一个代理对象替代它的原有的位置，只要在真正需要使用的时候，才对它进行加载。&lt;/p&gt;
     
     </summary>
     
@@ -900,9 +912,10 @@ ASM是低级的字节码生成工具，使用ASM已经近乎于在使用Java byt
     <link href="http://blog.edagarli.com/2016/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E4%BD%BF%E7%94%A8%E5%92%8C%E5%AE%9E%E7%8E%B0%E4%B9%8B%E4%BC%98%E5%8C%96%E7%AC%94%E8%AE%B0/"/>
     <id>http://blog.edagarli.com/2016/单例模式使用和实现之优化笔记/</id>
     <published>2016-01-23T10:23:00.000Z</published>
-    <updated>2016-03-18T03:50:02.000Z</updated>
+    <updated>2016-03-19T07:41:56.000Z</updated>
     
     <content type="html">&lt;p&gt;这算是最为普遍的模式之一。在Java语言中，这样的行为能带来两大好处:  (1)对于频繁使用的对象，可以省略创建对象所花费的时间，这对于那些重量级对象而言，是非常可观的一笔系统开销。  (2)由于new操作的次数减少，因而对系统内存的使用频率也会降低，这将减轻GC压力，缩短GC停顿时间。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;p&gt;单例模式的核心在于通过一个接口返回唯一的对象实例。一个简单的单例实现如下：&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;public class Singleton{
    private Singleton(){
@@ -950,7 +963,7 @@ ASM是低级的字节码生成工具，使用ASM已经近乎于在使用Java byt
     
     <summary type="html">
     
-      &lt;p&gt;这算是最为普遍的模式之一。在Java语言中，这样的行为能带来两大好处:  (1)对于频繁使用的对象，可以省略创建对象所花费的时间，这对于那些重量级对象而言，是非常可观的一笔系统开销。  (2)由于new操作的次数减少，因而对系统内存的使用频率也会降低，这将减轻GC压力，缩短
+      &lt;p&gt;这算是最为普遍的模式之一。在Java语言中，这样的行为能带来两大好处:  (1)对于频繁使用的对象，可以省略创建对象所花费的时间，这对于那些重量级对象而言，是非常可观的一笔系统开销。  (2)由于new操作的次数减少，因而对系统内存的使用频率也会降低，这将减轻GC压力，缩短GC停顿时间。&lt;/p&gt;
     
     </summary>
     
@@ -966,9 +979,10 @@ ASM是低级的字节码生成工具，使用ASM已经近乎于在使用Java byt
     <link href="http://blog.edagarli.com/2016/%E8%AE%BE%E8%AE%A1%E4%BC%98%E5%8C%96%E4%B9%8B%E7%AC%94%E8%AE%B0/"/>
     <id>http://blog.edagarli.com/2016/设计优化之笔记/</id>
     <published>2016-01-23T09:06:00.000Z</published>
-    <updated>2016-03-18T03:50:02.000Z</updated>
+    <updated>2016-03-19T07:42:55.000Z</updated>
     
     <content type="html">&lt;p&gt;软件的结构对系统整体性能有着重要的影响。优秀的设计结构可以规避很多潜在的性能问题，对系统性能的影响可能远远大于代码的优化。因此，熟悉一些常用的软件设计模式和方法，对设计高性能软件有着重要的帮助。一些常用的与性能相关的设计模式，组件和设计方法如下:&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;pre&gt;&lt;code&gt;单列模式的使用和实现
    代理模式的实现和深入
    享元模式的应用
@@ -986,7 +1000,6 @@ ASM是低级的字节码生成工具，使用ASM已经近乎于在使用Java byt
     <summary type="html">
     
       &lt;p&gt;软件的结构对系统整体性能有着重要的影响。优秀的设计结构可以规避很多潜在的性能问题，对系统性能的影响可能远远大于代码的优化。因此，熟悉一些常用的软件设计模式和方法，对设计高性能软件有着重要的帮助。一些常用的与性能相关的设计模式，组件和设计方法如下:&lt;/p&gt;
-&lt;pre&gt;&lt;cod
     
     </summary>
     
@@ -1002,9 +1015,10 @@ ASM是低级的字节码生成工具，使用ASM已经近乎于在使用Java byt
     <link href="http://blog.edagarli.com/2016/%E5%AE%9E%E7%8E%B0%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E5%8A%9F%E8%83%BD/"/>
     <id>http://blog.edagarli.com/2016/实现依赖注入功能/</id>
     <published>2016-01-22T12:52:00.000Z</published>
-    <updated>2016-03-18T03:50:02.000Z</updated>
+    <updated>2016-03-19T07:42:33.000Z</updated>
     
     <content type="html">&lt;p&gt;对类的实例化，不是开发者自己通过new的方式来实例化，而是通过框架自身来实例化，这过程称为IoC。控制不是由开发者来决定的，而是反转给框架了。一般地，我们也将控制反转称为DI（Dependency Injection，依赖注入）。那如何实现呢？&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;p&gt;最简单的方式是，先通过BeanHelper获取所有Bean Map（是一个Map&lt;class&lt;?&gt;,Object&amp;gt; 结构，纪录了类与对象的映射关系，&lt;br&gt;分别取出Bean类与Bean实例 ，进而通过反射获取类中所有的成员变量。继续遍历这些成员变量，在循环中判断当前成员变量是否带有Inject注解，若带有该注解，则从Bean Map中根据Bean类取出Bean实例。最后通过ReflectionUtil＃setField方法来修改当前成员变量的值。&lt;/class&lt;?&gt;&lt;/p&gt;
 &lt;p&gt;核心实现：&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;Map&amp;lt;Class&amp;lt;?&amp;gt;, Object&amp;gt; beanMap = BeanHelper.getBeanMap();
@@ -1035,7 +1049,6 @@ if (CollectionUtil.isNotEmpty(beanMap)) {
     <summary type="html">
     
       &lt;p&gt;对类的实例化，不是开发者自己通过new的方式来实例化，而是通过框架自身来实例化，这过程称为IoC。控制不是由开发者来决定的，而是反转给框架了。一般地，我们也将控制反转称为DI（Dependency Injection，依赖注入）。那如何实现呢？&lt;/p&gt;
-&lt;p&gt;最简单的方式是
     
     </summary>
     
@@ -1051,9 +1064,10 @@ if (CollectionUtil.isNotEmpty(beanMap)) {
     <link href="http://blog.edagarli.com/2016/%E5%88%9B%E4%B8%9A%E5%85%AC%E5%8F%B8%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E7%AB%AF%E4%BC%98%E5%8C%96%E4%B9%8B%E8%B7%AF/"/>
     <id>http://blog.edagarli.com/2016/创业公司高性能服务端优化之路/</id>
     <published>2016-01-22T07:47:00.000Z</published>
-    <updated>2016-03-18T03:50:02.000Z</updated>
+    <updated>2016-03-19T07:41:45.000Z</updated>
     
     <content type="html">&lt;p&gt;由于业务规模增长极大，在1年左右的时间从零增长到每天近百万单，给后端带来极大的访问压力。压力主要分为两类：读压力、写压力。读压力来源于配送员在APP中抢单，高频刷新查询周围的订单，每天访问量几亿次，高峰期QPS高达数千次/秒。写压力来源于商家发单、接单、取货、完成等操作。业务读的压力远大于写压力，读请求量约是写请求量的30倍以上。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;p&gt;极速增长的业务，对技术的要求越来越高，我们必须在架构上做好充分的准备，才能迎接业务的挑战。接下来，我们一起看看的后台架构是如何演化的。&lt;/p&gt;
 &lt;p&gt;最初的技术选型&lt;/p&gt;
 &lt;p&gt;作为创业公司，最重要的一点是敏捷，快速实现产品，对外提供服务，于是我们选择了公有云服务，保证快速实施和可扩展性，节省了自建机房等时间。在技术选型上，为快速的响应业务需求，业务系统使用python做为开发语言，数据库使用Mysql。&lt;/p&gt;
@@ -1094,7 +1108,7 @@ if (CollectionUtil.isNotEmpty(beanMap)) {
     
     <summary type="html">
     
-      &lt;p&gt;由于业务规模增长极大，在1年左右的时间从零增长到每天近百万单，给后端带来极大的访问压力。压力主要分为两类：读压力、写压力。读压力来源于配送员在APP中抢单，高频刷新查询周围的订单，每天访问量几亿次，高峰期QPS高达数千次/秒。写压力来源于商家发单、接单、取货、完成等操作。业
+      &lt;p&gt;由于业务规模增长极大，在1年左右的时间从零增长到每天近百万单，给后端带来极大的访问压力。压力主要分为两类：读压力、写压力。读压力来源于配送员在APP中抢单，高频刷新查询周围的订单，每天访问量几亿次，高峰期QPS高达数千次/秒。写压力来源于商家发单、接单、取货、完成等操作。业务读的压力远大于写压力，读请求量约是写请求量的30倍以上。&lt;/p&gt;
     
     </summary>
     
@@ -1110,23 +1124,23 @@ if (CollectionUtil.isNotEmpty(beanMap)) {
     <link href="http://blog.edagarli.com/2016/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E4%B9%8BJava%E7%A8%8B%E5%BA%8F%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
     <id>http://blog.edagarli.com/2016/读书笔记之Java程序性能优化/</id>
     <published>2016-01-21T08:16:00.000Z</published>
-    <updated>2016-03-18T03:50:02.000Z</updated>
+    <updated>2016-03-19T11:45:55.000Z</updated>
     
     <content type="html">&lt;p&gt;为了提升系统性能，开发人员可以从系统的各个角度和层次对系统进行优化。除了最常见的代码优化外，在软件架构上，JVM虚拟机层，数据库以及操作系统层面都可以通过各种手段进行调优，从而在整体上提升系统的性能。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;h3 id=&quot;设计调优&quot;&gt;&lt;a href=&quot;#设计调优&quot; class=&quot;headerlink&quot; title=&quot;设计调优&quot;&gt;&lt;/a&gt;设计调优&lt;/h3&gt;&lt;p&gt;   一个良好的系统设计可以规避很多潜在的性能问题。因此，尽可能多花些时间在系统设计上，是创建高性能程序的关键。&lt;/p&gt;
 &lt;h3 id=&quot;代码调优&quot;&gt;&lt;a href=&quot;#代码调优&quot; class=&quot;headerlink&quot; title=&quot;代码调优&quot;&gt;&lt;/a&gt;代码调优&lt;/h3&gt;&lt;p&gt;   好的实现与一个坏的实现对系统的影响也是非常大的。&lt;/p&gt;
 &lt;h3 id=&quot;JVM调优&quot;&gt;&lt;a href=&quot;#JVM调优&quot; class=&quot;headerlink&quot; title=&quot;JVM调优&quot;&gt;&lt;/a&gt;JVM调优&lt;/h3&gt;&lt;p&gt;  对JVM虚拟机进行优化也能在一定程度上提升Java程序的性能。&lt;/p&gt;
 &lt;h3 id=&quot;数据库调优&quot;&gt;&lt;a href=&quot;#数据库调优&quot; class=&quot;headerlink&quot; title=&quot;数据库调优&quot;&gt;&lt;/a&gt;数据库调优&lt;/h3&gt;&lt;p&gt;  在应用层对SQL语句进行优化&lt;/p&gt;
 &lt;p&gt;  对数据库进行优化&lt;/p&gt;
 &lt;p&gt;  对数据库软件进行优化&lt;/p&gt;
-&lt;h3 id=&quot;操作系统&quot;&gt;&lt;a href=&quot;#操作系统&quot; class=&quot;headerlink&quot; title=&quot;操作系统&quot;&gt;&lt;/a&gt;操作系统&lt;/h3&gt;&lt;p&gt;   不同操作系统，调优手段有所区别。    &lt;/p&gt;
+&lt;h3 id=&quot;操作系统&quot;&gt;&lt;a href=&quot;#操作系统&quot; class=&quot;headerlink&quot; title=&quot;操作系统&quot;&gt;&lt;/a&gt;操作系统&lt;/h3&gt;&lt;p&gt;   不同操作系统，调优手段有所区别。&lt;/p&gt;
 &lt;h3 id=&quot;系统优化主意事项&quot;&gt;&lt;a href=&quot;#系统优化主意事项&quot; class=&quot;headerlink&quot; title=&quot;系统优化主意事项&quot;&gt;&lt;/a&gt;系统优化主意事项&lt;/h3&gt;&lt;p&gt;   软件的功能优化虽然能提升软件的性能，但是优化过程往往伴随着一些风险和弊端。性能调优必须有明确的目标，不要为了调优而调优，如果当前程序并没有明显的性能问题，盲目地进行调整，其风险可能远远大于收益。&lt;/p&gt;
 </content>
     
     <summary type="html">
     
       &lt;p&gt;为了提升系统性能，开发人员可以从系统的各个角度和层次对系统进行优化。除了最常见的代码优化外，在软件架构上，JVM虚拟机层，数据库以及操作系统层面都可以通过各种手段进行调优，从而在整体上提升系统的性能。&lt;/p&gt;
-&lt;h3 id=&quot;设计调优&quot;&gt;&lt;a href=&quot;#设计调优&quot; cl
     
     </summary>
     
