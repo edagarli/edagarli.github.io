@@ -10,6 +10,7 @@ date: 2016-01-09 13:24:00
 
 https://github.com/spring-projects/spring-data-redis
 
+<!-- more -->
 
 简单介绍下，Spring-data-redis为spring-data模块中对redis的支持部分，简称为“SDR”，提供了基于jedis客户端API的高度封装以及与spring容器的整合。
 

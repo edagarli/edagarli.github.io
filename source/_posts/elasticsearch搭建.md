@@ -9,6 +9,8 @@ date: 2015-11-03 15:44:00
 
 自己根据之前的rtf版本修改了下，因为elasticsearch1.0版本漏洞太多。
 
+<!-- more -->
+
 elasticsearch 1.3中文发行版，针对中文集成了相关插件，并带有Demo，方便新手学习,或者在生产环境中直接使用
 https://github.com/edagarli/elasticsearch_rtf_1.3
 

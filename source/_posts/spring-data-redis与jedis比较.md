@@ -8,6 +8,8 @@ date: 2016-01-09 11:21:00
 ---
 redis客户端实现方式有两种，一种是直接调用jedis来实现，一种是使用spring data redis,做了一些封装来调用。
 
+<!-- more -->
+
 #spring data redis:
 
 
