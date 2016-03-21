@@ -15,7 +15,7 @@ keywords: [Geeker,Hacker,edagarli,lizhi,李智,技术博客]
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: http://blog.edagarli.com
 root: /
-permalink: :year/:title/
+permalink: :year/:month/:day/:title/
 permalink_defaults:
 
 # Directory
