@@ -1,4 +1,4 @@
-title: React-Native写了个DoubanApp
+title: 每天都实战一个React-Native项目
 tags:
   - React-Native
 categories:
@@ -6,7 +6,9 @@ categories:
   
 ---
 
-A self-taught project to learn React-Native, I made a decision to put my every single day to write React-Native(Day and Day).
+>A self-taught project to learn React-Native, I made a decision to put my every single day to write React-Native(Day and Day).
+
+<!-- more -->
 
 ## Project Index ##
 
