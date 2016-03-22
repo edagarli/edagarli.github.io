@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.edagarli.com/"/>
-  <updated>2016-03-19T11:34:56.000Z</updated>
+  <updated>2016-03-22T09:17:46.000Z</updated>
   <id>http://blog.edagarli.com/</id>
   
   <author>
@@ -14,6 +14,69 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>React-Native写了个DoubanApp</title>
+    <link href="http://blog.edagarli.com/2016/03/22/A%20self-taught%20project%20to%20learn%20React-Native/"/>
+    <id>http://blog.edagarli.com/2016/03/22/A self-taught project to learn React-Native/</id>
+    <published>2016-03-22T09:17:46.000Z</published>
+    <updated>2016-03-22T09:17:46.000Z</updated>
+    
+    <content type="html">&lt;p&gt;A self-taught project to learn React-Native, I made a decision to put my every single day to write React-Native(Day and Day).&lt;/p&gt;
+&lt;h2 id=&quot;Project-Index&quot;&gt;&lt;a href=&quot;#Project-Index&quot; class=&quot;headerlink&quot; title=&quot;Project Index&quot;&gt;&lt;/a&gt;Project Index&lt;/h2&gt;&lt;p&gt;Day 01 - HelloWorld&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/edagarli/ReactNativeDayAndDay/tree/master/Day01HelloWorld&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Project 01: Hello React-Native&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Day 02 - BasicExercises&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/edagarli/ReactNativeDayAndDay/tree/master/Day02BasicExercises&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Project 02: BasicExercises&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Day 03 - Day03LayoutExercises&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/edagarli/ReactNativeDayAndDay/tree/master/Day03LayoutExercises&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Project 03-1: Day03LayoutExercises&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/edagarli/ReactNativeDayAndDay/tree/master/Day03LayoutExercisesTwo&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Project 03-2: Day03LayoutExercisesTwo&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Day 04 - WriteModule&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/edagarli/ReactNativeDayAndDay/tree/master/Day04WriteModule&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Project 04: WriteModule&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Day 05 - AppExercises&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/edagarli/React-Douban/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Project 05: React-Douban&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&quot;/images/douban.gif&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Day 06 - ListViewLoadMore&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/edagarli/ReactNativeDayAndDay/tree/master/Day06ListViewLoadMore&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Project 06: Day06ListViewLoadMore&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&quot;/images/day06.gif&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Day 07 - RefreshableListView&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/edagarli/ReactNativeDayAndDay/tree/master/Day07RefreshableListView&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Project 07: Day07RefreshableListView&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&quot;/images/day07.gif&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;What’s-next&quot;&gt;&lt;a href=&quot;#What’s-next&quot; class=&quot;headerlink&quot; title=&quot;What’s next?&quot;&gt;&lt;/a&gt;What’s next?&lt;/h2&gt;&lt;p&gt;Picture App&lt;/p&gt;
+&lt;h2 id=&quot;License&quot;&gt;&lt;a href=&quot;#License&quot; class=&quot;headerlink&quot; title=&quot;License&quot;&gt;&lt;/a&gt;License&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/edagarli/ReactNativeDayAndDay&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;React Day And Day&lt;/a&gt; is under the MIT license.&lt;/p&gt;
+&lt;h2 id=&quot;contact-me&quot;&gt;&lt;a href=&quot;#contact-me&quot; class=&quot;headerlink&quot; title=&quot;contact me&quot;&gt;&lt;/a&gt;contact me&lt;/h2&gt;&lt;p&gt;Weibo: &lt;a href=&quot;http://weibo.com/edagarli&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;@edagarli&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Twitter &lt;a href=&quot;http://twitter.com/edagarli&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;@edagarli&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Telegram: @edagarli&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;A self-taught project to learn React-Native, I made a decision to put my every single day to write React-Native(Day and Day).&lt;/p&gt;
+&lt;h2 id=
+    
+    </summary>
+    
+      <category term="实践" scheme="http://blog.edagarli.com/categories/%E5%AE%9E%E8%B7%B5/"/>
+    
+    
+      <category term="React-Native" scheme="http://blog.edagarli.com/tags/React-Native/"/>
+    
+  </entry>
   
   <entry>
     <title>React-Native写了个DoubanApp</title>
@@ -1116,38 +1179,6 @@ if (CollectionUtil.isNotEmpty(beanMap)) {
     
     
       <category term="优化" scheme="http://blog.edagarli.com/tags/%E4%BC%98%E5%8C%96/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>读书笔记之Java性能调优概述</title>
-    <link href="http://blog.edagarli.com/2016/01/21/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E4%B9%8BJava%E7%A8%8B%E5%BA%8F%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
-    <id>http://blog.edagarli.com/2016/01/21/读书笔记之Java程序性能优化/</id>
-    <published>2016-01-21T08:16:00.000Z</published>
-    <updated>2016-03-19T11:45:55.000Z</updated>
-    
-    <content type="html">&lt;p&gt;为了提升系统性能，开发人员可以从系统的各个角度和层次对系统进行优化。除了最常见的代码优化外，在软件架构上，JVM虚拟机层，数据库以及操作系统层面都可以通过各种手段进行调优，从而在整体上提升系统的性能。&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;h3 id=&quot;设计调优&quot;&gt;&lt;a href=&quot;#设计调优&quot; class=&quot;headerlink&quot; title=&quot;设计调优&quot;&gt;&lt;/a&gt;设计调优&lt;/h3&gt;&lt;p&gt;   一个良好的系统设计可以规避很多潜在的性能问题。因此，尽可能多花些时间在系统设计上，是创建高性能程序的关键。&lt;/p&gt;
-&lt;h3 id=&quot;代码调优&quot;&gt;&lt;a href=&quot;#代码调优&quot; class=&quot;headerlink&quot; title=&quot;代码调优&quot;&gt;&lt;/a&gt;代码调优&lt;/h3&gt;&lt;p&gt;   好的实现与一个坏的实现对系统的影响也是非常大的。&lt;/p&gt;
-&lt;h3 id=&quot;JVM调优&quot;&gt;&lt;a href=&quot;#JVM调优&quot; class=&quot;headerlink&quot; title=&quot;JVM调优&quot;&gt;&lt;/a&gt;JVM调优&lt;/h3&gt;&lt;p&gt;  对JVM虚拟机进行优化也能在一定程度上提升Java程序的性能。&lt;/p&gt;
-&lt;h3 id=&quot;数据库调优&quot;&gt;&lt;a href=&quot;#数据库调优&quot; class=&quot;headerlink&quot; title=&quot;数据库调优&quot;&gt;&lt;/a&gt;数据库调优&lt;/h3&gt;&lt;p&gt;  在应用层对SQL语句进行优化&lt;/p&gt;
-&lt;p&gt;  对数据库进行优化&lt;/p&gt;
-&lt;p&gt;  对数据库软件进行优化&lt;/p&gt;
-&lt;h3 id=&quot;操作系统&quot;&gt;&lt;a href=&quot;#操作系统&quot; class=&quot;headerlink&quot; title=&quot;操作系统&quot;&gt;&lt;/a&gt;操作系统&lt;/h3&gt;&lt;p&gt;   不同操作系统，调优手段有所区别。&lt;/p&gt;
-&lt;h3 id=&quot;系统优化主意事项&quot;&gt;&lt;a href=&quot;#系统优化主意事项&quot; class=&quot;headerlink&quot; title=&quot;系统优化主意事项&quot;&gt;&lt;/a&gt;系统优化主意事项&lt;/h3&gt;&lt;p&gt;   软件的功能优化虽然能提升软件的性能，但是优化过程往往伴随着一些风险和弊端。性能调优必须有明确的目标，不要为了调优而调优，如果当前程序并没有明显的性能问题，盲目地进行调整，其风险可能远远大于收益。&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;为了提升系统性能，开发人员可以从系统的各个角度和层次对系统进行优化。除了最常见的代码优化外，在软件架构上，JVM虚拟机层，数据库以及操作系统层面都可以通过各种手段进行调优，从而在整体上提升系统的性能。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="读书笔记" scheme="http://blog.edagarli.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="Java调优" scheme="http://blog.edagarli.com/tags/Java%E8%B0%83%E4%BC%98/"/>
     
   </entry>
   
