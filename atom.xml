@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.edagarli.com/"/>
-  <updated>2016-03-22T09:17:46.000Z</updated>
+  <updated>2016-03-22T09:23:34.000Z</updated>
   <id>http://blog.edagarli.com/</id>
   
   <author>
@@ -16,13 +16,16 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>React-Native写了个DoubanApp</title>
+    <title>每天都实战一个React-Native项目</title>
     <link href="http://blog.edagarli.com/2016/03/22/A%20self-taught%20project%20to%20learn%20React-Native/"/>
     <id>http://blog.edagarli.com/2016/03/22/A self-taught project to learn React-Native/</id>
-    <published>2016-03-22T09:17:46.000Z</published>
-    <updated>2016-03-22T09:17:46.000Z</updated>
+    <published>2016-03-22T09:23:34.000Z</published>
+    <updated>2016-03-22T09:23:34.000Z</updated>
     
-    <content type="html">&lt;p&gt;A self-taught project to learn React-Native, I made a decision to put my every single day to write React-Native(Day and Day).&lt;/p&gt;
+    <content type="html">&lt;blockquote&gt;
+&lt;p&gt;A self-taught project to learn React-Native, I made a decision to put my every single day to write React-Native(Day and Day).&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;h2 id=&quot;Project-Index&quot;&gt;&lt;a href=&quot;#Project-Index&quot; class=&quot;headerlink&quot; title=&quot;Project Index&quot;&gt;&lt;/a&gt;Project Index&lt;/h2&gt;&lt;p&gt;Day 01 - HelloWorld&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/edagarli/ReactNativeDayAndDay/tree/master/Day01HelloWorld&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Project 01: Hello React-Native&lt;/a&gt;&lt;/li&gt;
@@ -66,8 +69,9 @@
     
     <summary type="html">
     
-      &lt;p&gt;A self-taught project to learn React-Native, I made a decision to put my every single day to write React-Native(Day and Day).&lt;/p&gt;
-&lt;h2 id=
+      &lt;blockquote&gt;
+&lt;p&gt;A self-taught project to learn React-Native, I made a decision to put my every single day to write React-Native(Day and Day).&lt;/p&gt;
+&lt;/blockquote&gt;
     
     </summary>
     
@@ -890,9 +894,9 @@ javac -J-agentlib:hprof=heap=sites Hello.java
       <category term="案例" scheme="http://blog.edagarli.com/categories/%E6%A1%88%E4%BE%8B/"/>
     
     
-      <category term="案例" scheme="http://blog.edagarli.com/tags/%E6%A1%88%E4%BE%8B/"/>
-    
       <category term="Redis" scheme="http://blog.edagarli.com/tags/Redis/"/>
+    
+      <category term="案例" scheme="http://blog.edagarli.com/tags/%E6%A1%88%E4%BE%8B/"/>
     
       <category term="架构" scheme="http://blog.edagarli.com/tags/%E6%9E%B6%E6%9E%84/"/>
     

@@ -34,7 +34,7 @@
 <p>在数据库层面实现伸缩，方法很多，文档也很多，此处不做过多赘述。大致方法为：水平拆分、垂直拆分和定期滚动。</p>
 <p>总之，我们可以在入口层、业务层面、缓存层和数据库层四个层面，使用刚才介绍的方法和技术实现系统高可用和可伸缩性。具体为：在入口层用心跳来做到高可用，用平行部署来伸缩；在业务层做到服务无状态；在缓存层，可以减小一些粒度，以方便实现高可用，使用一致性Hash将有助于实现缓存层的伸缩性；数据库层的主从模式能解决高可用问题，拆分和滚动能解决可伸缩问题。</p>
 <p>本文中分享的这些技巧和方法，主要想帮助不太复杂的业务场景或者中小型应用快速搭建起高可用可伸缩的系统。关于如何构建高可用和可伸缩系统还有很多更为细节的点和实践经验值得探讨，望以后能与大家做更充分的交流。</p>
-</div></article></div></section><footer><div class="paginator"><a href="/2016/01/17/谈谈赚钱的事与值钱的事/" class="prev">上一篇</a><a href="/2016/01/09/spring-data-redis源码分析/" class="next">下一篇</a></div><div data-thread-key="2016/01/17/高可用可伸缩架构实用经验谈/" data-title="高可用可伸缩架构实用经验谈" data-url="http://blog.edagarli.com/2016/01/17/高可用可伸缩架构实用经验谈/" data-author-key="1" class="ds-thread"></div><script>var duoshuoQuery = {short_name:"edagarli"};
+</div></article></div></section><footer><div class="paginator"><a href="/2016/01/17/谈谈赚钱的事与值钱的事/" class="prev">PRVE</a><a href="/2016/01/09/spring-data-redis源码分析/" class="next">NEXT</a></div><div data-thread-key="2016/01/17/高可用可伸缩架构实用经验谈/" data-title="高可用可伸缩架构实用经验谈" data-url="http://blog.edagarli.com/2016/01/17/高可用可伸缩架构实用经验谈/" data-author-key="1" class="ds-thread"></div><script>var duoshuoQuery = {short_name:"edagarli"};
 (function() {
     var ds = document.createElement('script');
     ds.type = 'text/javascript';ds.async = true;
