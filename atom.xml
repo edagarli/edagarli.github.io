@@ -987,9 +987,9 @@ javac -J-agentlib:hprof=heap=sites Hello.java
       <category term="案例" scheme="http://blog.edagarli.com/categories/%E6%A1%88%E4%BE%8B/"/>
     
     
-      <category term="Redis" scheme="http://blog.edagarli.com/tags/Redis/"/>
-    
       <category term="案例" scheme="http://blog.edagarli.com/tags/%E6%A1%88%E4%BE%8B/"/>
+    
+      <category term="Redis" scheme="http://blog.edagarli.com/tags/Redis/"/>
     
       <category term="架构" scheme="http://blog.edagarli.com/tags/%E6%9E%B6%E6%9E%84/"/>
     
