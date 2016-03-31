@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.edagarli.com/"/>
-  <updated>2016-03-30T13:56:31.000Z</updated>
+  <updated>2016-03-31T17:32:51.000Z</updated>
   <id>http://blog.edagarli.com/</id>
   
   <author>
@@ -14,6 +14,42 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>创业就像是玩LOL游戏</title>
+    <link href="http://blog.edagarli.com/2016/04/01/%E5%88%9B%E4%B8%9A%E5%B0%B1%E5%83%8F%E6%98%AF%E7%8E%A9LOL%E6%B8%B8%E6%88%8F/"/>
+    <id>http://blog.edagarli.com/2016/04/01/创业就像是玩LOL游戏/</id>
+    <published>2016-03-31T17:32:51.000Z</published>
+    <updated>2016-03-31T17:32:51.000Z</updated>
+    
+    <content type="html">&lt;p&gt;我想很多人都玩过LOL游戏。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;p&gt;刚开始玩的时候，可能你觉得LOL还是需要点运气的，因为你匹配到的队友太坑了，导致你直接输掉比赛。&lt;/p&gt;
+&lt;p&gt;但是要不了多久，你就会发现，就算你队友不坑，当你一旦跟高手对阵，当对手观察过、练习过、深思熟虑过。你几乎每盘都会输。事实上，开局不久之后你就会发现自己处于难以翻盘的局面。遇到这种情况，我一般选择20投。&lt;/p&gt;
+&lt;p&gt;结果你会发现，LOL远不只是个靠运气的游戏。要玩得好，你需要练习，学习，需要计算（大招用了没，闪现交了没，TP还没有没，等等），需要付出努力，也需要更多经验意识（比如插眼）。&lt;/p&gt;
+&lt;p&gt;你也许已经看出我想说的了：创业的过程也是这样，什么东西都需要你去学习。 &lt;/p&gt;
+&lt;p&gt;在LOL里，哪怕是个菜鸟，只要你每周花点时间练习，只要资质不是太差，你必定能在很短的时间内逐步提高，或者至少能摆脱一直被虐的局面（以我个人的经验来看）。&lt;/p&gt;
+&lt;p&gt;但是对于创业公司来说，哪怕是那些已经做得有声有色的项目，都没有这样的 “必定”。哪怕之前有过成功经验也无法保证什么，市场是瞬息万变的（曾经B轮拿到3000万美元融资的蜜淘，最近还不是倒闭了) 。&lt;/p&gt;
+&lt;p&gt;创业是漫长的过程，就像游戏一样，需要你好好去运营，面对未知的变化。比如：突如其来的打野gank。可能今天融资是重点，明天忙着招聘面试，后天又要为租办公室搞得焦头烂额。&lt;/p&gt;
+&lt;p&gt;LOL比赛中有很多套路。比如：传送门加号令之旗。这些都是从对战中研究出来的。创业的世界里，也一样，各种方法论简直满地都是。我听过 “别要太多钱，够用就好” 和 “能拿的钱就拿”，或者 “你要么成功要么烧光钱最后失败，不管结果是哪种，你都不用担心股权稀释” 和 “如果你不小心，到最后会被稀释出自己的公司”，以及 “初创期间，你本人是你能请得起的最好的员工” 和 “在早期唯一值得花钱的事情是创始团队以外的人才引进”。最后还有 “公司地点在哪里无所谓” 和 “如果你不把公司开在一线城市，没人会愿意为你工作” 之类的，等等等等。&lt;/p&gt;
+&lt;p&gt;LOL比赛最后谁能获胜？这真看不出来，只能说相对有优势。除了避免犯错，努力点。创业者还能做什么？鸡汤和方法论很多，但很多都相互矛盾。真正的“创业大师”是不存在的。几乎所有成功的创业者都会告诉你，他们一路走来，运气是多么重要。&lt;/p&gt;
+&lt;p&gt;换个角度看待你身边的每件事，你会发现不一样。&lt;/p&gt;
+&lt;p&gt;##contact me&lt;/p&gt;
+&lt;p&gt;Weibo: &lt;a href=&quot;http://weibo.com/edagarli&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;@edagarli&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;我想很多人都玩过LOL游戏。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="闲谈" scheme="http://blog.edagarli.com/categories/%E9%97%B2%E8%B0%88/"/>
+    
+    
+      <category term="创业" scheme="http://blog.edagarli.com/tags/%E5%88%9B%E4%B8%9A/"/>
+    
+  </entry>
   
   <entry>
     <title>为什么我们擅长模仿而不善于创造</title>
@@ -1030,9 +1066,9 @@ javac -J-agentlib:hprof=heap=sites Hello.java
       <category term="案例" scheme="http://blog.edagarli.com/categories/%E6%A1%88%E4%BE%8B/"/>
     
     
-      <category term="案例" scheme="http://blog.edagarli.com/tags/%E6%A1%88%E4%BE%8B/"/>
-    
       <category term="Redis" scheme="http://blog.edagarli.com/tags/Redis/"/>
+    
+      <category term="案例" scheme="http://blog.edagarli.com/tags/%E6%A1%88%E4%BE%8B/"/>
     
       <category term="架构" scheme="http://blog.edagarli.com/tags/%E6%9E%B6%E6%9E%84/"/>
     
@@ -1174,42 +1210,6 @@ ASM是低级的字节码生成工具，使用ASM已经近乎于在使用Java byt
     
     
       <category term="单例模式" scheme="http://blog.edagarli.com/tags/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>设计优化之笔记</title>
-    <link href="http://blog.edagarli.com/2016/01/23/%E8%AE%BE%E8%AE%A1%E4%BC%98%E5%8C%96%E4%B9%8B%E7%AC%94%E8%AE%B0/"/>
-    <id>http://blog.edagarli.com/2016/01/23/设计优化之笔记/</id>
-    <published>2016-01-23T09:06:00.000Z</published>
-    <updated>2016-03-19T07:42:55.000Z</updated>
-    
-    <content type="html">&lt;p&gt;软件的结构对系统整体性能有着重要的影响。优秀的设计结构可以规避很多潜在的性能问题，对系统性能的影响可能远远大于代码的优化。因此，熟悉一些常用的软件设计模式和方法，对设计高性能软件有着重要的帮助。一些常用的与性能相关的设计模式，组件和设计方法如下:&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;pre&gt;&lt;code&gt;单列模式的使用和实现
-   代理模式的实现和深入
-   享元模式的应用
-   装饰者模式对性能组件的封装
-   观察者模式的使用
-   使用Value Object 模式减少网络数据传输
-   使用业务代理模式添加远程调用缓存
-   缓冲和缓存的定义和使用
-   对象池的使用场景及其基本实现
-   构建负载均衡系统以及Terracotta框架的简单使用
-   时间换空间和空间换时间的基本思路
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt; 之后打算对单独每一点分别写深入分析的一篇文章。&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;软件的结构对系统整体性能有着重要的影响。优秀的设计结构可以规避很多潜在的性能问题，对系统性能的影响可能远远大于代码的优化。因此，熟悉一些常用的软件设计模式和方法，对设计高性能软件有着重要的帮助。一些常用的与性能相关的设计模式，组件和设计方法如下:&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="读书笔记" scheme="http://blog.edagarli.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="优化" scheme="http://blog.edagarli.com/tags/%E4%BC%98%E5%8C%96/"/>
     
   </entry>
   
