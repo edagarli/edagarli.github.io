@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.edagarli.com/"/>
-  <updated>2016-04-04T07:17:19.000Z</updated>
+  <updated>2016-04-04T07:19:22.000Z</updated>
   <id>http://blog.edagarli.com/</id>
   
   <author>
@@ -19,8 +19,8 @@
     <title>调用超时监控组件开源</title>
     <link href="http://blog.edagarli.com/2016/04/04/%E8%B0%83%E7%94%A8%E8%B6%85%E6%97%B6%E7%9B%91%E6%8E%A7%E7%BB%84%E4%BB%B6%E5%BC%80%E6%BA%90/"/>
     <id>http://blog.edagarli.com/2016/04/04/调用超时监控组件开源/</id>
-    <published>2016-04-04T07:17:19.000Z</published>
-    <updated>2016-04-04T07:17:19.000Z</updated>
+    <published>2016-04-04T07:19:22.000Z</published>
+    <updated>2016-04-04T07:19:22.000Z</updated>
     
     <content type="html">&lt;blockquote&gt;
 &lt;p&gt;调用超时监控组件( &lt;a href=&quot;https://github.com/2-dfire/twodfire-monitor&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/2-dfire/twodfire-monitor&lt;/a&gt; )&lt;br&gt;这是我公司内部使用的超时监控组件，现在开源出来。对于中小型企业来说，已经完全满足了。&lt;/p&gt;
@@ -33,6 +33,7 @@
 &lt;/ul&gt;
 &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;bean id=&amp;quot;monitorAround&amp;quot; class=&amp;quot;com.twodfire.timerMonitor.monitor.MonitorAround&amp;quot;&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;lt;property name=&amp;quot;maxTime&amp;quot; value=&amp;quot;300&amp;quot;/&amp;gt;&amp;lt;!-- 最大的超时时间--&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;/bean&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;aop:config&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;aop:aspect id=&amp;quot;testAspect&amp;quot; ref=&amp;quot;monitorAround&amp;quot;&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;lt;aop:pointcut id=&amp;quot;timeMonitorPointcut&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                  expression=&amp;quot;execution(* *..service*..*(..))&amp;quot;/&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;lt;aop:around pointcut-ref=&amp;quot;timeMonitorPointcut&amp;quot; method=&amp;quot;watchPerformance&amp;quot;/&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;/aop:aspect&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;/aop:config&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;h2 id=&quot;示例&quot;&gt;&lt;a href=&quot;#示例&quot; class=&quot;headerlink&quot; title=&quot;示例&quot;&gt;&lt;/a&gt;示例&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/edagarli/monitor-example/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/edagarli/monitor-example/&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;contact-me&quot;&gt;&lt;a href=&quot;#contact-me&quot; class=&quot;headerlink&quot; title=&quot;contact me&quot;&gt;&lt;/a&gt;contact me&lt;/h2&gt;&lt;p&gt;Weibo: &lt;a href=&quot;http://weibo.com/edagarli&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;@edagarli&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&quot;开源协议&quot;&gt;&lt;a href=&quot;#开源协议&quot; class=&quot;headerlink&quot; title=&quot;开源协议&quot;&gt;&lt;/a&gt;开源协议&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/2-dfire/twodfire-monitor/blob/master/LICENSE&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;MIT&lt;/a&gt;&lt;/p&gt;
 </content>
     
@@ -1106,9 +1107,9 @@ javac -J-agentlib:hprof=heap=sites Hello.java
       <category term="案例" scheme="http://blog.edagarli.com/categories/%E6%A1%88%E4%BE%8B/"/>
     
     
-      <category term="Redis" scheme="http://blog.edagarli.com/tags/Redis/"/>
-    
       <category term="案例" scheme="http://blog.edagarli.com/tags/%E6%A1%88%E4%BE%8B/"/>
+    
+      <category term="Redis" scheme="http://blog.edagarli.com/tags/Redis/"/>
     
       <category term="架构" scheme="http://blog.edagarli.com/tags/%E6%9E%B6%E6%9E%84/"/>
     
