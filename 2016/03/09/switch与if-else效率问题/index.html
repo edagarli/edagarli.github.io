@@ -85,7 +85,7 @@ switch_eg:
 </code></pre><p>在上面的汇编代码中我们可以很清楚的看到switch部分被分配了一个连续的查找表，switch case中不连续的部分也被添加上了相应的条目，switch表的大小不是根据case语句的多少，而是case的最大值的最小值之间的间距。在选择相应 的分支时，会先有一个cmp子句，如果大于查找表的最大值，则跳转到default子句。而其他所有的case语句的耗时都回事O(1)。</p>
 <p>相比于if-else结构，switch的效率绝对是要高很多的，但是switch使用查找表的方式决定了case的条件必须是一个连续的常量。而if-else则可以灵活的多。</p>
 <p>可以看到if-else只是单纯地一个接一个比较，效率比较低<br>可以看出，switch的效率一般比if-else高<br>switch   效率高,     从汇编代码可以看出来<br>switch   只计算一次值   然后都是test   ,   jmp,<br>if…else   是每个条件都要计算一遍的.<br>switch的效率与分支数无关<br>当只有分支比较少的时候，if效率比switch高（因为switch有跳转表）<br>分支比较多，那当然是switch</p>
-</div></article></div></section><footer><div class="paginator"><a href="/2016/03/17/React-Native写了个DoubanApp/" class="prev">PRVE</a><a href="/2016/03/07/如何解决消息发送一致性/" class="next">NEXT</a></div><div data-thread-key="2016/03/09/switch与if-else效率问题/" data-title="switch与if-else效率问题" data-url="http://blog.edagarli.com/2016/03/09/switch与if-else效率问题/" data-author-key="1" class="ds-thread"></div><script>var duoshuoQuery = {short_name:"edagarli"};
+</div></article></div></section><footer><div class="paginator"><a href="/2016/03/17/React-Native写了个DoubanApp/" class="prev">上一篇</a><a href="/2016/03/07/如何解决消息发送一致性/" class="next">下一篇</a></div><div data-thread-key="2016/03/09/switch与if-else效率问题/" data-title="switch与if-else效率问题" data-url="http://blog.edagarli.com/2016/03/09/switch与if-else效率问题/" data-author-key="1" class="ds-thread"></div><script>var duoshuoQuery = {short_name:"edagarli"};
 (function() {
     var ds = document.createElement('script');
     ds.type = 'text/javascript';ds.async = true;
