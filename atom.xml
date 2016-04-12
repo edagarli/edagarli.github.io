@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.edagarli.com/"/>
-  <updated>2016-04-04T07:19:22.000Z</updated>
+  <updated>2016-04-12T15:20:12.000Z</updated>
   <id>http://blog.edagarli.com/</id>
   
   <author>
@@ -14,6 +14,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>我的经历</title>
+    <link href="http://blog.edagarli.com/2016/04/12/%E6%88%91%E7%9A%84%E7%BB%8F%E5%8E%86/"/>
+    <id>http://blog.edagarli.com/2016/04/12/我的经历/</id>
+    <published>2016-04-12T15:20:12.000Z</published>
+    <updated>2016-04-12T15:20:12.000Z</updated>
+    
+    <content type="html">&lt;p&gt;前段时间,很多人问我技术经历.最近正好被记者采访自己的技术经历,他写了文章, 发布出来.我正好借用下.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://t.cn/RqxsgzI&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://t.cn/RqxsgzI&lt;/a&gt;&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;前段时间,很多人问我技术经历.最近正好被记者采访自己的技术经历,他写了文章, 发布出来.我正好借用下.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://t.cn/RqxsgzI&quot;&gt;http://t.cn/RqxsgzI&lt;/a&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="随笔" scheme="http://blog.edagarli.com/categories/%E9%9A%8F%E7%AC%94/"/>
+    
+    
+      <category term="经历" scheme="http://blog.edagarli.com/tags/%E7%BB%8F%E5%8E%86/"/>
+    
+  </entry>
   
   <entry>
     <title>调用超时监控组件开源</title>
@@ -1107,9 +1132,9 @@ javac -J-agentlib:hprof=heap=sites Hello.java
       <category term="案例" scheme="http://blog.edagarli.com/categories/%E6%A1%88%E4%BE%8B/"/>
     
     
-      <category term="案例" scheme="http://blog.edagarli.com/tags/%E6%A1%88%E4%BE%8B/"/>
-    
       <category term="Redis" scheme="http://blog.edagarli.com/tags/Redis/"/>
+    
+      <category term="案例" scheme="http://blog.edagarli.com/tags/%E6%A1%88%E4%BE%8B/"/>
     
       <category term="架构" scheme="http://blog.edagarli.com/tags/%E6%9E%B6%E6%9E%84/"/>
     
@@ -1147,43 +1172,6 @@ javac -J-agentlib:hprof=heap=sites Hello.java
     
     
       <category term="框架" scheme="http://blog.edagarli.com/tags/%E6%A1%86%E6%9E%B6/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>代理模式几种实现性能比较</title>
-    <link href="http://blog.edagarli.com/2016/01/25/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E4%B9%8B%E4%BC%98%E5%8C%96/"/>
-    <id>http://blog.edagarli.com/2016/01/25/代理模式之优化/</id>
-    <published>2016-01-25T02:27:00.000Z</published>
-    <updated>2016-03-19T07:41:31.000Z</updated>
-    
-    <content type="html">&lt;p&gt;代理模式的意图很多，比如：安全原因，远程调用等。这里主要讨论使用代理模式实现延迟加载，从而提升系统的性能和反应速度。&lt;/p&gt;
-&lt;p&gt;延迟加载的核心思想是：如果当前并没有使用这个组件，则不需要真正地初始化它，使用一个代理对象替代它的原有的位置，只要在真正需要使用的时候，才对它进行加载。&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;h2 id=&quot;代理模式的实现和使用&quot;&gt;&lt;a href=&quot;#代理模式的实现和使用&quot; class=&quot;headerlink&quot; title=&quot;代理模式的实现和使用&quot;&gt;&lt;/a&gt;代理模式的实现和使用&lt;/h2&gt;&lt;p&gt;代理分为几种&lt;/p&gt;
-&lt;p&gt;静态代理&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;为每一个代理写一个方法，其实是挺烦的。接口有变动，真实主题与代理类都要修改。
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;动态代理&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;解决了上面问题，同时可以在运行时指定代理类的执行逻辑，从而大大提升系统的灵活性。
-动态代理又分JDK自带的动态代理，CGLIB，Javassist或者ASM库。
-ASM是低级的字节码生成工具，使用ASM已经近乎于在使用Java bytecode编程，对开发人员要求更高，当然也是性能最好的一种动态代理生成工具。但ASM的使用是在过于繁锁，而且性能也没有数量级的提升，与CGLIB等高级字节码生成工具相比，ASM程序的维护性也较差，如果不是在对性能有苛刻要求的场合，建议还是使用CGLIB或Javassist
-
-
-实际测试中，JDK的动态类创建过程很快，这是因为在这个内置实现中defineClass（）方法被定义为native实现，故性能高于其它几种实现。但在代理类的函数调用性能上，JDK的动态代理就不如CGLIB和Javassist的基于动态代理的代理。
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;如果觉得还不错，赏点酒钱！&lt;br&gt;&lt;img src=&quot;/images/aex068188cqwy9xbxa3oc07.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;代理模式的意图很多，比如：安全原因，远程调用等。这里主要讨论使用代理模式实现延迟加载，从而提升系统的性能和反应速度。&lt;/p&gt;
-&lt;p&gt;延迟加载的核心思想是：如果当前并没有使用这个组件，则不需要真正地初始化它，使用一个代理对象替代它的原有的位置，只要在真正需要使用的时候，才对它进行加载。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="读书笔记" scheme="http://blog.edagarli.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="代理模式" scheme="http://blog.edagarli.com/tags/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/"/>
     
   </entry>
   
