@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.edagarli.com/"/>
-  <updated>2016-04-12T16:53:33.000Z</updated>
+  <updated>2016-04-12T17:13:49.000Z</updated>
   <id>http://blog.edagarli.com/</id>
   
   <author>
@@ -19,17 +19,31 @@
     <title>我的经历</title>
     <link href="http://blog.edagarli.com/2016/04/13/%E6%88%91%E7%9A%84%E7%BB%8F%E5%8E%86/"/>
     <id>http://blog.edagarli.com/2016/04/13/我的经历/</id>
-    <published>2016-04-12T16:53:33.000Z</published>
-    <updated>2016-04-12T16:53:33.000Z</updated>
+    <published>2016-04-12T17:13:49.000Z</published>
+    <updated>2016-04-12T17:13:49.000Z</updated>
     
     <content type="html">&lt;p&gt;前段时间,有些人问我技术经历.自己最近正好被记者采访.我正好借用下他发布的文章.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://t.cn/RqxsgzI&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://t.cn/RqxsgzI&lt;/a&gt;&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;</content>
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;p&gt;李智，男，24岁，现为二维火研发团队成员。鄱阳湖边长大的他，鬓发不输谢霆锋，清秀堪比宋仲基。可这样的小鲜肉，花名却叫“卤肉”。&lt;/p&gt;
+&lt;p&gt;跟大多数宅男程序猿相比，李智算是比较外向的。“我以前也很宅，是个闷葫芦，但后来经常逛社区，与人打交道多了，慢慢就变得外向。”混segmentfault，闯Hackathon（编程马拉松，又译为黑客松），怀着一颗不安分的心，他一直想做一款伟大的产品。&lt;/p&gt;
+&lt;p&gt;▲李智&lt;br&gt;休学创业&lt;br&gt;一举拿下IDG创业大赛第一名&lt;/p&gt;
+&lt;p&gt;一切源于兴趣。“高中那会儿，流行木马盗QQ等，感觉一个木马就能控制别人电脑很牛。”出于对网络安全的兴趣，高三毕业之后的那个暑假，他就开始自学计算机技术。上大学时，他开始系统学习编程。&lt;/p&gt;
+&lt;p&gt;学计算机的同学通常分为两拨：一拨沉迷于游戏，一拨热衷于开发产品，李智属于后者。他把大多数课余时间都花在了学习和做产品上。&lt;/p&gt;
+&lt;p&gt;在父母的计划中，他该安安分分读完本科，考个研究生，然后教书或继续做研究。但不安分的他，2012年看了“硅谷传奇”、“乔布斯传”等几部电影之后，萌生了休学创业的想法。“休学之前斗争了三个月。一开始，父母不理解，学校也坚决反对。后来，我先说服了父母，由父母去跟学校沟通。”&lt;/p&gt;
+&lt;p&gt;李智休学后，就走上了创业路。他跟几个90后极客小伙伴一起搞了个工作室，大家在一起做自己喜欢做的事。2012年，他们的团队在IDG创业大赛上一举夺魁，获得了15万元的奖金，并获得了投资人青睐，成功融资100万元。他注册成立了公司，决定做一款浏览器。但由于团队整体运营能力偏弱，做这款产品的时机也不是很对，公司经营情况并不理想。后来，李智因为种种原因离开了公司。&lt;/p&gt;
+&lt;p&gt;2014年，李智通过缘创派平台寻找合伙人创业过程中结识了新的小伙伴，又开始了新的创业。作为团队技术合伙人，李智负责产品开发任务。“我们一开始做‘打分吧’，一款服装搭配指导的社交APP，后来又升级为‘私搭’，但总感觉还没有抓住核心。后来，公司资金链出了问题，团队就解散了。”之后，李智加入二维火，一直从事研发工作至今。&lt;/p&gt;
+&lt;p&gt;混社区、爱开源、爱“跑马”&lt;br&gt;一直在为做好产品做准备&lt;/p&gt;
+&lt;p&gt;连续创业多年来，李智觉得自己是在实践中摸爬滚打过来，基本上什么坑都走过了。“我的最终目的依然是做一款好产品。让所有人都用自己做的产品是不是很爽？”所以，他长年混迹“segmentfault”、“v2ex”等社区，喜欢写博客开源，还经常参加Hackathon。“我一直都在为自己的梦想做准备。”&lt;/p&gt;
+&lt;p&gt;在交流论坛上，李智主要在技术交流板块回答提问。他觉得，回答问题也是一个梳理技术的过程，能巩固技术，还能在上面发现一些新的问题，在以后的实践过程中就有效地避免类似的坑。“曾经一天之内在‘segmentfault’上回答了十多个问题，获得200多声望点，这个数字算是比较高的了。”&lt;/p&gt;
+&lt;p&gt;除了混社区，他也喜欢写博客开源，架构开源、产品开源，让大家一起学习探讨，在探讨中提升自己的技术。“我很大一部分技术方面的提高都是在开源中获得的。”他说，“我曾做了一个小插件‘github’，帮别人快速搜索定位代码的。开源之后，别人发现了BUG，觉得代码不优美，使用也不太方便，我就不断去改进完善。这样一来，以后做产品的时候考虑问题也更全面了。”&lt;/p&gt;
+&lt;p&gt;有空时，他也经常参加Hackathon，乐在其中。一般都是周末的两天时间，周六上午讲解一下，下午开始做，晚上熬通宵，到周日上午把产品做出来，下午由大牛进行评论。他觉得，这样的活动好处巨大，完善自己的技术，增加人脉，增加自己想法和产品的曝光度，一举多得。&lt;/p&gt;
+&lt;p&gt;到现在为止，李智已经做了不少产品，包括“打分吧”、“私搭”、“易停车”等。“虽然‘让所有人都用自己做的产品’的梦想还未实现，但我一直在探索中逐渐接近这个梦想。”&lt;/p&gt;
+&lt;p&gt;他发布文章的原文链接：&lt;a href=&quot;http://t.cn/RqxsgzI&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://t.cn/RqxsgzI&lt;/a&gt;&lt;/p&gt;
+</content>
     
     <summary type="html">
     
       &lt;p&gt;前段时间,有些人问我技术经历.自己最近正好被记者采访.我正好借用下他发布的文章.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://t.cn/RqxsgzI&quot;&gt;http://t.cn/RqxsgzI&lt;/a&gt;&lt;/p&gt;
     
     </summary>
     
@@ -1057,9 +1071,9 @@ javac -J-agentlib:hprof=heap=sites Hello.java
       <category term="读书笔记" scheme="http://blog.edagarli.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
     
     
-      <category term="HBase" scheme="http://blog.edagarli.com/tags/HBase/"/>
-    
       <category term="读书笔记" scheme="http://blog.edagarli.com/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="HBase" scheme="http://blog.edagarli.com/tags/HBase/"/>
     
   </entry>
   
@@ -1132,9 +1146,9 @@ javac -J-agentlib:hprof=heap=sites Hello.java
       <category term="案例" scheme="http://blog.edagarli.com/categories/%E6%A1%88%E4%BE%8B/"/>
     
     
-      <category term="Redis" scheme="http://blog.edagarli.com/tags/Redis/"/>
-    
       <category term="案例" scheme="http://blog.edagarli.com/tags/%E6%A1%88%E4%BE%8B/"/>
+    
+      <category term="Redis" scheme="http://blog.edagarli.com/tags/Redis/"/>
     
       <category term="架构" scheme="http://blog.edagarli.com/tags/%E6%9E%B6%E6%9E%84/"/>
     
