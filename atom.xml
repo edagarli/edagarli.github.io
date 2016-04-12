@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.edagarli.com/"/>
-  <updated>2016-04-12T17:13:49.000Z</updated>
+  <updated>2016-04-12T17:21:42.000Z</updated>
   <id>http://blog.edagarli.com/</id>
   
   <author>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>我的经历</title>
+    <title>混segmentfault 闯Hackathon 一心要做一款伟大产品的攻城狮</title>
     <link href="http://blog.edagarli.com/2016/04/13/%E6%88%91%E7%9A%84%E7%BB%8F%E5%8E%86/"/>
     <id>http://blog.edagarli.com/2016/04/13/我的经历/</id>
-    <published>2016-04-12T17:13:49.000Z</published>
-    <updated>2016-04-12T17:13:49.000Z</updated>
+    <published>2016-04-12T17:21:42.000Z</published>
+    <updated>2016-04-12T17:21:42.000Z</updated>
     
     <content type="html">&lt;p&gt;前段时间,有些人问我技术经历.自己最近正好被记者采访.我正好借用下他发布的文章.&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
@@ -1146,9 +1146,9 @@ javac -J-agentlib:hprof=heap=sites Hello.java
       <category term="案例" scheme="http://blog.edagarli.com/categories/%E6%A1%88%E4%BE%8B/"/>
     
     
-      <category term="案例" scheme="http://blog.edagarli.com/tags/%E6%A1%88%E4%BE%8B/"/>
-    
       <category term="Redis" scheme="http://blog.edagarli.com/tags/Redis/"/>
+    
+      <category term="案例" scheme="http://blog.edagarli.com/tags/%E6%A1%88%E4%BE%8B/"/>
     
       <category term="架构" scheme="http://blog.edagarli.com/tags/%E6%9E%B6%E6%9E%84/"/>
     
