@@ -1,0 +1,61 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Nginx命令行配置 · Edagarli's Blog</title><meta name="description" content="Nginx命令行配置 - Edagarli"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="short icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" type="text/css"></head><body><header><a href="/" class="logo-link"><img src="/favicon.png"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/edagarli" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/edagarli" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="http://t.cn/RqJwVLs" target="_blank" class="nav-list-link">EXPERIENCE</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><section class="container"><div class="post"><article class="post-block"><h1 class="post-title">Nginx命令行配置</h1><div class="post-time">2016年6月8日</div><div class="post-content"><p>接下来,会记录下Nginx从基本到深入的一些东西.</p>
+<p>在linux中，需要使用命令来控制Nginx服务器的启动与停止，重载配置文件，回滚日志文件，平滑升级等行为。</p>
+<a id="more"></a>
+<p>1)默认启动方式</p>
+<pre><code>／usr/local/nginx/sbin/nginx
+这时，会读取默认路径下的配置文件: /usr/local/nginx/conf/nginx.conf
+</code></pre><p>2)指定配置文件的启动方式</p>
+<pre><code>/usr/local/nginx/sbin/nginx -c /tmp/nginx.conf
+</code></pre><p>3)指定安装目录</p>
+<pre><code>/usr/local/nginx/sbin/nginx -p /usr/local/nginx
+</code></pre><p>4)全局配置项的启动方式</p>
+<pre><code> /usr/local/nginx/sbin/nginx -g &quot;pid /var/nginx/test.pid&quot;
+ -g参数约束的条件是指定的配置项不能与默认路径下的nginx.conf配置项冲突。
+ -g启动的Nginx服务执行其他命令时，需要把－g参数也带上，否则可能出现配置项不匹配的情形。
+比如：/usr/local/nginx/sbin/nginx -g &quot;pid /var/nginx/test.pid;&quot; -s stop
+</code></pre><p>5)测试配置信息是否有错误</p>
+<pre><code>/usr/local/nginx/sbin/nginx -t
+</code></pre><p>6)在测试配置阶段不输出信息</p>
+<pre><code>/usr/local/nginx/sbin/nginx -t -q
+</code></pre><p>7)显示版本信息</p>
+<pre><code>/usr/local/nginx/sbin/nginx -v
+</code></pre><p>8)显示编译阶段的参数</p>
+<pre><code>/usr/local/nginx/sbin/nginx -V
+</code></pre><p>9)快速地停止服务</p>
+<pre><code>/usr/local/nginx/sbin/nginx -s stop
+－s参数其实是告诉Nginx程序向正在运行的Nginx服务发送信号量，Nginx程序通过Nginx.pid文件中得到master进程的进程ID，再向运行中的master进程发送TREM信号来快速地关闭Nginx服务。
+ps -ef | grep nginx
+kill -s SIGTERM port或kill -s SIGINT port
+其实得到的效果与-s stop一样的
+</code></pre><p>10) 优雅的停止服务</p>
+<pre><code>处理完当前所有请求再停止服务
+/usr/local/nginx/sbin/nginx -s quit
+或kill -s SIGQUIT &lt;nginx master pid&gt;
+如果要优雅地停止worker进程：kill -s SIGWINCH &lt;nginx worker pid&gt;
+</code></pre><p>11)使运行中的Nginx重读配置项并生效</p>
+<pre><code>／usr/local/nginx/sbin/nginx -s reload
+或kill -s SIGHUP &lt;nginx master pid&gt;
+</code></pre><p>12）日志文件回滚<br>    使用-s reopen参数可以重新打开日志文件，把当前日志文件改名或转移到其他目录进行备份，再重新打开时就会生成新的日志文件。这个功能使得日志文件不至于过大。</p>
+<pre><code>／usr/local/nginx/sbin/nginx -s reopen
+或kill -s SIGUSR1 &lt;nginx master pid&gt;
+</code></pre><p>13)平滑升级Nginx</p>
+<pre><code>nginx支持不重启来完成新版本的平滑升级
+kill -s SIGUSR2 &lt;nginx master pid&gt;
+会将pid文件重命名，如将/usr/local/nginx/logs/nginx.pid重命名／usr/local/nginx/logs/nginx.pid.oldbin
+启动新版本的Nginx，ps可以发现新旧的在同时运行
+kill命令向旧版本的master进程发送SIGQUIT信号。
+</code></pre><p>14）显示命令行帮助 </p>
+<pre><code>－h 或者？
+</code></pre><hr>
+<p>如果觉得还不错，赏点酒钱！<br><img src="/images/aex068188cqwy9xbxa3oc07.png" alt=""></p>
+</div></article></div></section><footer><div class="paginator"><a href="/2016/04/13/我的经历/" class="next">NEXT</a></div><div data-thread-key="2016/06/08/Nginx命令行配置/" data-title="Nginx命令行配置" data-url="http://blog.edagarli.com/2016/06/08/Nginx命令行配置/" data-author-key="1" class="ds-thread"></div><script>var duoshuoQuery = {short_name:"edagarli"};
+(function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+
+</script><div class="copyright"><p>© 2015 - 2016 <a href="http://blog.edagarli.com">Edagarli</a>, unless otherwise noted.</p></div></footer><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-65933410-1",'auto');ga('send','pageview');</script><script>var _hmt = _hmt || [];(function() {var hm = document.createElement("script");hm.src ="//hm.baidu.com/hm.js?47be17dedd3258963b6518c2ffbd5e1d";var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(hm, s);})();</script><script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script></body></html>

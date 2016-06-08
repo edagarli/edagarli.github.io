@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.edagarli.com/"/>
-  <updated>2016-04-12T17:21:42.000Z</updated>
+  <updated>2016-06-08T05:24:28.000Z</updated>
   <id>http://blog.edagarli.com/</id>
   
   <author>
@@ -14,6 +14,75 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Nginx命令行配置</title>
+    <link href="http://blog.edagarli.com/2016/06/08/Nginx%E5%91%BD%E4%BB%A4%E8%A1%8C%E9%85%8D%E7%BD%AE/"/>
+    <id>http://blog.edagarli.com/2016/06/08/Nginx命令行配置/</id>
+    <published>2016-06-08T04:19:55.000Z</published>
+    <updated>2016-06-08T05:24:28.000Z</updated>
+    
+    <content type="html">&lt;p&gt;接下来,会记录下Nginx从基本到深入的一些东西.&lt;/p&gt;
+&lt;p&gt;在linux中，需要使用命令来控制Nginx服务器的启动与停止，重载配置文件，回滚日志文件，平滑升级等行为。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;p&gt;1)默认启动方式&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;／usr/local/nginx/sbin/nginx
+这时，会读取默认路径下的配置文件: /usr/local/nginx/conf/nginx.conf
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;2)指定配置文件的启动方式&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;/usr/local/nginx/sbin/nginx -c /tmp/nginx.conf
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;3)指定安装目录&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;/usr/local/nginx/sbin/nginx -p /usr/local/nginx
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;4)全局配置项的启动方式&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; /usr/local/nginx/sbin/nginx -g &amp;quot;pid /var/nginx/test.pid&amp;quot;
+ -g参数约束的条件是指定的配置项不能与默认路径下的nginx.conf配置项冲突。
+ -g启动的Nginx服务执行其他命令时，需要把－g参数也带上，否则可能出现配置项不匹配的情形。
+比如：/usr/local/nginx/sbin/nginx -g &amp;quot;pid /var/nginx/test.pid;&amp;quot; -s stop
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;5)测试配置信息是否有错误&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;/usr/local/nginx/sbin/nginx -t
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;6)在测试配置阶段不输出信息&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;/usr/local/nginx/sbin/nginx -t -q
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;7)显示版本信息&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;/usr/local/nginx/sbin/nginx -v
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;8)显示编译阶段的参数&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;/usr/local/nginx/sbin/nginx -V
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;9)快速地停止服务&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;/usr/local/nginx/sbin/nginx -s stop
+－s参数其实是告诉Nginx程序向正在运行的Nginx服务发送信号量，Nginx程序通过Nginx.pid文件中得到master进程的进程ID，再向运行中的master进程发送TREM信号来快速地关闭Nginx服务。
+ps -ef | grep nginx
+kill -s SIGTERM port或kill -s SIGINT port
+其实得到的效果与-s stop一样的
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;10) 优雅的停止服务&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;处理完当前所有请求再停止服务
+/usr/local/nginx/sbin/nginx -s quit
+或kill -s SIGQUIT &amp;lt;nginx master pid&amp;gt;
+如果要优雅地停止worker进程：kill -s SIGWINCH &amp;lt;nginx worker pid&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;11)使运行中的Nginx重读配置项并生效&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;／usr/local/nginx/sbin/nginx -s reload
+或kill -s SIGHUP &amp;lt;nginx master pid&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;12）日志文件回滚&lt;br&gt;    使用-s reopen参数可以重新打开日志文件，把当前日志文件改名或转移到其他目录进行备份，再重新打开时就会生成新的日志文件。这个功能使得日志文件不至于过大。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;／usr/local/nginx/sbin/nginx -s reopen
+或kill -s SIGUSR1 &amp;lt;nginx master pid&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;13)平滑升级Nginx&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;nginx支持不重启来完成新版本的平滑升级
+kill -s SIGUSR2 &amp;lt;nginx master pid&amp;gt;
+会将pid文件重命名，如将/usr/local/nginx/logs/nginx.pid重命名／usr/local/nginx/logs/nginx.pid.oldbin
+启动新版本的Nginx，ps可以发现新旧的在同时运行
+kill命令向旧版本的master进程发送SIGQUIT信号。
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;14）显示命令行帮助 &lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;－h 或者？
+&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
+&lt;p&gt;如果觉得还不错，赏点酒钱！&lt;br&gt;&lt;img src=&quot;/images/aex068188cqwy9xbxa3oc07.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;接下来,会记录下Nginx从基本到深入的一些东西.&lt;/p&gt;
+&lt;p&gt;在linux中，需要使用命令来控制Nginx服务器的启动与停止，重载配置文件，回滚日志文件，平滑升级等行为。&lt;/p&gt;
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>混segmentfault 闯Hackathon 一心要做一款伟大产品的攻城狮</title>
@@ -1146,46 +1215,11 @@ javac -J-agentlib:hprof=heap=sites Hello.java
       <category term="案例" scheme="http://blog.edagarli.com/categories/%E6%A1%88%E4%BE%8B/"/>
     
     
-      <category term="Redis" scheme="http://blog.edagarli.com/tags/Redis/"/>
-    
       <category term="案例" scheme="http://blog.edagarli.com/tags/%E6%A1%88%E4%BE%8B/"/>
     
+      <category term="Redis" scheme="http://blog.edagarli.com/tags/Redis/"/>
+    
       <category term="架构" scheme="http://blog.edagarli.com/tags/%E6%9E%B6%E6%9E%84/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>实现一个轻量级框架</title>
-    <link href="http://blog.edagarli.com/2016/01/26/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E8%BD%BB%E9%87%8F%E7%BA%A7%E6%A1%86%E6%9E%B6/"/>
-    <id>http://blog.edagarli.com/2016/01/26/实现一个轻量级框架/</id>
-    <published>2016-01-26T11:40:00.000Z</published>
-    <updated>2016-03-19T07:42:29.000Z</updated>
-    
-    <content type="html">&lt;p&gt;最近在折腾框架。&lt;/p&gt;
-&lt;p&gt;自己从0到1搭建一个java web框架实现&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;p&gt;轻量级的框架&lt;/p&gt;
-&lt;p&gt;Spring 框架, fuck, 太重了, 开发一个很简单的web也要写一大堆代码.&lt;/p&gt;
-&lt;p&gt;只想折腾一个轻量级的框架, 有核心即可… 类似Nginx模块化设计.&lt;/p&gt;
-&lt;p&gt;核心+插件&lt;/p&gt;
-&lt;p&gt;可以定制化扩展&lt;/p&gt;
-&lt;p&gt;正在参考Play,Nutz,Smart,jfinal等框架,吸收优点,思想与框架慢慢完善中&lt;/p&gt;
-&lt;p&gt;项目地址：&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/edagarli/own_framework&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/edagarli/own_framework&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;如果觉得还不错，赏点酒钱！&lt;br&gt;&lt;img src=&quot;/images/aex068188cqwy9xbxa3oc07.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;最近在折腾框架。&lt;/p&gt;
-&lt;p&gt;自己从0到1搭建一个java web框架实现&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="聊聊架构" scheme="http://blog.edagarli.com/categories/%E8%81%8A%E8%81%8A%E6%9E%B6%E6%9E%84/"/>
-    
-    
-      <category term="框架" scheme="http://blog.edagarli.com/tags/%E6%A1%86%E6%9E%B6/"/>
     
   </entry>
   
