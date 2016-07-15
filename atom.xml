@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.edagarli.com/"/>
-  <updated>2016-06-08T11:40:16.000Z</updated>
+  <updated>2016-07-15T14:07:58.000Z</updated>
   <id>http://blog.edagarli.com/</id>
   
   <author>
@@ -14,6 +14,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>开通微信公众号</title>
+    <link href="http://blog.edagarli.com/2016/07/15/%E5%BC%80%E9%80%9A%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7/"/>
+    <id>http://blog.edagarli.com/2016/07/15/开通微信公众号/</id>
+    <published>2016-07-15T14:07:58.000Z</published>
+    <updated>2016-07-15T14:07:58.000Z</updated>
+    
+    <content type="html">&lt;p&gt;开始尝试在微信公众号写点文章了.&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;p&gt;我是李智(edagarli), 花名卤肉， 我会不定期分享一些技术，产品以及我创业方面的想法。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/qrcode.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;如果觉得还不错，赏点酒钱！&lt;br&gt;&lt;img src=&quot;/images/aex068188cqwy9xbxa3oc07.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;开始尝试在微信公众号写点文章了.&lt;/p&gt;
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>Redis之过期键删除策略</title>
@@ -1204,38 +1228,6 @@ javac -J-agentlib:hprof=heap=sites Hello.java
       <category term="读书笔记" scheme="http://blog.edagarli.com/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
     
       <category term="HBase" scheme="http://blog.edagarli.com/tags/HBase/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>情人节主题网站礼物</title>
-    <link href="http://blog.edagarli.com/2016/02/05/%E6%83%85%E4%BA%BA%E8%8A%82%E7%A4%BC%E7%89%A9/"/>
-    <id>http://blog.edagarli.com/2016/02/05/情人节礼物/</id>
-    <published>2016-02-05T13:20:00.000Z</published>
-    <updated>2016-03-19T07:42:38.000Z</updated>
-    
-    <content type="html">&lt;p&gt;参考hackerzhou写的网站礼物&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://hackerzhou.me/ex_love/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://hackerzhou.me/ex_love/&lt;/a&gt;   （貌似现在不能访问了，😄）&lt;/p&gt;
-&lt;p&gt;为妹子也写了个。&lt;/p&gt;
-&lt;p&gt;We are both programmers, so I write some code to celebrate our 1st valentine’s day.&lt;/p&gt;
-&lt;p&gt;代码：&lt;br&gt;&lt;a href=&quot;https://github.com/edagarli/OurLoveStory/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/edagarli/OurLoveStory/&lt;/a&gt;&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;参考hackerzhou写的网站礼物&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://hackerzhou.me/ex_love/&quot;&gt;http://hackerzhou.me/ex_love/&lt;/a&gt;   （貌似现在不能访问了，😄）&lt;/p&gt;
-&lt;p&gt;为妹子也写了个。&lt;/p&gt;
-&lt;p&gt;We are both programmers, so I write some code to celebrate our 1st valentine’s day.&lt;/p&gt;
-&lt;p&gt;代码：&lt;br&gt;&lt;a href=&quot;https://github.com/edagarli/OurLoveStory/&quot;&gt;https://github.com/edagarli/OurLoveStory/&lt;/a&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="闲谈" scheme="http://blog.edagarli.com/categories/%E9%97%B2%E8%B0%88/"/>
-    
-    
-      <category term="闲谈" scheme="http://blog.edagarli.com/tags/%E9%97%B2%E8%B0%88/"/>
     
   </entry>
   
