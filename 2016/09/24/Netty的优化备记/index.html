@@ -3,8 +3,27 @@
 <p>通常，在生产环境中，需要实时打印接口日志，其它日志处于ERROR级别，当推送服务发生I/O异常之后，会记录异常日志。如果当前磁盘的WIO比较高，可能会发生写日志文件操作被同步阻塞，阻塞时间无法预测。这就会导致Netty的NioEventLoop线程被阻塞，Socket链路无法被及时关闭、其它的链路也无法进行读写操作等。</p>
 <a id="more"></a>
 <p>以最常用的log4j为例，尽管它支持异步写日志（AsyncAppender），但是当日志队列满之后，它会同步阻塞业务线程，直到日志队列有空闲位置可用，相关代码如下：</p>
-<p>synchronized (this.buffer) {<br>      while (true) {<br>        int previousSize = this.buffer.size();<br>        if (previousSize &lt; this.bufferSize) {<br>          this.buffer.add(event);<br>          if (previousSize != 0) break;<br>          this.buffer.notifyAll(); break;<br>        }<br>        boolean discard = true;<br>        if ((this.blocking) &amp;&amp; (!Thread.interrupted()) &amp;&amp; (Thread.currentThread() != this.dispatcher)) //判断是业务线程<br>        {<br>          try<br>          {<br>            this.buffer.wait();//阻塞业务线程<br>            discard = false;<br>          }<br>          catch (InterruptedException e)<br>          {<br>            Thread.currentThread().interrupt();<br>          }</p>
-<pre><code>}
+<pre><code>synchronized (this.buffer) {
+      while (true) {
+        int previousSize = this.buffer.size();
+        if (previousSize &lt; this.bufferSize) {
+          this.buffer.add(event);
+          if (previousSize != 0) break;
+          this.buffer.notifyAll(); break;
+        }
+        boolean discard = true;
+        if ((this.blocking) &amp;&amp; (!Thread.interrupted()) &amp;&amp; (Thread.currentThread() != this.dispatcher)) //判断是业务线程
+        {
+          try
+          {
+            this.buffer.wait();//阻塞业务线程
+            discard = false;
+          }
+          catch (InterruptedException e)
+          {
+            Thread.currentThread().interrupt();
+          }
+}
 </code></pre><p>类似这类BUG具有极强的隐蔽性，往往WIO高的时间持续非常短，或者是偶现的，在测试环境中很难模拟此类故障，问题定位难度非常大。这就要求读者在平时写代码的时候一定要当心，注意那些隐性地雷。</p>
 <p>2.TCP参数优化</p>
 <p>常用的TCP参数，例如TCP层面的接收和发送缓冲区大小设置，在Netty中分别对应ChannelOption的SO_SNDBUF和SO_RCVBUF，需要根据推送消息的大小，合理设置，对于海量长连接，通常32K是个不错的选择。</p>
