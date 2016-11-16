@@ -36,7 +36,7 @@
 <p>推送服务器承载了海量的长链接，每个长链接实际就是一个会话。如果每个会话都持有心跳数据、接收缓冲区、指令集等数据结构，而且这些实例随着消息的处理朝生夕灭，这就会给服务器带来沉重的GC压力，同时消耗大量的内存。</p>
 <p>最有效的解决策略就是使用内存池，每个NioEventLoop线程处理N个链路，在线程内部，链路的处理时串行的。假如A链路首先被处理，它会创建接收缓冲区等对象，待解码完成之后，构造的POJO对象被封装成Task后投递到后台的线程池中执行，然后接收缓冲区会被释放，每条消息的接收和处理都会重复接收缓冲区的创建和释放。如果使用内存池，则当A链路接收到新的数据报之后，从NioEventLoop的内存池中申请空闲的ByteBuf，解码完成之后，调用release将ByteBuf释放到内存池中，供后续B链路继续使用。</p>
 <p>如果觉得还不错，赏点酒钱！<br><img src="/images/aex068188cqwy9xbxa3oc07.png" alt=""></p>
-</div></article></div></section><footer><div class="paginator"><a href="/2016/07/15/开通微信公众号/" class="next">NEXT</a></div><div data-thread-key="2016/09/24/Netty的优化备记/" data-title="Netty的优化备记" data-url="http://blog.edagarli.com/2016/09/24/Netty的优化备记/" data-author-key="1" class="ds-thread"></div><script>var duoshuoQuery = {short_name:"edagarli"};
+</div></article></div></section><footer><div class="paginator"><a href="/2016/11/16/谈谈工作狂/" class="prev">PRVE</a><a href="/2016/07/15/开通微信公众号/" class="next">NEXT</a></div><div data-thread-key="2016/09/24/Netty的优化备记/" data-title="Netty的优化备记" data-url="http://blog.edagarli.com/2016/09/24/Netty的优化备记/" data-author-key="1" class="ds-thread"></div><script>var duoshuoQuery = {short_name:"edagarli"};
 (function() {
     var ds = document.createElement('script');
     ds.type = 'text/javascript';ds.async = true;

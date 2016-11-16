@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.edagarli.com/2016/11/16/%E8%B0%88%E8%B0%88%E5%B7%A5%E4%BD%9C%E7%8B%82/</loc>
+    
+    <lastmod>2016-11-16T14:44:41.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.edagarli.com/2016/09/24/Netty%E7%9A%84%E4%BC%98%E5%8C%96%E5%A4%87%E8%AE%B0/</loc>
     
     <lastmod>2016-09-24T12:48:57.000Z</lastmod>
